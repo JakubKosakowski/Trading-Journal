@@ -4,6 +4,7 @@ import sys
 
 def main():
     app = QApplication(sys.argv)
+    app.setStyle('Fusion')
     gui = MainWindow()
     gui.show()
     sys.exit(app.exec_())
