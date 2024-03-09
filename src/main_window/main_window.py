@@ -14,3 +14,4 @@ class MainWindow(QWidget):
         grid.addWidget(btn, 0, 0, Qt.AlignHCenter)
         self.db = Database()
         print(self.db.cursor)
+        self.db.select(columns=['age'])
