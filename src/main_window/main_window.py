@@ -13,4 +13,3 @@ class MainWindow(QWidget):
         grid = QGridLayout(self)
         grid.addWidget(btn, 0, 0, Qt.AlignHCenter)
         self.db = Database()
-        print(self.db.cursor)
