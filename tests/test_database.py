@@ -20,6 +20,10 @@ def test_insert():
     test_inst = Database()
     assert test_inst.insert(table="test", values=["Krzysztof", 27, 21]) == 21
     # assert test_inst.insert(table="test", values=['Mateusz'])
+    with pytest.raises(psycopg2.errors.SyntaxError):
+        test_inst.insert(table="test", values=['Mateusz'])
+        test_inst.insert(table="not_existed")
+        test_inst.insert(table="not_existed", values=["Michal", 22, 12])
 
 # def test_mytest():
 #     with pytest.raises(SystemExit):

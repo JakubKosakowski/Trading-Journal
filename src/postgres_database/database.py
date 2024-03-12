@@ -26,6 +26,8 @@ class Database:
             self.cursor.execute(f'{command_table_part} {command_value_part}');
         except psycopg2.errors.DatabaseError as err:
             raise(err)
+        except psycopg2.errors.SyntaxError as err:
+            raise(err)
         return self.cursor.fetchone()[0]
     
 
