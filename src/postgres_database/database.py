@@ -11,7 +11,6 @@ class Database:
         try:
             values = ', '.join(columns) if isinstance(columns, list) else columns if ', ' in columns else columns.replace(' ', ', ')
             command = f'SELECT {values} FROM {table};' if conditions == '' else f'SELECT {values} FROM {table} WHERE {conditions};'
-            print(command)
             self.cursor.execute(command)
         except psycopg2.errors.UndefinedColumn as err:
             raise(err)
@@ -26,8 +25,29 @@ class Database:
             self.cursor.execute(f'{command_table_part} {command_value_part}');
         except psycopg2.errors.DatabaseError as err:
             raise(err)
+        except psycopg2.errors.SyntaxError as err:
+            raise(err)
         return self.cursor.fetchone()[0]
     
+    def update(self, table, columns, new_values, ident_column, ident_value):
+        try:
+            command_set_new_values = ''
+            if isinstance(columns, list) and isinstance(new_values, list):
+                for i in range(len(columns)):
+                    command_set_new_values += f" {columns[i]} = '{new_values[i]}'" if isinstance(new_values[i], str) else f' {columns[i]} = {new_values[i]}'
+                    command_set_new_values += ',' if i < len(columns)-1 else ''
+                command_returning = f'RETURNING {columns[0]};'.replace("'", "")
+            else:
+                raise(Exception("Column and new value have to be the same type!"))
+            self.cursor.execute(f'UPDATE {table} SET{command_set_new_values} WHERE {ident_column} = {ident_value} {command_returning}')   
+        except IndexError as err:
+            raise(err)
+        except TypeError as err:
+            raise(err)
+        except psycopg2.errors.SyntaxError as err:
+            raise(err)
+        return self.cursor.fetchone()[0]
+        
 
     def get_table_columns_names(self, table):
         self.cursor.execute(f'SELECT * FROM {table}')
