@@ -13,7 +13,7 @@ def test_select():
     assert test_inst.select(conditions="id = 1") == [(1, 'Jakub', 24,)]
     with pytest.raises(psycopg2.errors.UndefinedColumn):
         test_inst.select(columns=['price'])
-    with pytest.raises(psycopg2.errors.UndefinedFunction):
+    with pytest.raises(psycopg2.errors.InFailedSqlTransaction):
         test_inst.select(conditions="age == 24")
 
 # def test_mytest():

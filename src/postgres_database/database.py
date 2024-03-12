@@ -10,11 +10,12 @@ class Database:
     def select(self, table="test", columns="*", conditions=""):
         try:
             values = ', '.join(columns) if isinstance(columns, list) else columns if ', ' in columns else columns.replace(' ', ', ')
-            command: str = f'SELECT {values} FROM {table} WHERE {conditions};' if conditions != '' else f'SELECT {values} FROM {table};'
+            command = f'SELECT {values} FROM {table};' if conditions == '' else f'SELECT {values} FROM {table} WHERE {conditions};'
+            print(command)
             self.cursor.execute(command)
         except psycopg2.errors.UndefinedColumn as err:
             raise(err)
-        except psycopg2.errors.UndefinedFunction as err:
+        except psycopg2.errors.InFailedSqlTransaction as err:
             raise(err) 
         return self.cursor.fetchall()
     
