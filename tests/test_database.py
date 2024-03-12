@@ -15,6 +15,7 @@ def test_select():
         test_inst.select(columns=['price'])
     with pytest.raises(psycopg2.errors.InFailedSqlTransaction):
         test_inst.select(conditions="age == 24")
+        test_inst.select(table="not_existed")     
 
 def test_insert():
     test_inst = Database()
@@ -24,6 +25,17 @@ def test_insert():
         test_inst.insert(table="test", values=['Mateusz'])
         test_inst.insert(table="not_existed")
         test_inst.insert(table="not_existed", values=["Michal", 22, 12])
+
+def test_update():
+    test_inst = Database()
+    assert test_inst.update(table="test", ident_column="id" , ident_value="1", columns=["age"], new_values=[21]) == 21
+    assert test_inst.update(table="test", ident_column="id" , ident_value="2", columns=["name", "age"], new_values=["Bozydar", 45]) == "Bozydar"
+    # with pytest.raises(TypeError):
+    #     test_inst.update(table="not_existed")
+    # with pytest.raises(psycopg2.errors.SyntaxError):
+    #     test_inst.update(table="test", ident_column="id", ident_value="10", columns=["name"], new_values=["Czeslaw"])
+    #     test_inst.update(table="test", ident_column="id", ident_value="2", columns=["price"], new_values=[12])
+    #     test_inst.update(table="test", ident_column="id", ident_value="2", columns=["name"], new_valuse=[12])
 
 # def test_mytest():
 #     with pytest.raises(SystemExit):
