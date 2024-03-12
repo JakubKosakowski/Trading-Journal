@@ -19,6 +19,16 @@ class Database:
             raise(err) 
         return self.cursor.fetchall()
     
+    def insert(self, table, values):
+        try:
+            command = f"""INSERT INTO test(name, age, test_ident)
+            VALUES{tuple(values)} RETURNING test_ident;"""
+            print(command)
+            self.cursor.execute(command);
+        except psycopg2.errors.DatabaseError as err:
+            raise(err)
+        return self.cursor.fetchone()[0]
+    
     # def delete(self, checked_value, checked_column="id", table="test"):
     #     self.cursor.execute(f'SELECT price FROM test')
     #     try:
