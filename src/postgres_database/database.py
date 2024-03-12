@@ -21,13 +21,17 @@ class Database:
     
     def insert(self, table, values):
         try:
-            command = f"""INSERT INTO test(name, age, test_ident)
-            VALUES{tuple(values)} RETURNING test_ident;"""
-            print(command)
-            self.cursor.execute(command);
+            command_table_part = f"INSERT INTO {table}{tuple(self.get_table_columns_names(table))}".replace("'", "")
+            command_value_part = f"VALUES{tuple(values)} RETURNING test_ident;"
+            self.cursor.execute(f'{command_table_part} {command_value_part}');
         except psycopg2.errors.DatabaseError as err:
             raise(err)
         return self.cursor.fetchone()[0]
+    
+
+    def get_table_columns_names(self, table):
+        self.cursor.execute(f'SELECT * FROM {table}')
+        return [desc[0] for desc in self.cursor.description][1:]
     
     # def delete(self, checked_value, checked_column="id", table="test"):
     #     self.cursor.execute(f'SELECT price FROM test')
