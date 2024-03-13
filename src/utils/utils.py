@@ -9,7 +9,7 @@ class Utils:
     @staticmethod
     def download_file(url):
         try:
-            urlretrieve(url, 'currencies.csv')
+            urlretrieve(url,'./config/currencies.csv')
         except error.URLError as err:
             raise(err)
         return 'Success'
