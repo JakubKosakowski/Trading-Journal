@@ -47,6 +47,13 @@ class Database:
         except psycopg2.errors.SyntaxError as err:
             raise(err)
         return self.cursor.fetchone()[0]
+    
+    def delete(self, table, condition):
+        try:
+            self.cursor.execute(f'DELETE FROM {table} WHERE {condition} RETURNING id;')
+        except psycopg2.errors.SyntaxError as err:
+            raise(err)
+        return self.cursor.fetchone()[0]
         
 
     def get_table_columns_names(self, table):
