@@ -2,11 +2,9 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 
-class TransactionFormView(QLayout):
-    def __init__(self):
-        super().__init__()
-        self.glay = QGridLayout(self)
-        self.label = QLabel(self)
-        self.label.setText('New label')
-        self.glay.addWidget(self.label, 0, 0, Qt.AlignHCenter)
+class TransactionFormView(QWidget):
+    def __init__(self, parent=None):
+        super(TransactionFormView, self).__init__(parent)
+        self.menu_btn = QPushButton("Go back to menu", self)
+        self.menu_btn.move(100, 350)
         
