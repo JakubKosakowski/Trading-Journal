@@ -7,4 +7,11 @@ class TransactionFormView(QWidget):
         super(TransactionFormView, self).__init__(parent)
         self.menu_btn = QPushButton("Go back to menu", self)
         self.menu_btn.move(100, 350)
+        self.load_reason_to_entry()
+
+    def load_reason_to_entry(self):
+        self.entry_reason_label = QLabel('', self)
+        self.entry_reason_label.setFixedSize(780, 100)
+        self.entry_reason_label.move(10, 10)
+        self.entry_reason_label.setStyleSheet("border: 1px solid black;")
         
