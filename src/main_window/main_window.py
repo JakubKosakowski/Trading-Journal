@@ -13,7 +13,7 @@ class MainWindowWidget(QWidget):
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.setFixedSize(400, 450)
+        self.setFixedSize(800, 600)
         self.start_main_window_UI()
 
     def start_main_window_UI(self):
