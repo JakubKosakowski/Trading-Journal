@@ -9,6 +9,7 @@ class MainWindowWidget(QWidget):
         super(MainWindowWidget, self).__init__(parent)
         self.transaction_btn = QPushButton("Add transaction", self)
         self.transaction_btn.move(50, 140)
+        self.transaction_btn.setObjectName('transaction-btn')
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
