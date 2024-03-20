@@ -10,11 +10,12 @@ class MainWindowWidget(QWidget):
         self.transaction_btn = QPushButton("Add transaction", self)
         self.transaction_btn.move(50, 140)
         self.transaction_btn.setObjectName('transaction-btn')
+        self.showMaximized()
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.setFixedSize(800, 600)
+        self.setGeometry(100, 100, 800, 600)
         self.start_main_window_UI()
 
     def start_main_window_UI(self):
