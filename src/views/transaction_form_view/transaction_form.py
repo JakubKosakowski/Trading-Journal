@@ -13,5 +13,5 @@ class TransactionFormView(QWidget):
         self.entry_reason_label = QLabel('', self)
         self.entry_reason_label.setFixedSize(780, 100)
         self.entry_reason_label.move(10, 10)
-        self.entry_reason_label.setStyleSheet("border: 1px solid black;")
+        # self.entry_reason_label.setStyleSheet("border: 1px solid black;")
         
