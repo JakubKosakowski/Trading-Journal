@@ -1,3 +1,26 @@
 QLabel {
-    border: 1px solid black;
+    border: 1px solid #222831;
+}
+
+QWidget {
+    background-color: #EEEEEE;
+    color: #393E46;
+}
+
+QPushButton#menu-btn,
+QPushButton#transaction-btn {
+    background-color: #00ADB5;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid #00ADB5;
+    padding: 5px 15px;
+    margin-top: 10px;
+    outline: 0px;
+}
+
+QPushButton#menu-btn:hover,
+QPushButton#menu-btn:focus {
+  background-color: #00ADB5;
+  border: 1px solid #005b60;
 }
