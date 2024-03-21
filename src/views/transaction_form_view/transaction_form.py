@@ -26,3 +26,6 @@ class TransactionFormView(QWidget):
         self.enter_exit_label = QLabel('', self)
         self.enter_exit_label.setFixedSize(780, 200)
         self.enter_exit_label.move(10, 150)
+
+    def load_reason_for_exit_section(self):
+        pass
