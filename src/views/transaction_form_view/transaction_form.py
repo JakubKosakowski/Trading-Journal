@@ -18,7 +18,7 @@ class TransactionFormView(QWidget):
         self.entry_reason_label.move(10, 10)
 
     def load_reason_to_entry_edit_lines(self):
-        self.entry_reason_textfield = QPlainTextEdit(self)
+        self.entry_reason_textfield = QPlainTextEdit(self, objectName='reason-text')
         self.entry_reason_textfield.setFixedSize(760, 30)
         self.entry_reason_textfield.move(20, 20)
 
