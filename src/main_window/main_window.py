@@ -7,15 +7,14 @@ from src.views import TransactionFormView
 class MainWindowWidget(QWidget):
     def __init__(self, parent=None):
         super(MainWindowWidget, self).__init__(parent)
-        self.transaction_btn = QPushButton("Add transaction", self)
+        self.transaction_btn = QPushButton("Add transaction", self, objectName='transaction-btn')
         self.transaction_btn.move(50, 140)
-        self.transaction_btn.setObjectName('transaction-btn')
         self.showMaximized()
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.setGeometry(100, 100, 800, 600)
+        self.setGeometry(550, 250, 800, 600)
         self.start_main_window_UI()
 
     def start_main_window_UI(self):

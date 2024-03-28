@@ -1,5 +1,12 @@
 QLabel {
     border: 1px solid #222831;
+    border-radius: 8px;
+}
+
+QPlainTextEdit#reason-text {
+    background-color: #FAF8FF;
+    border: 1px solid #222831;
+    border-radius: 5px;
 }
 
 QWidget {
@@ -20,7 +27,7 @@ QPushButton#transaction-btn {
 }
 
 QPushButton#menu-btn:hover,
-QPushButton#menu-btn:focus {
+QPushButton#transaction-btn:hover {
   background-color: #00ADB5;
   border: 1px solid #005b60;
 }

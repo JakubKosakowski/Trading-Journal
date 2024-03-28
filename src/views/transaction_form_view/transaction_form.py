@@ -11,6 +11,7 @@ class TransactionFormView(QWidget):
         self.load_reason_to_entry()
         self.load_reason_to_entry_edit_lines()
         self.load_enter_and_exits_section()
+        self.load_fields_labels()
 
     def load_reason_to_entry(self):
         self.entry_reason_label = QLabel('', self)
@@ -18,7 +19,7 @@ class TransactionFormView(QWidget):
         self.entry_reason_label.move(10, 10)
 
     def load_reason_to_entry_edit_lines(self):
-        self.entry_reason_textfield = QPlainTextEdit(self)
+        self.entry_reason_textfield = QPlainTextEdit(self, objectName='reason-text')
         self.entry_reason_textfield.setFixedSize(760, 30)
         self.entry_reason_textfield.move(20, 20)
 
@@ -26,6 +27,11 @@ class TransactionFormView(QWidget):
         self.enter_exit_label = QLabel('', self)
         self.enter_exit_label.setFixedSize(780, 200)
         self.enter_exit_label.move(10, 150)
+
+    def load_fields_labels(self):
+        self.fields_labels = QLabel("        Date\t\tOrder Price           Filled Priced           Slippage           Filled Shares           Total Cost           Day's High           Day's Low           Grade        ", self)
+        self.fields_labels.setFixedSize(760, 30)
+        self.fields_labels.move(20, 300)
 
     def load_reason_for_exit_section(self):
         pass
