@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.views import TransactionFormView
+from src.utils import Logger
 
 class MainWindowWidget(QWidget):
     def __init__(self, parent=None):
@@ -13,12 +14,15 @@ class MainWindowWidget(QWidget):
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
+        self.logger = Logger(__name__)
         super(MainWindow, self).__init__(parent)
+        self.logger.logger.info("Main window generated.")
         self.setGeometry(550, 250, 800, 600)
         self.start_main_window_UI()
 
     def start_main_window_UI(self):
         self.main_tab = MainWindowWidget(self)
+        self.logger.logger.info("Main window widget generated.")
         self.setWindowTitle("Trading Journal")
         self.setCentralWidget(self.main_tab)
         self.main_tab.transaction_btn.clicked.connect(self.add_new_transaction_UI)
@@ -26,6 +30,7 @@ class MainWindow(QMainWindow):
 
     def add_new_transaction_UI(self):
         self.transaction_tab = TransactionFormView(self)
+        self.logger.logger.info("Transaction form view generated.")
         self.setWindowTitle("Add new transaction")
         self.setCentralWidget(self.transaction_tab)
         self.transaction_tab.menu_btn.clicked.connect(self.start_main_window_UI)
