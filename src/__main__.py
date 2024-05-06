@@ -5,8 +5,8 @@ import sys
 
 def main():
     app = QApplication(sys.argv)
-    app.setStyle('Fusion')
-    app.setStyleSheet(Path('static/css/style.css').read_text())
+    app.setStyle("Fusion")
+    app.setStyleSheet(Path("static/css/style.css").read_text())
     gui = MainWindow()
     sys.exit(app.exec_())
 

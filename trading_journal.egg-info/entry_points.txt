@@ -1,2 +1,2 @@
 [console_scripts]
-trading-journal = scripts.app:main
+trading-journal = src.__main__:main

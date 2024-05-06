@@ -1,8 +1,9 @@
 from urllib.request import urlretrieve
 from urllib import error
-import os
-import csv
-import json
+import csv, json
+from .logger import Logger
+
+logger = Logger(__name__)
 
 class Utils:
     def __init__(self):
@@ -13,11 +14,11 @@ class Utils:
         try:
             urlretrieve(url, f'{destination}/{filename}')
         except (error.URLError) as err:
-            raise(err)
+            logger.logger.error(f"An error occurred: {err}")
         return 'Success'
     
     @staticmethod
-    def convert_csv_to_json(csv_file_path, json_file_path="../../config/data.json"):
+    def convert_csv_to_json(csv_file_path, json_file_path="config/data.json"):
         csvfile = open(csv_file_path, 'r')
         jsonfile = open(json_file_path, 'w')
 
