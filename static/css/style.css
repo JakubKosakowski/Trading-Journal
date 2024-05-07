@@ -15,7 +15,8 @@ QWidget {
 }
 
 QPushButton#menu-btn,
-QPushButton#transaction-btn {
+QPushButton#transaction-btn,
+QPushButton#all-transactions-btn {
     background-color: #00ADB5;
     color: #fff;
     font-weight: 600;
@@ -27,7 +28,8 @@ QPushButton#transaction-btn {
 }
 
 QPushButton#menu-btn:hover,
-QPushButton#transaction-btn:hover {
+QPushButton#transaction-btn:hover,
+QPushButton#all-transactions-btn:hover {
   background-color: #00ADB5;
   border: 1px solid #005b60;
 }
