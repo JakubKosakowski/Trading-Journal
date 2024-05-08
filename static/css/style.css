@@ -28,6 +28,10 @@ QHeaderView {
     font-family: 'Montserrat', sans-serif;
 }
 
+QTableWidget::item {
+    border-bottom: 1px dotted white;
+}
+
 /* Application buttons styles */
 
 QPushButton#menu-btn,

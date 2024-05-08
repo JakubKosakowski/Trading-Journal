@@ -26,6 +26,7 @@ class AllTransactionsView(QWidget):
 
     def create_table(self):
         self.table_widget = QTableWidget()
+        self.table_widget.setShowGrid(False)
         self.records = self.database.select()
         self.table_widget.setRowCount(len(self.records))
         self.table_widget.setColumnCount(2)
