@@ -14,6 +14,22 @@ QWidget {
     color: #393E46;
 }
 
+/* All transaction table styles */
+
+QTableWidget {
+    background-color: #00333C;
+    color: #fff;
+}
+
+QHeaderView {
+    background-color: #00333C;
+    color: #fff;
+    border-style: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Application buttons styles */
+
 QPushButton#menu-btn,
 QPushButton#transaction-btn,
 QPushButton#all-transactions-btn {
@@ -30,6 +46,6 @@ QPushButton#all-transactions-btn {
 QPushButton#menu-btn:hover,
 QPushButton#transaction-btn:hover,
 QPushButton#all-transactions-btn:hover {
-  background-color: #00ADB5;
-  border: 1px solid #005b60;
+    background-color: #00ADB5;
+    border: 1px solid #005b60;
 }
