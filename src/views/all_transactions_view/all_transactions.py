@@ -2,11 +2,14 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger
+from src.postgres_database import Database
 
 class AllTransactionsView(QWidget):
     def __init__(self, parent=None):
         super(AllTransactionsView, self).__init__(parent)
         self.logger = Logger(__name__)
+        self.database = Database()
+        self.logger.logger.info("Database loaded.")
         self.menu_btn = QPushButton("Go back to menu", self)
         self.logger.logger.info('Go back to menu button generated.')
         self.menu_btn.move(100, 350)
@@ -22,9 +25,14 @@ class AllTransactionsView(QWidget):
         self.logger.logger.info("Table layout set up.")
 
     def create_table(self):
-       self.table_widget = QTableWidget()
-       self.table_widget.setRowCount(2)
-       self.table_widget.setColumnCount(1)
+        self.table_widget = QTableWidget()
+        self.records = self.database.select()
+        self.table_widget.setRowCount(len(self.records))
+        self.table_widget.setColumnCount(2)
 
-       self.table_widget.setItem(0,0, QTableWidgetItem("Name"))
-       self.table_widget.setItem(1,0, QTableWidgetItem("Jakub")) 
+        self.table_widget.setItem(0,0, QTableWidgetItem("Name"))
+        self.table_widget.setItem(0,1, QTableWidgetItem("Age"))
+        for ind, record in enumerate(self.records):
+            self.table_widget.setItem(ind+1,0, QTableWidgetItem(record[1]))
+            self.table_widget.setItem(ind+1,1, QTableWidgetItem(str(record[2])))
+            self.logger.logger.debug(f"Record nr. {ind}: {record}")
