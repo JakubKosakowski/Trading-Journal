@@ -27,12 +27,11 @@ class AllTransactionsView(QWidget):
     def create_table(self):
         self.table_widget = QTableWidget()
         self.records = self.database.select()
-        self.table_widget.setRowCount(len(self.records)+1)
+        self.table_widget.setRowCount(len(self.records))
         self.table_widget.setColumnCount(2)
 
-        self.table_widget.setItem(0,0, QTableWidgetItem("Name"))
-        self.table_widget.setItem(0,1, QTableWidgetItem("Age"))
+        self.table_widget.setHorizontalHeaderLabels(["name", "age"])
         for ind, record in enumerate(self.records):
-            self.table_widget.setItem(ind+1,0, QTableWidgetItem(record[1]))
-            self.table_widget.setItem(ind+1,1, QTableWidgetItem(str(record[2])))
+            self.table_widget.setItem(ind,0, QTableWidgetItem(record[1]))
+            self.table_widget.setItem(ind,1, QTableWidgetItem(str(record[2])))
             self.logger.logger.debug(f"Record nr. {ind}: {record}")
