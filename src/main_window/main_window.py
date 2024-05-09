@@ -2,12 +2,17 @@ from src.postgres_database import Database
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from src.views import TransactionFormView, AllTransactionsView
+from src.views import TransactionFormView, AllTransactionsView, SettingsView
 from src.utils import Logger
 
 class MainWindowWidget(QWidget):
     def __init__(self, parent=None, logger=None):
         super(MainWindowWidget, self).__init__(parent)
+        self.settings_btn = QPushButton("", self, objectName='settings-btn')
+        self.settings_btn.move(750, 50)
+        self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
+        self.settings_btn.setCursor(QCursor(Qt.PointingHandCursor))
+        logger.logger.info('Settings button generated.')
         self.transaction_btn = QPushButton("Add transaction", self, objectName='transaction-btn')
         self.transaction_btn.move(50, 140)
         logger.logger.info("Add transaction button generated")
@@ -29,6 +34,7 @@ class MainWindow(QMainWindow):
         self.logger.logger.info("Main window widget generated.")
         self.setWindowTitle("Trading Journal")
         self.setCentralWidget(self.main_tab)
+        self.main_tab.settings_btn.clicked.connect(self.settings_UI)
         self.main_tab.transaction_btn.clicked.connect(self.add_new_transaction_UI)
         self.main_tab.all_transactions_btn.clicked.connect(self.show_all_transactions_UI)
         self.show()
@@ -47,6 +53,14 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("All transactions")
         self.setCentralWidget(self.all_transactions_tab)
         self.all_transactions_tab.menu_btn.clicked.connect(self.start_main_window_UI)
+        self.show()
+
+    def settings_UI(self):
+        self.settings_tab = SettingsView(self)
+        self.logger.logger.debug('Settings view generated.')
+        self.setWindowTitle("Settings")
+        self.setCentralWidget(self.settings_tab)
+        self.settings_tab.menu_btn.clicked.connect(self.start_main_window_UI)
         self.show()
 
     # def set_transaction_layout(self):
