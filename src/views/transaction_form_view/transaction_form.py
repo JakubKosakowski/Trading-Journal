@@ -10,6 +10,7 @@ class TransactionFormView(QWidget):
         self.menu_btn = QPushButton("Go back to menu", self)
         self.menu_btn.move(100, 350)
         self.menu_btn.setObjectName('menu-btn')
+        self.logger.logger.info('Go back to menu button generated.')
         self.load_reason_to_entry()
         self.load_reason_to_entry_edit_lines()
         self.load_enter_and_exits_section()

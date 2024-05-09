@@ -2,7 +2,7 @@ from src.postgres_database import Database
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from src.views import TransactionFormView, AllTransactionsView
+from src.views import TransactionFormView, AllTransactionsView, SettingsView
 from src.utils import Logger
 
 class MainWindowWidget(QWidget):
@@ -56,7 +56,12 @@ class MainWindow(QMainWindow):
         self.show()
 
     def settings_UI(self):
-        self.logger.logger.debug('CLICKED')
+        self.settings_tab = SettingsView(self)
+        self.logger.logger.debug('Settings view generated.')
+        self.setWindowTitle("Settings")
+        self.setCentralWidget(self.settings_tab)
+        self.settings_tab.menu_btn.clicked.connect(self.start_main_window_UI)
+        self.show()
 
     # def set_transaction_layout(self):
     #     new_view = TransactionFormView()
