@@ -11,6 +11,7 @@ class MainWindowWidget(QWidget):
         self.settings_btn = QPushButton("", self, objectName='settings-btn')
         self.settings_btn.move(750, 50)
         self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
+        self.settings_btn.setCursor(QCursor(Qt.PointingHandCursor))
         logger.logger.info('Settings button generated.')
         self.transaction_btn = QPushButton("Add transaction", self, objectName='transaction-btn')
         self.transaction_btn.move(50, 140)
@@ -33,6 +34,7 @@ class MainWindow(QMainWindow):
         self.logger.logger.info("Main window widget generated.")
         self.setWindowTitle("Trading Journal")
         self.setCentralWidget(self.main_tab)
+        self.main_tab.settings_btn.clicked.connect(self.settings_UI)
         self.main_tab.transaction_btn.clicked.connect(self.add_new_transaction_UI)
         self.main_tab.all_transactions_btn.clicked.connect(self.show_all_transactions_UI)
         self.show()
@@ -52,6 +54,9 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.all_transactions_tab)
         self.all_transactions_tab.menu_btn.clicked.connect(self.start_main_window_UI)
         self.show()
+
+    def settings_UI(self):
+        self.logger.logger.debug('CLICKED')
 
     # def set_transaction_layout(self):
     #     new_view = TransactionFormView()

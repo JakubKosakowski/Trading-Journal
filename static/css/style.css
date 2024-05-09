@@ -47,6 +47,11 @@ QPushButton#all-transactions-btn {
     outline: 0px;
 }
 
+QPushButton#settings-btn {
+    background-color: #EEEEEE;
+    border-style: none;
+}
+
 QPushButton#menu-btn:hover,
 QPushButton#transaction-btn:hover,
 QPushButton#all-transactions-btn:hover {
