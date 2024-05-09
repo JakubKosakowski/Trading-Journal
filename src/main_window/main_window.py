@@ -8,6 +8,10 @@ from src.utils import Logger
 class MainWindowWidget(QWidget):
     def __init__(self, parent=None, logger=None):
         super(MainWindowWidget, self).__init__(parent)
+        self.settings_btn = QPushButton("", self, objectName='settings-btn')
+        self.settings_btn.move(750, 50)
+        self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
+        logger.logger.info('Settings button generated.')
         self.transaction_btn = QPushButton("Add transaction", self, objectName='transaction-btn')
         self.transaction_btn.move(50, 140)
         logger.logger.info("Add transaction button generated")
