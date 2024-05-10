@@ -1,0 +1,11 @@
+[project]
+name = "Trading-Journal"
+version = "0.0.1"
+description = "A simple trading journal made with Python and PostgreSQL"
+
+[author]
+name = "Jakub Kosakowski"
+email = "Jakub.Kosakowski@protonamil.com"
+
+[settings]
+fullscreen = false
