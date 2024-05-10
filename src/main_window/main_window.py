@@ -20,10 +20,11 @@ class MainWindowWidget(QWidget):
         self.all_transactions_btn = QPushButton("Show all transactions", self, objectName='all-transactions-btn')
         self.all_transactions_btn.move(50, 200)
         parent.logger.logger.info("Show all transactions button generated")
+        parent.logger.logger.debug(parent.toml_data['settings']['fullscreen'])
         if parent.toml_data['settings']['fullscreen']:
-            self.showFullScreen()
+            parent.showFullScreen()
         else:
-            self.showMaximized()
+            parent.showMaximized()
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
