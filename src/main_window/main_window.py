@@ -20,6 +20,8 @@ class MainWindowWidget(QWidget):
         self.all_transactions_btn = QPushButton("Show all transactions", self, objectName='all-transactions-btn')
         self.all_transactions_btn.move(50, 200)
         parent.logger.logger.info("Show all transactions button generated")
+        self.exit_btn = QPushButton("Exit", self, objectName='exit-btn')
+        self.exit_btn.move(50, 260)
         parent.logger.logger.debug(parent.toml_data['settings']['fullscreen'])
         if parent.toml_data['settings']['fullscreen']:
             parent.showFullScreen()
@@ -43,6 +45,7 @@ class MainWindow(QMainWindow):
         self.main_tab.settings_btn.clicked.connect(self.settings_UI)
         self.main_tab.transaction_btn.clicked.connect(self.add_new_transaction_UI)
         self.main_tab.all_transactions_btn.clicked.connect(self.show_all_transactions_UI)
+        self.main_tab.exit_btn.clicked.connect(self.close)
         self.show()
 
     def add_new_transaction_UI(self):
