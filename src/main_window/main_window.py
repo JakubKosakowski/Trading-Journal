@@ -4,39 +4,48 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.views import TransactionFormView, AllTransactionsView, SettingsView
 from src.utils import Logger
+from config.settings import load_toml_settings
 
 class MainWindowWidget(QWidget):
-    def __init__(self, parent=None, logger=None):
+    def __init__(self, parent=None):
         super(MainWindowWidget, self).__init__(parent)
         self.settings_btn = QPushButton("", self, objectName='settings-btn')
         self.settings_btn.move(750, 50)
         self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
         self.settings_btn.setCursor(QCursor(Qt.PointingHandCursor))
-        logger.logger.info('Settings button generated.')
+        parent.logger.logger.info('Settings button generated.')
         self.transaction_btn = QPushButton("Add transaction", self, objectName='transaction-btn')
         self.transaction_btn.move(50, 140)
-        logger.logger.info("Add transaction button generated")
+        parent.logger.logger.info("Add transaction button generated")
         self.all_transactions_btn = QPushButton("Show all transactions", self, objectName='all-transactions-btn')
         self.all_transactions_btn.move(50, 200)
-        logger.logger.info("Show all transactions button generated")
-        self.showMaximized()
+        parent.logger.logger.info("Show all transactions button generated")
+        self.exit_btn = QPushButton("Exit", self, objectName='exit-btn')
+        self.exit_btn.move(50, 260)
+        parent.logger.logger.debug(parent.toml_data['settings']['fullscreen'])
+        if parent.toml_data['settings']['fullscreen']:
+            parent.showFullScreen()
+        else:
+            parent.showMaximized()
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         self.logger = Logger(__name__)
+        self.toml_data = load_toml_settings()
         super(MainWindow, self).__init__(parent)
         self.logger.logger.info("Main window generated.")
         self.setGeometry(550, 250, 800, 600)
         self.start_main_window_UI()
 
     def start_main_window_UI(self):
-        self.main_tab = MainWindowWidget(self, self.logger)
+        self.main_tab = MainWindowWidget(self)
         self.logger.logger.info("Main window widget generated.")
         self.setWindowTitle("Trading Journal")
         self.setCentralWidget(self.main_tab)
         self.main_tab.settings_btn.clicked.connect(self.settings_UI)
         self.main_tab.transaction_btn.clicked.connect(self.add_new_transaction_UI)
         self.main_tab.all_transactions_btn.clicked.connect(self.show_all_transactions_UI)
+        self.main_tab.exit_btn.clicked.connect(self.close)
         self.show()
 
     def add_new_transaction_UI(self):
