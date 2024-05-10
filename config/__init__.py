@@ -1,1 +1,1 @@
-from .settings import config
+from .settings import config, load_toml_settings

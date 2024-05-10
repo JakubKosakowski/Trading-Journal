@@ -24,3 +24,4 @@ class SettingsView(QWidget):
             self.logger.logger.info('Full screen enable.')
         else:
             self.main_window.showMaximized()
+            self.logger.logger.info('Full screen disable.')
