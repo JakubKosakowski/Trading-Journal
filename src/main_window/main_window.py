@@ -26,7 +26,7 @@ class MainWindowWidget(QWidget):
         if parent.toml_data['settings']['fullscreen']:
             parent.showFullScreen()
         else:
-            parent.showMaximized()
+            parent.setGeometry(550, 250, 800, 600)
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):

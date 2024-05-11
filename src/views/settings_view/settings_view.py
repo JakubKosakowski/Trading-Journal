@@ -28,7 +28,7 @@ class SettingsView(QWidget):
                 self.main_window.showFullScreen()
                 self.logger.logger.info('Full screen enable.')
             else:
-                self.main_window.showMaximized()
+                self.main_window.setGeometry(550, 250, 800, 600)
                 self.logger.logger.info('Full screen disable.')
             with open("config/myproject.toml", "w") as file:
                 toml.dump(self.main_window.toml_data, file)
