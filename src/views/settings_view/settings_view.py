@@ -23,9 +23,12 @@ class SettingsView(QWidget):
         self.full_screen_checkbox.stateChanged.connect(self.set_screen_size)
         self.logger.logger.info('Full screen mode checkbox generated.')
 
+        currencies = ['PLN', 'USD', 'GBP', 'CHF', 'JPY']
         self.currency_cb = QComboBox(self)
-        self.currency_cb.addItems(['USD $', 'PLN zł', 'GBP £', 'CHF ₣', 'JPY ¥'])
+        self.currency_cb.addItems(currencies)
         self.currency_cb.move(100, 150)
+        self.currency_cb.setCurrentIndex(currencies.index(self.main_window.toml_data['settings']['user_currency']))
+        self.currency_cb.currentIndexChanged.connect(self.set_user_currency)
         self.logger.logger.info('User currency ComboBox generated.')
 
     def set_screen_size(self):
@@ -37,6 +40,15 @@ class SettingsView(QWidget):
             else:
                 self.main_window.setGeometry(550, 250, 800, 600)
                 self.logger.logger.info('Full screen disable.')
+            with open("config/myproject.toml", "w") as file:
+                toml.dump(self.main_window.toml_data, file)
+                self.logger.logger.info('Toml data updated.')
+        except Exception as err:
+            self.logger.logger.error(f'An error occurred: {err}')
+
+    def set_user_currency(self):
+        try:
+            self.main_window.toml_data['settings']['user_currency'] = self.currency_cb.currentText()
             with open("config/myproject.toml", "w") as file:
                 toml.dump(self.main_window.toml_data, file)
                 self.logger.logger.info('Toml data updated.')
