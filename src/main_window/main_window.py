@@ -22,7 +22,11 @@ class MainWindowWidget(QWidget):
         parent.logger.logger.info("Show all transactions button generated")
         self.exit_btn = QPushButton("Exit", self, objectName='exit-btn')
         self.exit_btn.move(50, 260)
-        parent.logger.logger.debug(parent.toml_data['settings']['fullscreen'])
+        l1 = QLabel(parent, objectName='version-label')
+        l1.setText(f"Version: {parent.toml_data['project']['version']}")
+        l1.move(700, 570)
+        l1.setAlignment(Qt.AlignCenter)
+        parent.logger.logger.info('Version label generated.')
         if parent.toml_data['settings']['fullscreen']:
             parent.showFullScreen()
         else:
@@ -42,10 +46,6 @@ class MainWindow(QMainWindow):
         self.logger.logger.info("Main window widget generated.")
         self.setWindowTitle("Trading Journal")
         self.setCentralWidget(self.main_tab)
-        l1 = QLabel(self, objectName='version-label')
-        l1.setText(f"Version: {self.toml_data['project']['version']}")
-        l1.move(700, 570)
-        l1.setAlignment(Qt.AlignCenter)
         self.main_tab.settings_btn.clicked.connect(self.settings_UI)
         self.main_tab.transaction_btn.clicked.connect(self.add_new_transaction_UI)
         self.main_tab.all_transactions_btn.clicked.connect(self.show_all_transactions_UI)
