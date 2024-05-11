@@ -10,16 +10,23 @@ class SettingsView(QWidget):
         super(SettingsView, self).__init__(parent)
         self.main_window = parent
         self.logger = Logger(__name__)
+
         self.menu_btn = QPushButton("Go back to menu", self)
         self.menu_btn.move(100, 350)
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
+
         self.full_screen_checkbox = QCheckBox('Full screen mode', self)
         if self.main_window.toml_data['settings']['fullscreen']:
             self.full_screen_checkbox.setChecked(True)
         self.full_screen_checkbox.move(100, 100)
         self.full_screen_checkbox.stateChanged.connect(self.set_screen_size)
         self.logger.logger.info('Full screen mode checkbox generated.')
+
+        self.currency_cb = QComboBox(self)
+        self.currency_cb.addItems(['USD $', 'PLN zł', 'GBP £', 'CHF ₣', 'JPY ¥'])
+        self.currency_cb.move(100, 150)
+        self.logger.logger.info('User currency ComboBox generated.')
 
     def set_screen_size(self):
         try:
