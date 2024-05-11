@@ -3,6 +3,11 @@ QLabel {
     border-radius: 8px;
 }
 
+QLabel#version-label {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
 QPlainTextEdit#reason-text {
     background-color: #FAF8FF;
     border: 1px solid #222831;

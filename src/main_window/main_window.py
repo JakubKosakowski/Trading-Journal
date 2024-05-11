@@ -22,11 +22,15 @@ class MainWindowWidget(QWidget):
         parent.logger.logger.info("Show all transactions button generated")
         self.exit_btn = QPushButton("Exit", self, objectName='exit-btn')
         self.exit_btn.move(50, 260)
-        parent.logger.logger.debug(parent.toml_data['settings']['fullscreen'])
+        l1 = QLabel(parent, objectName='version-label')
+        l1.setText(f"Version: {parent.toml_data['project']['version']}")
+        l1.move(700, 570)
+        l1.setAlignment(Qt.AlignCenter)
+        parent.logger.logger.info('Version label generated.')
         if parent.toml_data['settings']['fullscreen']:
             parent.showFullScreen()
         else:
-            parent.showMaximized()
+            parent.setGeometry(550, 250, 800, 600)
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
