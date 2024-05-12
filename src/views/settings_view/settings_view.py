@@ -37,6 +37,15 @@ class SettingsView(QWidget):
         self.primary_color_picker.clicked.connect(self.primary_on_click)
         self.logger.logger.info('Primary color picker generated.')
 
+        self.test_label = QLabel(self)
+        self.test_label.setText("TEST LABEL")
+        self.test_label.move(300, 300)
+        self.test_label.setStyleSheet(
+            f"""
+            background-color: {self.main_window.toml_data['settings']['primary_color']};
+            """
+        )
+
     def set_screen_size(self):
         try:
             self.main_window.toml_data['settings']['fullscreen'] = not self.main_window.toml_data['settings']['fullscreen']
@@ -73,5 +82,6 @@ class SettingsView(QWidget):
             with open("config/myproject.toml", "w") as file:
                 toml.dump(self.main_window.toml_data, file)
                 self.logger.logger.info('Toml data updated.')
+            self.update()
         except Exception as err:
             self.logger.logger.error(f'An error occurred: {err}')
