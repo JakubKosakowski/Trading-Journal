@@ -34,6 +34,7 @@ class SettingsView(QWidget):
         self.primary_color_picker = QPushButton('', self, objectName='primary-color-btn')
         self.primary_color_picker.move(300, 100)
         self.primary_color_picker.resize(20, 20)
+        self.primary_color_picker.clicked.connect(self.primary_on_click)
         self.logger.logger.info('Primary color picker generated.')
 
     def set_screen_size(self):
@@ -54,6 +55,21 @@ class SettingsView(QWidget):
     def set_user_currency(self):
         try:
             self.main_window.toml_data['settings']['user_currency'] = self.currency_cb.currentText()
+            with open("config/myproject.toml", "w") as file:
+                toml.dump(self.main_window.toml_data, file)
+                self.logger.logger.info('Toml data updated.')
+        except Exception as err:
+            self.logger.logger.error(f'An error occurred: {err}')
+
+    @pyqtSlot()
+    def primary_on_click(self):
+        self.change_primary_color()
+
+    def change_primary_color(self):
+        color = QColorDialog.getColor()
+
+        try:
+            self.main_window.toml_data['settings']['primary_color'] = color.name()
             with open("config/myproject.toml", "w") as file:
                 toml.dump(self.main_window.toml_data, file)
                 self.logger.logger.info('Toml data updated.')
