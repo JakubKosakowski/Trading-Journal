@@ -31,6 +31,11 @@ class SettingsView(QWidget):
         self.currency_cb.currentIndexChanged.connect(self.set_user_currency)
         self.logger.logger.info('User currency ComboBox generated.')
 
+        self.primary_color_picker = QPushButton('', self, objectName='primary-color-btn')
+        self.primary_color_picker.move(300, 100)
+        self.primary_color_picker.resize(20, 20)
+        self.logger.logger.info('Primary color picker generated.')
+
     def set_screen_size(self):
         try:
             self.main_window.toml_data['settings']['fullscreen'] = not self.main_window.toml_data['settings']['fullscreen']
