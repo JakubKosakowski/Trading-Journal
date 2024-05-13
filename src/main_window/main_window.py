@@ -38,6 +38,7 @@ class MainWindowWidget(QWidget):
     def set_colors(self):
         self.set_transaction_btn_color()
         self.set_all_transactions_btn_color()
+        self.set_exit_btn_color()
         
         self.parent_window.logger.logger.info("All window styles setted.")
 
@@ -53,6 +54,16 @@ class MainWindowWidget(QWidget):
         
     def set_all_transactions_btn_color(self):
         self.all_transactions_btn.setStyleSheet("QPushButton {"
+                                            f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
+                                            f"border: 1px solid {self.parent_window.toml_data['settings']['primary_color']};"
+                                            "}"
+                                            "QPushButton:hover {"
+                                            f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
+                                            f"border: 1px solid #005b60;"
+                                            "}")
+        
+    def set_exit_btn_color(self):
+        self.exit_btn.setStyleSheet("QPushButton {"
                                             f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
                                             f"border: 1px solid {self.parent_window.toml_data['settings']['primary_color']};"
                                             "}"

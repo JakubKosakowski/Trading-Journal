@@ -58,8 +58,7 @@ QPushButton#settings-btn {
     border-style: none;
 }
 
-QPushButton#menu-btn:hover,
-QPushButton#exit-btn:hover {
+QPushButton#menu-btn:hover {
     background-color: #00ADB5;
     border: 1px solid #005b60;
 }
