@@ -43,11 +43,11 @@ QPushButton#menu-btn,
 QPushButton#transaction-btn,
 QPushButton#all-transactions-btn,
 QPushButton#exit-btn {
-    background-color: #00ADB5;
+    /* background-color: #00ADB5; */
     color: #fff;
     font-weight: 600;
     border-radius: 8px;
-    border: 1px solid #00ADB5;
+    /* border: 1px solid #00ADB5; */
     padding: 5px 15px;
     margin-top: 10px;
     outline: 0px;
@@ -59,7 +59,6 @@ QPushButton#settings-btn {
 }
 
 QPushButton#menu-btn:hover,
-QPushButton#transaction-btn:hover,
 QPushButton#all-transactions-btn:hover,
 QPushButton#exit-btn:hover {
     background-color: #00ADB5;

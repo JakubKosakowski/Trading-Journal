@@ -9,28 +9,43 @@ from config.settings import load_toml_settings
 class MainWindowWidget(QWidget):
     def __init__(self, parent=None):
         super(MainWindowWidget, self).__init__(parent)
+        self.parent_window = parent
         self.settings_btn = QPushButton("", self, objectName='settings-btn')
         self.settings_btn.move(750, 50)
         self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
         self.settings_btn.setCursor(QCursor(Qt.PointingHandCursor))
-        parent.logger.logger.info('Settings button generated.')
+        self.parent_window.logger.logger.info('Settings button generated.')
         self.transaction_btn = QPushButton("Add transaction", self, objectName='transaction-btn')
         self.transaction_btn.move(50, 140)
-        parent.logger.logger.info("Add transaction button generated")
+        self.parent_window.logger.logger.info("Add transaction button generated")
         self.all_transactions_btn = QPushButton("Show all transactions", self, objectName='all-transactions-btn')
         self.all_transactions_btn.move(50, 200)
-        parent.logger.logger.info("Show all transactions button generated")
+        self.parent_window.logger.logger.info("Show all transactions button generated")
         self.exit_btn = QPushButton("Exit", self, objectName='exit-btn')
         self.exit_btn.move(50, 260)
-        l1 = QLabel(parent, objectName='version-label')
-        l1.setText(f"Version: {parent.toml_data['project']['version']}")
+        l1 = QLabel(self.parent_window , objectName='version-label')
+        l1.setText(f"Version: {self.parent_window .toml_data['project']['version']}")
         l1.move(700, 570)
         l1.setAlignment(Qt.AlignCenter)
-        parent.logger.logger.info('Version label generated.')
-        if parent.toml_data['settings']['fullscreen']:
-            parent.showFullScreen()
+        self.parent_window.logger.logger.info('Version label generated.')
+        if self.parent_window.toml_data['settings']['fullscreen']:
+            self.parent_window.showFullScreen()
         else:
-            parent.setGeometry(550, 250, 800, 600)
+            self.parent_window.setGeometry(550, 250, 800, 600)
+
+        self.set_colors()
+
+    def set_colors(self):
+        self.transaction_btn.setStyleSheet("QPushButton {"
+                                            f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
+                                            f"border: 1px solid {self.parent_window.toml_data['settings']['primary_color']};"
+                                            "}"
+                                            "QPushButton:hover {"
+                                            f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
+                                            f"border: 1px solid #005b60;"
+                                            "}")
+        
+        self.parent_window.logger.logger.info("All window styles setted.")
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
