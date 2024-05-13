@@ -59,7 +59,6 @@ QPushButton#settings-btn {
 }
 
 QPushButton#menu-btn:hover,
-QPushButton#all-transactions-btn:hover,
 QPushButton#exit-btn:hover {
     background-color: #00ADB5;
     border: 1px solid #005b60;
