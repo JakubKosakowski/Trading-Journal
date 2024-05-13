@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger
-from src.postgres_database import Database
 import toml
 
 class SettingsView(QWidget):
@@ -37,14 +36,12 @@ class SettingsView(QWidget):
         self.primary_color_picker.clicked.connect(self.primary_on_click)
         self.logger.logger.info('Primary color picker generated.')
 
+        self.load_colors()
+
         self.test_label = QLabel(self)
         self.test_label.setText("TEST LABEL")
         self.test_label.move(300, 300)
-        self.test_label.setStyleSheet(
-            f"""
-            background-color: {self.main_window.toml_data['settings']['primary_color']};
-            """
-        )
+        
 
     def set_screen_size(self):
         try:
@@ -82,6 +79,9 @@ class SettingsView(QWidget):
             with open("config/myproject.toml", "w") as file:
                 toml.dump(self.main_window.toml_data, file)
                 self.logger.logger.info('Toml data updated.')
-            self.update()
+            self.load_colors()
         except Exception as err:
             self.logger.logger.error(f'An error occurred: {err}')
+
+    def load_colors(self):
+        self.setStyleSheet(f"""background-color: {self.main_window.toml_data['settings']['primary_color']}""")
