@@ -38,9 +38,9 @@ class SettingsView(QWidget):
 
         self.load_colors()
 
-        self.test_label = QLabel(self)
-        self.test_label.setText("TEST LABEL")
-        self.test_label.move(300, 300)
+        self.primary_color_label = QLabel(self)
+        self.primary_color_label.setText("Buttons' color")
+        self.primary_color_label.move(330, 100)
         
 
     def set_screen_size(self):
