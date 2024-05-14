@@ -33,14 +33,15 @@ class SettingsView(QWidget):
         self.primary_color_picker = QPushButton('', self, objectName='primary-color-btn')
         self.primary_color_picker.move(300, 100)
         self.primary_color_picker.resize(20, 20)
+        self.primary_color_picker.setCursor(QCursor(Qt.PointingHandCursor))
         self.primary_color_picker.clicked.connect(self.primary_on_click)
         self.logger.logger.info('Primary color picker generated.')
 
         self.load_colors()
 
-        self.test_label = QLabel(self)
-        self.test_label.setText("TEST LABEL")
-        self.test_label.move(300, 300)
+        self.primary_color_label = QLabel(self)
+        self.primary_color_label.setText("Buttons' color")
+        self.primary_color_label.move(330, 100)
         
 
     def set_screen_size(self):
@@ -84,4 +85,19 @@ class SettingsView(QWidget):
             self.logger.logger.error(f'An error occurred: {err}')
 
     def load_colors(self):
-        self.setStyleSheet(f"""background-color: {self.main_window.toml_data['settings']['primary_color']}""")
+        self.load_menu_button_color()
+        self.load_combobox_style()
+        self.primary_color_picker.setStyleSheet(f"border-style: none; background-color: {self.main_window.toml_data['settings']['primary_color']}")
+
+    def load_menu_button_color(self):
+        self.menu_btn.setStyleSheet("QPushButton {"
+                                            f"background-color: {self.main_window.toml_data['settings']['primary_color']};"
+                                            f"border: 1px solid {self.main_window.toml_data['settings']['primary_color']};"
+                                            "}"
+                                            "QPushButton:hover {"
+                                            f"background-color: {self.main_window.toml_data['settings']['primary_color']};"
+                                            f"border: 1px solid #005b60;"
+                                            "}")
+        
+    def load_combobox_style(self):
+        self.currency_cb.setStyleSheet(f"background-color: {self.main_window.toml_data['settings']['primary_color']};")
