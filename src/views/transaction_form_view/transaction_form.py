@@ -6,6 +6,7 @@ from src.utils import Logger
 class TransactionFormView(QWidget):
     def __init__(self, parent=None):
         super(TransactionFormView, self).__init__(parent)
+        self.main_window = parent
         self.logger = Logger(__name__)
         self.menu_btn = QPushButton("Go back to menu", self)
         self.menu_btn.move(100, 350)
@@ -15,6 +16,7 @@ class TransactionFormView(QWidget):
         self.load_reason_to_entry_edit_lines()
         self.load_enter_and_exits_section()
         self.load_fields_labels()
+        self.load_colors()
 
     def load_reason_to_entry(self):
         self.entry_reason_label = QLabel('', self)
@@ -42,3 +44,16 @@ class TransactionFormView(QWidget):
 
     def load_reason_for_exit_section(self):
         pass
+
+    def load_colors(self):
+        self.load_menu_button_color()
+
+    def load_menu_button_color(self):
+        self.menu_btn.setStyleSheet("QPushButton {"
+                                            f"background-color: {self.main_window.toml_data['settings']['primary_color']};"
+                                            f"border: 1px solid {self.main_window.toml_data['settings']['primary_color']};"
+                                            "}"
+                                            "QPushButton:hover {"
+                                            f"background-color: {self.main_window.toml_data['settings']['primary_color']};"
+                                            f"border: 1px solid #005b60;"
+                                            "}")
