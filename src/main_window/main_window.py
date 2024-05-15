@@ -42,8 +42,7 @@ class MainWindowWidget(QWidget):
         self.set_transaction_btn_color()
         self.set_all_transactions_btn_color()
         self.set_exit_btn_color()
-        
-        self.parent_window.logger.logger.info("All window styles setted.")
+        self.parent_window.logger.logger.info("All window styles set.")
 
     def set_transaction_btn_color(self):
         self.transaction_btn.setStyleSheet("QPushButton {"
@@ -54,6 +53,7 @@ class MainWindowWidget(QWidget):
                                             f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
                                             f"border: 1px solid #005b60;"
                                             "}")
+        self.parent_window.logger.logger.info('Add transaction button color set.')
         
     def set_all_transactions_btn_color(self):
         self.all_transactions_btn.setStyleSheet("QPushButton {"
@@ -64,6 +64,7 @@ class MainWindowWidget(QWidget):
                                             f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
                                             f"border: 1px solid #005b60;"
                                             "}")
+        self.parent_window.logger.logger.info('All transactions button color set.')
         
     def set_exit_btn_color(self):
         self.exit_btn.setStyleSheet("QPushButton {"
@@ -74,6 +75,7 @@ class MainWindowWidget(QWidget):
                                             f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
                                             f"border: 1px solid #005b60;"
                                             "}")
+        self.parent_window.logger.logger.info('Exit button color set.')
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):

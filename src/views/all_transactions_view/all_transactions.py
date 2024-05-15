@@ -38,7 +38,6 @@ class AllTransactionsView(QWidget):
         for ind, record in enumerate(self.records):
             self.table_widget.setItem(ind,0, QTableWidgetItem(record[1]))
             self.table_widget.setItem(ind,1, QTableWidgetItem(str(record[2])))
-            self.logger.logger.debug(f"Record nr. {ind}: {record}")
 
     def load_colors(self):
         self.load_menu_button_color()
