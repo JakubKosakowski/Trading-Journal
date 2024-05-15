@@ -49,6 +49,10 @@ class SettingsView(QWidget):
         self.primary_color_label = QLabel(self)
         self.primary_color_label.setText("Buttons' color")
         self.primary_color_label.move(330, 100)
+
+        self.secondary_color_label = QLabel(self)
+        self.secondary_color_label.setText("All transaction background color")
+        self.secondary_color_label.move(330, 130)
         
 
     def set_screen_size(self):
