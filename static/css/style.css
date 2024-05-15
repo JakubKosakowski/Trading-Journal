@@ -22,12 +22,12 @@ QWidget {
 /* All transaction table styles */
 
 QTableWidget {
-    background-color: #00333C;
+    /* background-color: #00333C; */
     color: #fff;
 }
 
 QHeaderView {
-    background-color: #00333C;
+    /* background-color: #00333C; */
     color: #fff;
     border-style: none;
     font-family: 'Montserrat', sans-serif;

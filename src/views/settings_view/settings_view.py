@@ -37,11 +37,22 @@ class SettingsView(QWidget):
         self.primary_color_picker.clicked.connect(self.primary_on_click)
         self.logger.logger.info('Primary color picker generated.')
 
+        self.secondary_color_picker = QPushButton('', self, objectName='secondary-color-btn')
+        self.secondary_color_picker.move(300, 130)
+        self.secondary_color_picker.resize(20, 20)
+        self.secondary_color_picker.setCursor(QCursor(Qt.PointingHandCursor))
+        self.secondary_color_picker.clicked.connect(self.secondary_on_click)
+        self.logger.logger.info('Secondary color picker generated.')
+
         self.load_colors()
 
         self.primary_color_label = QLabel(self)
         self.primary_color_label.setText("Buttons' color")
         self.primary_color_label.move(330, 100)
+
+        self.secondary_color_label = QLabel(self)
+        self.secondary_color_label.setText("All transaction background color")
+        self.secondary_color_label.move(330, 130)
         
 
     def set_screen_size(self):
@@ -72,6 +83,10 @@ class SettingsView(QWidget):
     def primary_on_click(self):
         self.change_primary_color()
 
+    @pyqtSlot()
+    def secondary_on_click(self):
+        self.change_secondary_color()
+
     def change_primary_color(self):
         color = QColorDialog.getColor()
 
@@ -84,10 +99,23 @@ class SettingsView(QWidget):
         except Exception as err:
             self.logger.logger.error(f'An error occurred: {err}')
 
+    def change_secondary_color(self):
+        color = QColorDialog.getColor()
+
+        try:
+            self.main_window.toml_data['settings']['secondary_color'] = color.name()
+            with open("config/myproject.toml", "w") as file:
+                toml.dump(self.main_window.toml_data, file)
+                self.logger.logger.info('Toml data updated.')
+            self.load_colors()
+        except Exception as err:
+            self.logger.logger.error(f'An error occurred: {err}')
+
     def load_colors(self):
         self.load_menu_button_color()
         self.load_combobox_style()
         self.primary_color_picker.setStyleSheet(f"border-style: none; background-color: {self.main_window.toml_data['settings']['primary_color']}")
+        self.secondary_color_picker.setStyleSheet(f"border-style: none; background-color: {self.main_window.toml_data['settings']['secondary_color']}")
 
     def load_menu_button_color(self):
         self.menu_btn.setStyleSheet("QPushButton {"

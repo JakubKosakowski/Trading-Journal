@@ -38,10 +38,11 @@ class AllTransactionsView(QWidget):
         for ind, record in enumerate(self.records):
             self.table_widget.setItem(ind,0, QTableWidgetItem(record[1]))
             self.table_widget.setItem(ind,1, QTableWidgetItem(str(record[2])))
-            self.logger.logger.debug(f"Record nr. {ind}: {record}")
 
     def load_colors(self):
         self.load_menu_button_color()
+        self.load_background_color()
+        self.logger.logger.info("All view colors loaded.")
 
     def load_menu_button_color(self):
         self.menu_btn.setStyleSheet("QPushButton {"
@@ -52,3 +53,13 @@ class AllTransactionsView(QWidget):
                                             f"background-color: {self.main_window.toml_data['settings']['primary_color']};"
                                             f"border: 1px solid #005b60;"
                                             "}")
+        self.logger.logger.info('Menu button color set.')
+        
+    def load_background_color(self):
+        self.table_widget.setStyleSheet("QTableWidget {"
+                                        f"background-color: {self.main_window.toml_data['settings']['secondary_color']};"
+                                        "}"
+                                        "QHeaderView {"
+                                        f"background-color: {self.main_window.toml_data['settings']['secondary_color']};"
+                                        "}")
+        self.logger.logger.info('Table background color set.')
