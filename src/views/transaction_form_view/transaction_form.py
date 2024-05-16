@@ -9,7 +9,7 @@ class TransactionFormView(QWidget):
         self.main_window = parent
         self.logger = Logger(__name__)
         self.menu_btn = QPushButton("Go back to menu", self)
-        self.menu_btn.move(100, 350)
+        self.menu_btn.move(100, 370)
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
         self.load_reason_to_entry()
@@ -32,15 +32,17 @@ class TransactionFormView(QWidget):
 
     def load_enter_and_exits_section(self):
         self.enter_exit_label = QLabel('', self)
-        self.enter_exit_label.setFixedSize(780, 200)
+        self.enter_exit_label.setFixedSize(780, 220)
         self.enter_exit_label.move(10, 150)
         self.logger.logger.info("Enter and exits section generated.")
 
     def load_fields_labels(self):
         self.fields_labels = QLabel("        Date\t\tOrder Price           Filled Priced           Slippage           Filled Shares           Total Cost           Day's High           Day's Low           Grade        ", self)
+        self.fields_labels.setObjectName('transaction-data-info')
         self.fields_labels.setFixedSize(760, 30)
         self.fields_labels.move(20, 300)
         self.logger.logger.info("Fields labels section generated.")
+        self.load_input_lines()
 
     def load_reason_for_exit_section(self):
         pass
@@ -57,3 +59,10 @@ class TransactionFormView(QWidget):
                                             f"background-color: {self.main_window.toml_data['settings']['primary_color']};"
                                             f"border: 1px solid #005b60;"
                                             "}")
+        
+    def load_input_lines(self):
+        self.transaction_date = QDateEdit(self, calendarPopup=True)
+        self.transaction_date.move(20, 320)
+        self.transaction_date.setDateTime(QDateTime.currentDateTime())
+        self.transaction_date.setStyleSheet(f"margin-top: 10px;")
+        self.logger.logger.info("Transaction date picker generated.")

@@ -8,6 +8,10 @@ QLabel#version-label {
     margin-bottom: 10px;
 }
 
+QLabel#transaction-data-info {
+    margin-bottom: 10px;
+}
+
 QPlainTextEdit#reason-text {
     background-color: #FAF8FF;
     border: 1px solid #222831;
