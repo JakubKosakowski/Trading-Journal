@@ -61,8 +61,27 @@ class TransactionFormView(QWidget):
                                             "}")
         
     def load_input_lines(self):
+        self.load_company_code()
+        self.load_transaction_date_picker()
+
+    def load_transaction_date_picker(self):
         self.transaction_date = QDateEdit(self, calendarPopup=True)
         self.transaction_date.move(20, 320)
         self.transaction_date.setDateTime(QDateTime.currentDateTime())
         self.transaction_date.setStyleSheet(f"margin-top: 10px;")
         self.logger.logger.info("Transaction date picker generated.")
+
+    def load_company_code(self):
+        self.load_company_code_label()
+        self.company_code = QLineEdit(self)
+        self.company_code.setFixedSize(40, 20)
+        self.company_code.move(100, 60)
+        self.company_code.setStyleSheet(f"background-color: #ffffff;")
+        self.logger.logger.info("Company code line edit generated.")
+
+    def load_company_code_label(self):
+        self.company_code_label = QLabel('Company code', self)
+        self.company_code_label.setFixedSize(80, 20)
+        self.company_code_label.move(20, 60)
+        self.company_code_label.setStyleSheet(f"border-style: none;")
+        self.logger.logger.info("Company code info label generated.")
