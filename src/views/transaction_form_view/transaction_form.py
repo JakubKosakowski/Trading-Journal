@@ -63,6 +63,7 @@ class TransactionFormView(QWidget):
     def load_input_lines(self):
         self.load_company_code()
         self.load_transaction_date_picker()
+        self.load_transaction_order_price()
 
     def load_transaction_date_picker(self):
         self.transaction_date = QDateEdit(self, calendarPopup=True)
@@ -85,3 +86,11 @@ class TransactionFormView(QWidget):
         self.company_code_label.move(20, 60)
         self.company_code_label.setStyleSheet(f"border-style: none;")
         self.logger.logger.info("Company code info label generated.")
+
+    def load_transaction_order_price(self):
+        self.transaction_order_price = QLineEdit(self)
+        self.transaction_order_price.setValidator(QDoubleValidator(0.001,99999.999,3))
+        self.transaction_order_price.setFixedSize(50, 20)
+        self.transaction_order_price.move(120, 330)
+        self.transaction_order_price.setStyleSheet(f"background-color: #ffffff;")
+        self.logger.logger.info("Order price line edit generated.")
