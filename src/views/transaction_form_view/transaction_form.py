@@ -65,6 +65,7 @@ class TransactionFormView(QWidget):
         self.load_transaction_date_picker()
         self.load_transaction_order_price()
         self.load_transaction_filled_priced()
+        self.load_transaction_slippage()
 
     def load_transaction_date_picker(self):
         self.transaction_date = QDateEdit(self, calendarPopup=True)
@@ -103,3 +104,13 @@ class TransactionFormView(QWidget):
         self.transaction_filled_priced.move(210, 330)
         self.transaction_filled_priced.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Filled priced line edit generated.")
+
+    def load_transaction_slippage(self):
+        self.transaction_slippage = QLineEdit(self)
+        self.transaction_slippage.setReadOnly(True)
+        self.transaction_slippage.setValidator(QDoubleValidator(0.001,99999.999,3))
+        self.transaction_slippage.setText('0.000')
+        self.transaction_slippage.setFixedSize(50, 20)
+        self.transaction_slippage.move(290, 330)
+        self.transaction_slippage.setStyleSheet(f"background-color: gray;")
+        self.logger.logger.info("Slippage line edit generated.")
