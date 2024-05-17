@@ -30,6 +30,11 @@ class SettingsView(QWidget):
         self.currency_cb.currentIndexChanged.connect(self.set_user_currency)
         self.logger.logger.info('User currency ComboBox generated.')
 
+        self.currency_cb_label = QLabel(self)
+        self.currency_cb_label.setText('User currency')
+        self.currency_cb_label.move(160, 153)
+        self.logger.logger.info('User currency info label generated.')
+
         self.primary_color_picker = QPushButton('', self, objectName='primary-color-btn')
         self.primary_color_picker.move(300, 100)
         self.primary_color_picker.resize(20, 20)
