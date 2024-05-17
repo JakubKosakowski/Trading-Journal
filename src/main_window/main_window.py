@@ -5,6 +5,7 @@ from PyQt5.QtGui import *
 from src.views import TransactionFormView, AllTransactionsView, SettingsView
 from src.utils import Logger
 from config.settings import load_toml_settings
+import static.lang.lang as lang
 
 class MainWindowWidget(QWidget):
     def __init__(self, parent=None):
@@ -16,7 +17,8 @@ class MainWindowWidget(QWidget):
         self.settings_btn.setCursor(QCursor(Qt.PointingHandCursor))
         self.parent_window.logger.logger.info('Settings button generated.')
 
-        self.transaction_btn = QPushButton("Add transaction", self, objectName='transaction-btn')
+        self.transaction_btn = QPushButton("", self, objectName='transaction-btn')
+        self.set_language_text(self.transaction_btn, "Dodaj transakcję")
         self.transaction_btn.move(50, 140)
         self.parent_window.logger.logger.info("Add transaction button generated")
 
@@ -76,6 +78,13 @@ class MainWindowWidget(QWidget):
                                             f"border: 1px solid #005b60;"
                                             "}")
         self.parent_window.logger.logger.info('Exit button color set.')
+
+    def set_language_text(self, obj, text):
+        if self.parent_window.toml_data['settings']['language'] == 'PL':
+            obj.setText(text)
+        else:
+            obj.setText(lang.LANGUAGES[self.parent_window.toml_data['settings']['language']][text])
+        self.parent_window.logger.logger.info('Object text generated.')
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
