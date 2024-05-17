@@ -3,20 +3,23 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.views import TransactionFormView, AllTransactionsView, SettingsView
-from src.utils import Logger
+from src.utils import Logger, Utils
 from config.settings import load_toml_settings
 
 class MainWindowWidget(QWidget):
     def __init__(self, parent=None):
         super(MainWindowWidget, self).__init__(parent)
         self.parent_window = parent
+        self.language = self.parent_window.toml_data['settings']['language']
         self.settings_btn = QPushButton("", self, objectName='settings-btn')
         self.settings_btn.move(750, 50)
         self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
         self.settings_btn.setCursor(QCursor(Qt.PointingHandCursor))
         self.parent_window.logger.logger.info('Settings button generated.')
 
-        self.transaction_btn = QPushButton("Add transaction", self, objectName='transaction-btn')
+        self.transaction_btn = QPushButton("", self, objectName='transaction-btn')
+        # self.set_language_text(self.transaction_btn, "Dodaj transakcję")
+        Utils.set_language_text(self.transaction_btn, "Dodaj transakcję", self.language, self.parent_window.toml_data)
         self.transaction_btn.move(50, 140)
         self.parent_window.logger.logger.info("Add transaction button generated")
 
@@ -77,6 +80,7 @@ class MainWindowWidget(QWidget):
                                             "}")
         self.parent_window.logger.logger.info('Exit button color set.')
 
+
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         self.logger = Logger(__name__)
@@ -115,7 +119,7 @@ class MainWindow(QMainWindow):
 
     def settings_UI(self):
         self.settings_tab = SettingsView(self)
-        self.logger.logger.debug('Settings view generated.')
+        self.logger.logger.info('Settings view generated.')
         self.setWindowTitle("Settings")
         self.setCentralWidget(self.settings_tab)
         self.settings_tab.menu_btn.clicked.connect(self.start_main_window_UI)

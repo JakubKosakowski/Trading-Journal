@@ -9,6 +9,7 @@ email = "Jakub.Kosakowski@protonamil.com"
 
 [settings]
 fullscreen = false
+language = "PL"
 user_currency = "PLN"
 primary_color = "#19a1d3"
 secondary_color = "#00007f"

@@ -2,6 +2,7 @@ from urllib.request import urlretrieve
 from urllib import error
 import csv, json
 from .logger import Logger
+from static.lang.lang import LANGUAGES
 
 logger = Logger(__name__)
 
@@ -43,3 +44,12 @@ class Utils:
                 list_of_columns_names.append(row)
                 break
         return list_of_columns_names[0]
+    
+    @staticmethod
+    def set_language_text(obj, text, lang_code, toml_data):
+        logger.logger.debug(lang_code)
+        if lang_code == 'PL':
+            obj.setText(text)
+        else:
+            obj.setText(LANGUAGES[toml_data['settings']['language']][text])
+        logger.logger.info('Object text generated.')

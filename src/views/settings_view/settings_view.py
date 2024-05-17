@@ -30,6 +30,24 @@ class SettingsView(QWidget):
         self.currency_cb.currentIndexChanged.connect(self.set_user_currency)
         self.logger.logger.info('User currency ComboBox generated.')
 
+        self.currency_cb_label = QLabel(self)
+        self.currency_cb_label.setText('User currency')
+        self.currency_cb_label.move(160, 153)
+        self.logger.logger.info('User currency info label generated.')
+
+        languages = ['US', 'PL']
+        self.app_language = QComboBox(self)
+        self.app_language.addItems(languages)
+        self.app_language.move(100, 200)
+        self.app_language.setCurrentIndex(languages.index(self.main_window.toml_data['settings']['language']))
+        self.app_language.currentIndexChanged.connect(self.set_app_language)
+        self.logger.logger.info('Application language ComboBox generated.')
+
+        self.app_language_label = QLabel(self)
+        self.app_language_label.setText('Application language')
+        self.app_language_label.move(220, 203)
+        self.logger.logger.info('Application language info label generated.')
+
         self.primary_color_picker = QPushButton('', self, objectName='primary-color-btn')
         self.primary_color_picker.move(300, 100)
         self.primary_color_picker.resize(20, 20)
@@ -73,6 +91,15 @@ class SettingsView(QWidget):
     def set_user_currency(self):
         try:
             self.main_window.toml_data['settings']['user_currency'] = self.currency_cb.currentText()
+            with open("config/myproject.toml", "w") as file:
+                toml.dump(self.main_window.toml_data, file)
+                self.logger.logger.info('Toml data updated.')
+        except Exception as err:
+            self.logger.logger.error(f'An error occurred: {err}')
+
+    def set_app_language(self):
+        try:
+            self.main_window.toml_data['settings']['language'] = self.app_language.currentText()
             with open("config/myproject.toml", "w") as file:
                 toml.dump(self.main_window.toml_data, file)
                 self.logger.logger.info('Toml data updated.')
