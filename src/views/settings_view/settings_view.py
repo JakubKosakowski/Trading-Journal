@@ -1,16 +1,19 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from src.utils import Logger
+from src.utils import Logger, Utils
 import toml
 
 class SettingsView(QWidget):
     def __init__(self, parent=None):
         super(SettingsView, self).__init__(parent)
         self.main_window = parent
+        self.language = self.main_window.toml_data['settings']['language']
+
         self.logger = Logger(__name__)
 
-        self.menu_btn = QPushButton("Go back to menu", self)
+        self.menu_btn = QPushButton("", self)
+        Utils.set_language_text(self.menu_btn, "Wróć do menu", self.language, self.main_window.toml_data)
         self.menu_btn.move(100, 350)
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')

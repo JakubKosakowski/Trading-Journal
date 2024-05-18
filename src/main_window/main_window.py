@@ -23,11 +23,13 @@ class MainWindowWidget(QWidget):
         self.transaction_btn.move(50, 140)
         self.parent_window.logger.logger.info("Add transaction button generated")
 
-        self.all_transactions_btn = QPushButton("Show all transactions", self, objectName='all-transactions-btn')
+        self.all_transactions_btn = QPushButton("", self, objectName='all-transactions-btn')
+        Utils.set_language_text(self.all_transactions_btn, "Pokaż wszystkie transakcje", self.language, self.parent_window.toml_data)
         self.all_transactions_btn.move(50, 200)
         self.parent_window.logger.logger.info("Show all transactions button generated")
         
-        self.exit_btn = QPushButton("Exit", self, objectName='exit-btn')
+        self.exit_btn = QPushButton("", self, objectName='exit-btn')
+        Utils.set_language_text(self.exit_btn, "Wyjdź", self.language, self.parent_window.toml_data)
         self.exit_btn.move(50, 260)
         l1 = QLabel(self.parent_window , objectName='version-label')
         l1.setText(f"Version: {self.parent_window.toml_data['project']['version']}")
