@@ -23,7 +23,8 @@ class MainWindowWidget(QWidget):
         self.transaction_btn.move(50, 140)
         self.parent_window.logger.logger.info("Add transaction button generated")
 
-        self.all_transactions_btn = QPushButton("Show all transactions", self, objectName='all-transactions-btn')
+        self.all_transactions_btn = QPushButton("", self, objectName='all-transactions-btn')
+        Utils.set_language_text(self.all_transactions_btn, "Pokaż wszystkie transakcje", self.language, self.parent_window.toml_data)
         self.all_transactions_btn.move(50, 200)
         self.parent_window.logger.logger.info("Show all transactions button generated")
         
