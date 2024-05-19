@@ -13,13 +13,11 @@ class SettingsView(QWidget):
         self.logger = Logger(__name__)
 
         self.menu_btn = QPushButton("", self)
-        Utils.set_language_text(self.menu_btn, "Wróć do menu", self.language, self.main_window.toml_data)
         self.menu_btn.move(100, 350)
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
 
         self.full_screen_checkbox = QCheckBox('', self)
-        Utils.set_language_text(self.full_screen_checkbox, "Tryb pełnego ekranu", self.language, self.main_window.toml_data)
         if self.main_window.toml_data['settings']['fullscreen']:
             self.full_screen_checkbox.setChecked(True)
         self.full_screen_checkbox.move(100, 100)
@@ -75,6 +73,8 @@ class SettingsView(QWidget):
         self.secondary_color_label = QLabel(self)
         self.secondary_color_label.setText("All transaction background color")
         self.secondary_color_label.move(330, 130)
+
+        self.load_text()
         
 
     def set_screen_size(self):
@@ -107,6 +107,7 @@ class SettingsView(QWidget):
             with open("config/myproject.toml", "w") as file:
                 toml.dump(self.main_window.toml_data, file)
                 self.logger.logger.info('Toml data updated.')
+            self.load_text()
         except Exception as err:
             self.logger.logger.error(f'An error occurred: {err}')
 
@@ -160,3 +161,7 @@ class SettingsView(QWidget):
         
     def load_combobox_style(self):
         self.currency_cb.setStyleSheet(f"background-color: {self.main_window.toml_data['settings']['primary_color']};")
+
+    def load_text(self):
+        Utils.set_language_text(self.menu_btn, "Wróć do menu", self.language, self.main_window.toml_data)
+        Utils.set_language_text(self.full_screen_checkbox, "Tryb pełnego ekranu", self.language, self.main_window.toml_data)
