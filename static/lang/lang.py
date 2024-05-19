@@ -6,5 +6,9 @@ LANGUAGES = {
         'Wróć do menu': 'Go back to menu',
         'Język': 'Language',
         'Waluta użytkownika': 'User currency',
+        'Kolory przycisków': "Buttons' colors",
+        'Tło widoku transakcji': 'All transactions background',
+        'Wersja aplikacji': 'Application version',
+        'Tryb pełnego ekranu': 'Full screen mode'
     }
 }

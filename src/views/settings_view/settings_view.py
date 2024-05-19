@@ -18,7 +18,8 @@ class SettingsView(QWidget):
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
 
-        self.full_screen_checkbox = QCheckBox('Full screen mode', self)
+        self.full_screen_checkbox = QCheckBox('', self)
+        Utils.set_language_text(self.full_screen_checkbox, "Tryb pełnego ekranu", self.language, self.main_window.toml_data)
         if self.main_window.toml_data['settings']['fullscreen']:
             self.full_screen_checkbox.setChecked(True)
         self.full_screen_checkbox.move(100, 100)
