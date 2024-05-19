@@ -66,7 +66,6 @@ class SettingsView(QWidget):
         self.load_colors()
 
         self.primary_color_label = QLabel(self)
-        self.primary_color_label.setText("Buttons' color")
         self.primary_color_label.move(330, 100)
 
         self.secondary_color_label = QLabel(self)
@@ -164,5 +163,5 @@ class SettingsView(QWidget):
         Utils.set_language_text(self.menu_btn, "Wróć do menu", self.language, self.main_window.toml_data)
         Utils.set_language_text(self.full_screen_checkbox, "Tryb pełnego ekranu", self.language, self.main_window.toml_data)
         Utils.set_language_text(self.currency_cb_label, "Waluta użytkownika", self.language, self.main_window.toml_data)
+        Utils.set_language_text(self.primary_color_label, "Kolory przycisków", self.language, self.main_window.toml_data)
         Utils.set_language_text(self.secondary_color_label, "Tło widoku transakcji", self.language, self.main_window.toml_data)
-        # Tło widoku transakcji
