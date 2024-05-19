@@ -33,7 +33,6 @@ class SettingsView(QWidget):
         self.logger.logger.info('User currency ComboBox generated.')
 
         self.currency_cb_label = QLabel(self)
-        self.currency_cb_label.setText('User currency')
         self.currency_cb_label.move(160, 153)
         self.logger.logger.info('User currency info label generated.')
 
@@ -165,3 +164,4 @@ class SettingsView(QWidget):
     def load_text(self):
         Utils.set_language_text(self.menu_btn, "Wróć do menu", self.language, self.main_window.toml_data)
         Utils.set_language_text(self.full_screen_checkbox, "Tryb pełnego ekranu", self.language, self.main_window.toml_data)
+        Utils.set_language_text(self.currency_cb_label, "Waluta użytkownika", self.language, self.main_window.toml_data)
