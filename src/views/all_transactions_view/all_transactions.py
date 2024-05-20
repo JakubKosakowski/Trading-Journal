@@ -69,3 +69,4 @@ class AllTransactionsView(QWidget):
 
     def load_text(self):
         Utils.set_language_text(self.menu_btn, "Wróć do menu", self.language, self.main_window.toml_data)
+        self.logger.logger.info('View text set.')
