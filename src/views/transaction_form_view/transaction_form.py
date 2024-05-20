@@ -10,7 +10,6 @@ class TransactionFormView(QWidget):
         self.language = self.main_window.toml_data['settings']['language']
         self.logger = Logger(__name__)
         self.menu_btn = QPushButton("Go back to menu", self)
-        Utils.set_language_text(self.menu_btn, "Wróć do menu", self.language, self.main_window.toml_data)
         self.menu_btn.move(100, 370)
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
@@ -20,6 +19,8 @@ class TransactionFormView(QWidget):
         self.load_enter_and_exits_section()
         self.load_fields_labels()
         self.load_colors()
+
+        self.load_text()
 
     def load_reason_to_entry(self):
         self.entry_reason_label = QLabel('', self)
@@ -86,7 +87,7 @@ class TransactionFormView(QWidget):
         self.logger.logger.info("Company code line edit generated.")
 
     def load_company_code_label(self):
-        self.company_code_label = QLabel('Company code', self)
+        self.company_code_label = QLabel('', self)
         self.company_code_label.setFixedSize(80, 20)
         self.company_code_label.move(20, 60)
         self.company_code_label.setStyleSheet(f"border-style: none;")
@@ -117,3 +118,7 @@ class TransactionFormView(QWidget):
         self.transaction_slippage.move(290, 330)
         self.transaction_slippage.setStyleSheet(f"background-color: gray;")
         self.logger.logger.info("Slippage line edit generated.")
+
+    def load_text(self):
+        Utils.set_language_text(self.menu_btn, "Wróć do menu", self.language, self.main_window.toml_data)
+        Utils.set_language_text(self.company_code_label, "Kod spółki", self.language, self.main_window.toml_data)

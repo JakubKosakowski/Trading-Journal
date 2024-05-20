@@ -9,6 +9,7 @@ LANGUAGES = {
         'Kolory przycisków': "Buttons' colors",
         'Tło widoku transakcji': 'All transactions background',
         'Wersja aplikacji': 'Application version',
-        'Tryb pełnego ekranu': 'Full screen mode'
+        'Tryb pełnego ekranu': 'Full screen mode',
+        'Kod spółki': "Company's code"
     }
 }
