@@ -13,7 +13,6 @@ class AllTransactionsView(QWidget):
         self.database = Database()
         self.logger.logger.info("Database loaded.")
         self.menu_btn = QPushButton("", self)
-        Utils.set_language_text(self.menu_btn, "Wróć do menu", self.language, self.main_window.toml_data)
         self.menu_btn.move(100, 350)
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
@@ -28,6 +27,8 @@ class AllTransactionsView(QWidget):
         self.logger.logger.info("Table layout set up.")
 
         self.load_colors()
+
+        self.load_text()
 
     def create_table(self):
         self.table_widget = QTableWidget()
@@ -65,3 +66,7 @@ class AllTransactionsView(QWidget):
                                         f"background-color: {self.main_window.toml_data['settings']['secondary_color']};"
                                         "}")
         self.logger.logger.info('Table background color set.')
+
+    def load_text(self):
+        Utils.set_language_text(self.menu_btn, "Wróć do menu", self.language, self.main_window.toml_data)
+        self.logger.logger.info('View text set.')

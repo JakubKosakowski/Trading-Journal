@@ -45,8 +45,7 @@ class SettingsView(QWidget):
         self.logger.logger.info('Application language ComboBox generated.')
 
         self.app_language_label = QLabel(self)
-        self.app_language_label.setText('Application language')
-        self.app_language_label.move(220, 203)
+        self.app_language_label.move(160, 203)
         self.logger.logger.info('Application language info label generated.')
 
         self.primary_color_picker = QPushButton('', self, objectName='primary-color-btn')
@@ -165,3 +164,4 @@ class SettingsView(QWidget):
         Utils.set_language_text(self.currency_cb_label, "Waluta użytkownika", self.language, self.main_window.toml_data)
         Utils.set_language_text(self.primary_color_label, "Kolory przycisków", self.language, self.main_window.toml_data)
         Utils.set_language_text(self.secondary_color_label, "Tło widoku transakcji", self.language, self.main_window.toml_data)
+        Utils.set_language_text(self.app_language_label, "Język", self.language, self.main_window.toml_data)
