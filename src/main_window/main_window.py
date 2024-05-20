@@ -19,22 +19,19 @@ class MainWindowWidget(QWidget):
 
         self.transaction_btn = QPushButton("", self, objectName='transaction-btn')
         # self.set_language_text(self.transaction_btn, "Dodaj transakcję")
-        Utils.set_language_text(self.transaction_btn, "Dodaj transakcję", self.language, self.parent_window.toml_data)
         self.transaction_btn.move(50, 140)
         self.parent_window.logger.logger.info("Add transaction button generated")
 
         self.all_transactions_btn = QPushButton("", self, objectName='all-transactions-btn')
-        Utils.set_language_text(self.all_transactions_btn, "Pokaż wszystkie transakcje", self.language, self.parent_window.toml_data)
         self.all_transactions_btn.move(50, 200)
         self.parent_window.logger.logger.info("Show all transactions button generated")
         
         self.exit_btn = QPushButton("", self, objectName='exit-btn')
-        Utils.set_language_text(self.exit_btn, "Wyjdź", self.language, self.parent_window.toml_data)
         self.exit_btn.move(50, 260)
-        l1 = QLabel(self.parent_window , objectName='version-label')
-        l1.setText(f"Version: {self.parent_window.toml_data['project']['version']}")
-        l1.move(700, 570)
-        l1.setAlignment(Qt.AlignCenter)
+        self.version_label = QLabel(self.parent_window , objectName='version-label')
+        self.version_label.setText(f"Version: {self.parent_window.toml_data['project']['version']}")
+        self.version_label.move(700, 570)
+        self.version_label.setAlignment(Qt.AlignCenter)
         self.parent_window.logger.logger.info('Version label generated.')
         if self.parent_window.toml_data['settings']['fullscreen']:
             self.parent_window.showFullScreen()
@@ -42,6 +39,7 @@ class MainWindowWidget(QWidget):
             self.parent_window.setGeometry(550, 250, 800, 600)
 
         self.set_colors()
+        self.load_text()
 
     def set_colors(self):
         self.set_transaction_btn_color()
@@ -81,6 +79,13 @@ class MainWindowWidget(QWidget):
                                             f"border: 1px solid #005b60;"
                                             "}")
         self.parent_window.logger.logger.info('Exit button color set.')
+
+    def load_text(self):
+        Utils.set_language_text(self.transaction_btn, "Dodaj transakcję", self.language, self.parent_window.toml_data)
+        Utils.set_language_text(self.exit_btn, "Wyjdź", self.language, self.parent_window.toml_data)
+        Utils.set_language_text(self.all_transactions_btn, "Pokaż wszystkie transakcje", self.language, self.parent_window.toml_data)
+        self.parent_window.logger.logger.info('View text set.')
+
 
 
 class MainWindow(QMainWindow):
