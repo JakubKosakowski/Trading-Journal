@@ -9,6 +9,7 @@ class AllTransactionsView(QWidget):
         super(AllTransactionsView, self).__init__(parent)
         self.main_window = parent
         self.language = self.main_window.toml_data['settings']['language']
+        Utils.set_title(self.main_window, 'Wszystkie transakcje', self.language, self.main_window.toml_data)
         self.logger = Logger(__name__)
         self.database = Database()
         self.logger.logger.info("Database loaded.")

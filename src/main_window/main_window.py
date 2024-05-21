@@ -84,7 +84,7 @@ class MainWindowWidget(QWidget):
     def load_text(self):
         Utils.set_language_text(self.transaction_btn, "Dodaj transakcję", self.language, self.parent_window.toml_data)
         Utils.set_language_text(self.exit_btn, "Wyjdź", self.language, self.parent_window.toml_data)
-        Utils.set_language_text(self.all_transactions_btn, "Pokaż wszystkie transakcje", self.language, self.parent_window.toml_data)
+        Utils.set_language_text(self.all_transactions_btn, "Wszystkie transakcje", self.language, self.parent_window.toml_data)
         self.parent_window.logger.logger.info('View text set.')
 
 
@@ -102,7 +102,6 @@ class MainWindow(QMainWindow):
     def start_main_window_UI(self):
         self.main_tab = MainWindowWidget(self)
         self.logger.logger.info("Main window widget generated.")
-        # self.setWindowTitle("Trading Journal")
         self.setCentralWidget(self.main_tab)
         self.main_tab.settings_btn.clicked.connect(self.settings_UI)
         self.main_tab.transaction_btn.clicked.connect(self.add_new_transaction_UI)
@@ -121,7 +120,6 @@ class MainWindow(QMainWindow):
     def show_all_transactions_UI(self):
         self.all_transactions_tab = AllTransactionsView(self)
         self.logger.logger.info("All transactions view generated.")
-        self.setWindowTitle("All transactions")
         self.setCentralWidget(self.all_transactions_tab)
         self.all_transactions_tab.menu_btn.clicked.connect(self.start_main_window_UI)
         self.show()
