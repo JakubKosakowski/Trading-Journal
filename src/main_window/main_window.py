@@ -112,7 +112,6 @@ class MainWindow(QMainWindow):
     def add_new_transaction_UI(self):
         self.transaction_tab = TransactionFormView(self)
         self.logger.logger.info("Transaction form view generated.")
-        # self.setWindowTitle("Add new transaction")
         self.setCentralWidget(self.transaction_tab)
         self.transaction_tab.menu_btn.clicked.connect(self.start_main_window_UI)
         self.show()
