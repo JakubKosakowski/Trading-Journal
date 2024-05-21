@@ -132,9 +132,8 @@ class MainWindow(QMainWindow):
         self.settings_tab.menu_btn.clicked.connect(self.start_main_window_UI)
         self.show()
 
-    # def set_transaction_layout(self):
-    #     new_view = TransactionFormView()
-    #     self.setLayout(new_view.glay)
+    def load_window_titles(self):
+        pass
         
 # class UIToolTab(QWidget):
 #     def __init__(self, parent=None):
