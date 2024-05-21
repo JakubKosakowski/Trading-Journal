@@ -11,6 +11,7 @@ class MainWindowWidget(QWidget):
         super(MainWindowWidget, self).__init__(parent)
         self.parent_window = parent
         self.language = self.parent_window.toml_data['settings']['language']
+        Utils.set_title(self.parent_window, 'Dziennik transakcji', self.language, self.parent_window.toml_data)
         self.settings_btn = QPushButton("", self, objectName='settings-btn')
         self.settings_btn.move(750, 50)
         self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
@@ -83,7 +84,7 @@ class MainWindowWidget(QWidget):
     def load_text(self):
         Utils.set_language_text(self.transaction_btn, "Dodaj transakcję", self.language, self.parent_window.toml_data)
         Utils.set_language_text(self.exit_btn, "Wyjdź", self.language, self.parent_window.toml_data)
-        Utils.set_language_text(self.all_transactions_btn, "Pokaż wszystkie transakcje", self.language, self.parent_window.toml_data)
+        Utils.set_language_text(self.all_transactions_btn, "Wszystkie transakcje", self.language, self.parent_window.toml_data)
         self.parent_window.logger.logger.info('View text set.')
 
 
@@ -92,6 +93,7 @@ class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         self.logger = Logger(__name__)
         self.toml_data = load_toml_settings()
+        self.language = self.toml_data['settings']['language']
         super(MainWindow, self).__init__(parent)
         self.logger.logger.info("Main window generated.")
         self.setGeometry(550, 250, 800, 600)
@@ -100,7 +102,6 @@ class MainWindow(QMainWindow):
     def start_main_window_UI(self):
         self.main_tab = MainWindowWidget(self)
         self.logger.logger.info("Main window widget generated.")
-        self.setWindowTitle("Trading Journal")
         self.setCentralWidget(self.main_tab)
         self.main_tab.settings_btn.clicked.connect(self.settings_UI)
         self.main_tab.transaction_btn.clicked.connect(self.add_new_transaction_UI)
@@ -111,7 +112,6 @@ class MainWindow(QMainWindow):
     def add_new_transaction_UI(self):
         self.transaction_tab = TransactionFormView(self)
         self.logger.logger.info("Transaction form view generated.")
-        self.setWindowTitle("Add new transaction")
         self.setCentralWidget(self.transaction_tab)
         self.transaction_tab.menu_btn.clicked.connect(self.start_main_window_UI)
         self.show()
@@ -119,7 +119,6 @@ class MainWindow(QMainWindow):
     def show_all_transactions_UI(self):
         self.all_transactions_tab = AllTransactionsView(self)
         self.logger.logger.info("All transactions view generated.")
-        self.setWindowTitle("All transactions")
         self.setCentralWidget(self.all_transactions_tab)
         self.all_transactions_tab.menu_btn.clicked.connect(self.start_main_window_UI)
         self.show()
@@ -127,14 +126,9 @@ class MainWindow(QMainWindow):
     def settings_UI(self):
         self.settings_tab = SettingsView(self)
         self.logger.logger.info('Settings view generated.')
-        self.setWindowTitle("Settings")
         self.setCentralWidget(self.settings_tab)
         self.settings_tab.menu_btn.clicked.connect(self.start_main_window_UI)
         self.show()
-
-    # def set_transaction_layout(self):
-    #     new_view = TransactionFormView()
-    #     self.setLayout(new_view.glay)
         
 # class UIToolTab(QWidget):
 #     def __init__(self, parent=None):
