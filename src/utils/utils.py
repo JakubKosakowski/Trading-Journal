@@ -47,9 +47,16 @@ class Utils:
     
     @staticmethod
     def set_language_text(obj, text, lang_code, toml_data):
-        logger.logger.debug(lang_code)
         if lang_code == 'PL':
             obj.setText(text)
         else:
             obj.setText(LANGUAGES[toml_data['settings']['language']][text])
         logger.logger.info('Object text generated.')
+
+    @staticmethod
+    def set_title(obj, text, lang_code, toml_data):
+        if lang_code == 'PL':
+            obj.setWindowTitle(text)
+        else:
+            obj.setWindowTitle(LANGUAGES[toml_data['settings']['language']][text])
+        logger.logger.info('Window title generated.')
