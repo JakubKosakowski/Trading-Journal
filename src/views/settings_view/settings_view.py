@@ -9,6 +9,7 @@ class SettingsView(QWidget):
         super(SettingsView, self).__init__(parent)
         self.main_window = parent
         self.language = self.main_window.toml_data['settings']['language']
+        Utils.set_title(self.main_window, 'Ustawienia', self.language, self.main_window.toml_data)
 
         self.logger = Logger(__name__)
 

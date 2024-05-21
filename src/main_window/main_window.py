@@ -126,7 +126,6 @@ class MainWindow(QMainWindow):
     def settings_UI(self):
         self.settings_tab = SettingsView(self)
         self.logger.logger.info('Settings view generated.')
-        self.setWindowTitle("Settings")
         self.setCentralWidget(self.settings_tab)
         self.settings_tab.menu_btn.clicked.connect(self.start_main_window_UI)
         self.show()

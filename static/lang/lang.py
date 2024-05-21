@@ -6,6 +6,7 @@ LANGUAGES = {
         'Wyjdź': 'Exit',
         'Wróć do menu': 'Go back to menu',
         'Język': 'Language',
+        'Ustawienia': 'Settings',
         'Waluta użytkownika': 'User currency',
         'Kolory przycisków': "Buttons' colors",
         'Tło widoku transakcji': 'All transactions background',
