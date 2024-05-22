@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger, Utils
+from src.setters import ButtonColorSetter
 import toml
 
 class SettingsView(QWidget):
@@ -141,20 +142,11 @@ class SettingsView(QWidget):
             self.logger.logger.error(f'An error occurred: {err}')
 
     def load_colors(self):
-        self.load_menu_button_color()
+        button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'])
+        button_color_setter.set_color(self.menu_btn)
         self.load_combobox_style()
         self.primary_color_picker.setStyleSheet(f"border-style: none; background-color: {self.main_window.toml_data['settings']['primary_color']}")
         self.secondary_color_picker.setStyleSheet(f"border-style: none; background-color: {self.main_window.toml_data['settings']['secondary_color']}")
-
-    def load_menu_button_color(self):
-        self.menu_btn.setStyleSheet("QPushButton {"
-                                            f"background-color: {self.main_window.toml_data['settings']['primary_color']};"
-                                            f"border: 1px solid {self.main_window.toml_data['settings']['primary_color']};"
-                                            "}"
-                                            "QPushButton:hover {"
-                                            f"background-color: {self.main_window.toml_data['settings']['primary_color']};"
-                                            f"border: 1px solid #005b60;"
-                                            "}")
         
     def load_combobox_style(self):
         self.currency_cb.setStyleSheet(f"background-color: {self.main_window.toml_data['settings']['primary_color']};")
