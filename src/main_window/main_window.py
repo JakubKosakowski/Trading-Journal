@@ -7,6 +7,25 @@ from src.utils import Logger, Utils
 from config.settings import load_toml_settings
 from abc import ABC, abstractmethod
 
+
+class ColorSetter(ABC):
+    @abstractmethod
+    def set_color(self, element, color):
+        pass
+
+
+class ButtonColorSetter(ColorSetter):
+    def set_color(self, element, color):
+        element.setStyleSheet("QPushButton {"
+                                f"background-color: {color};"
+                                f"border: 1px solid {color};"
+                                "}"
+                                "QPushButton:hover {"
+                                f"background-color: {color};"
+                                f"border: 1px solid #005b60;"
+                                "}")
+
+
 class MainWindowWidget(QWidget):
     def __init__(self, parent=None):
         super(MainWindowWidget, self).__init__(parent)
@@ -44,43 +63,11 @@ class MainWindowWidget(QWidget):
         self.load_text()
 
     def set_colors(self):
-        self.set_transaction_btn_color()
-        self.set_all_transactions_btn_color()
-        self.set_exit_btn_color()
+        button_color_setter = ButtonColorSetter()
+        button_color_setter.set_color(self.transaction_btn, self.parent_window.toml_data['settings']['primary_color'])
+        button_color_setter.set_color(self.all_transactions_btn, self.parent_window.toml_data['settings']['primary_color'])
+        button_color_setter.set_color(self.exit_btn, self.parent_window.toml_data['settings']['primary_color'])
         self.parent_window.logger.logger.info("All window styles set.")
-
-    def set_transaction_btn_color(self):
-        self.transaction_btn.setStyleSheet("QPushButton {"
-                                            f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
-                                            f"border: 1px solid {self.parent_window.toml_data['settings']['primary_color']};"
-                                            "}"
-                                            "QPushButton:hover {"
-                                            f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
-                                            f"border: 1px solid #005b60;"
-                                            "}")
-        self.parent_window.logger.logger.info('Add transaction button color set.')
-        
-    def set_all_transactions_btn_color(self):
-        self.all_transactions_btn.setStyleSheet("QPushButton {"
-                                            f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
-                                            f"border: 1px solid {self.parent_window.toml_data['settings']['primary_color']};"
-                                            "}"
-                                            "QPushButton:hover {"
-                                            f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
-                                            f"border: 1px solid #005b60;"
-                                            "}")
-        self.parent_window.logger.logger.info('All transactions button color set.')
-        
-    def set_exit_btn_color(self):
-        self.exit_btn.setStyleSheet("QPushButton {"
-                                            f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
-                                            f"border: 1px solid {self.parent_window.toml_data['settings']['primary_color']};"
-                                            "}"
-                                            "QPushButton:hover {"
-                                            f"background-color: {self.parent_window.toml_data['settings']['primary_color']};"
-                                            f"border: 1px solid #005b60;"
-                                            "}")
-        self.parent_window.logger.logger.info('Exit button color set.')
 
     def load_text(self):
         Utils.set_language_text(self.transaction_btn, "Dodaj transakcję", self.language, self.parent_window.toml_data)
@@ -88,10 +75,6 @@ class MainWindowWidget(QWidget):
         Utils.set_language_text(self.all_transactions_btn, "Wszystkie transakcje", self.language, self.parent_window.toml_data)
         self.parent_window.logger.logger.info('View text set.')
 
-class ColorSetter(ABC):
-    @abstractmethod
-    def set_color(self, element):
-        pass
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
