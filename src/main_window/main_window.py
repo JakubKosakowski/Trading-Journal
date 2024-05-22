@@ -5,6 +5,7 @@ from PyQt5.QtGui import *
 from src.views import TransactionFormView, AllTransactionsView, SettingsView
 from src.utils import Logger, Utils
 from config.settings import load_toml_settings
+from abc import ABC, abstractmethod
 
 class MainWindowWidget(QWidget):
     def __init__(self, parent=None):
@@ -87,7 +88,10 @@ class MainWindowWidget(QWidget):
         Utils.set_language_text(self.all_transactions_btn, "Wszystkie transakcje", self.language, self.parent_window.toml_data)
         self.parent_window.logger.logger.info('View text set.')
 
-
+class ColorSetter(ABC):
+    @abstractmethod
+    def set_color(self, element):
+        pass
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
