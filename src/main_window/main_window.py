@@ -10,18 +10,21 @@ from abc import ABC, abstractmethod
 
 class ColorSetter(ABC):
     @abstractmethod
-    def set_color(self, element, color):
+    def set_color(self, element):
         pass
 
 
 class ButtonColorSetter(ColorSetter):
-    def set_color(self, element, color):
+    def __init__(self, color):
+        self.color = color
+
+    def set_color(self, element):
         element.setStyleSheet("QPushButton {"
-                                f"background-color: {color};"
-                                f"border: 1px solid {color};"
+                                f"background-color: {self.color};"
+                                f"border: 1px solid {self.color};"
                                 "}"
                                 "QPushButton:hover {"
-                                f"background-color: {color};"
+                                f"background-color: {self.color};"
                                 f"border: 1px solid #005b60;"
                                 "}")
 
@@ -63,10 +66,10 @@ class MainWindowWidget(QWidget):
         self.load_text()
 
     def set_colors(self):
-        button_color_setter = ButtonColorSetter()
-        button_color_setter.set_color(self.transaction_btn, self.parent_window.toml_data['settings']['primary_color'])
-        button_color_setter.set_color(self.all_transactions_btn, self.parent_window.toml_data['settings']['primary_color'])
-        button_color_setter.set_color(self.exit_btn, self.parent_window.toml_data['settings']['primary_color'])
+        button_color_setter = ButtonColorSetter(self.parent_window.toml_data['settings']['primary_color'])
+        button_color_setter.set_color(self.transaction_btn)
+        button_color_setter.set_color(self.all_transactions_btn)
+        button_color_setter.set_color(self.exit_btn)
         self.parent_window.logger.logger.info("All window styles set.")
 
     def load_text(self):
