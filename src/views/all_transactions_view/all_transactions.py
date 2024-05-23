@@ -3,6 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger, Utils
 from src.postgres_database import Database
+from src.setters import ButtonColorSetter, TextSetter
 
 class AllTransactionsView(QWidget):
     def __init__(self, parent=None):
@@ -49,14 +50,8 @@ class AllTransactionsView(QWidget):
         self.logger.logger.info("All view colors loaded.")
 
     def load_menu_button_color(self):
-        self.menu_btn.setStyleSheet("QPushButton {"
-                                            f"background-color: {self.main_window.toml_data['settings']['primary_color']};"
-                                            f"border: 1px solid {self.main_window.toml_data['settings']['primary_color']};"
-                                            "}"
-                                            "QPushButton:hover {"
-                                            f"background-color: {self.main_window.toml_data['settings']['primary_color']};"
-                                            f"border: 1px solid #005b60;"
-                                            "}")
+        button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'])
+        button_color_setter.set_color(self.menu_btn)
         self.logger.logger.info('Menu button color set.')
         
     def load_background_color(self):
@@ -69,5 +64,6 @@ class AllTransactionsView(QWidget):
         self.logger.logger.info('Table background color set.')
 
     def load_text(self):
-        Utils.set_language_text(self.menu_btn, "Wróć do menu", self.language, self.main_window.toml_data)
+        text_setter = TextSetter(self.language, self.main_window.toml_data)
+        text_setter.set_text(self.menu_btn, "Wróć do menu")
         self.logger.logger.info('View text set.')
