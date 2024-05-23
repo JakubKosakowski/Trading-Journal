@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger, Utils
-from src.setters import ButtonColorSetter
+from src.setters import ButtonColorSetter, TextSetter
 import toml
 
 class SettingsView(QWidget):
@@ -10,7 +10,7 @@ class SettingsView(QWidget):
         super(SettingsView, self).__init__(parent)
         self.main_window = parent
         self.language = self.main_window.toml_data['settings']['language']
-        Utils.set_title(self.main_window, 'Ustawienia', self.language, self.main_window.toml_data)
+        Utils.set_title(self.main_window, 'Ustawienia', self.language, self.main_window.toml_data) # TODO SOLID method for setting title
 
         self.logger = Logger(__name__)
 
@@ -152,9 +152,10 @@ class SettingsView(QWidget):
         self.currency_cb.setStyleSheet(f"background-color: {self.main_window.toml_data['settings']['primary_color']};")
 
     def load_text(self):
-        Utils.set_language_text(self.menu_btn, "Wróć do menu", self.language, self.main_window.toml_data)
-        Utils.set_language_text(self.full_screen_checkbox, "Tryb pełnego ekranu", self.language, self.main_window.toml_data)
-        Utils.set_language_text(self.currency_cb_label, "Waluta użytkownika", self.language, self.main_window.toml_data)
-        Utils.set_language_text(self.primary_color_label, "Kolory przycisków", self.language, self.main_window.toml_data)
-        Utils.set_language_text(self.secondary_color_label, "Tło widoku transakcji", self.language, self.main_window.toml_data)
-        Utils.set_language_text(self.app_language_label, "Język", self.language, self.main_window.toml_data)
+        text_setter = TextSetter(self.language, self.main_window.toml_data)
+        text_setter.set_text(self.menu_btn, "Wróć do menu")
+        text_setter.set_text(self.full_screen_checkbox, "Tryb pełnego ekranu")
+        text_setter.set_text(self.currency_cb_label, "Waluta użytkownika")
+        text_setter.set_text(self.primary_color_label, "Kolory przycisków")
+        text_setter.set_text(self.secondary_color_label, "Tło widoku transakcji")
+        text_setter.set_text(self.app_language_label, "Język")
