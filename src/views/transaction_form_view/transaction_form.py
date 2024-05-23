@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger, Utils
+from src.setters import ButtonColorSetter, TextSetter
 
 class TransactionFormView(QWidget):
     def __init__(self, parent=None):
@@ -56,14 +57,8 @@ class TransactionFormView(QWidget):
         self.load_menu_button_color()
 
     def load_menu_button_color(self):
-        self.menu_btn.setStyleSheet("QPushButton {"
-                                            f"background-color: {self.main_window.toml_data['settings']['primary_color']};"
-                                            f"border: 1px solid {self.main_window.toml_data['settings']['primary_color']};"
-                                            "}"
-                                            "QPushButton:hover {"
-                                            f"background-color: {self.main_window.toml_data['settings']['primary_color']};"
-                                            f"border: 1px solid #005b60;"
-                                            "}")
+        button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'])
+        button_color_setter.set_color(self.menu_btn)
         
     def load_input_lines(self):
         self.load_company_code()
@@ -121,5 +116,6 @@ class TransactionFormView(QWidget):
         self.logger.logger.info("Slippage line edit generated.")
 
     def load_text(self):
-        Utils.set_language_text(self.menu_btn, "Wróć do menu", self.language, self.main_window.toml_data)
-        Utils.set_language_text(self.company_code_label, "Kod spółki", self.language, self.main_window.toml_data)
+        text_setter = TextSetter(self.language, self.main_window.toml_data)
+        text_setter.set_text(self.menu_btn, "Wróć do menu")
+        text_setter.set_text(self.company_code_label, "Kod spółki")
