@@ -5,7 +5,7 @@ from PyQt5.QtGui import *
 from src.views import TransactionFormView, AllTransactionsView, SettingsView
 from src.utils import Logger, Utils
 from config.settings import load_toml_settings
-from src.setters import ButtonColorSetter
+from src.setters import ButtonColorSetter, TextSetter
 
 
 class MainWindowWidget(QWidget):
@@ -52,9 +52,10 @@ class MainWindowWidget(QWidget):
         self.parent_window.logger.logger.info("All window styles set.")
 
     def load_text(self):
-        Utils.set_language_text(self.transaction_btn, "Dodaj transakcję", self.language, self.parent_window.toml_data)
-        Utils.set_language_text(self.exit_btn, "Wyjdź", self.language, self.parent_window.toml_data)
-        Utils.set_language_text(self.all_transactions_btn, "Wszystkie transakcje", self.language, self.parent_window.toml_data)
+        text_setter = TextSetter(self.language, self.parent_window.toml_data)
+        text_setter.set_text(self.transaction_btn, "Dodaj transakcję")
+        text_setter.set_text(self.exit_btn, "Wyjdź")
+        text_setter.set_text(self.all_transactions_btn, "Wszystkie transakcje")
         self.parent_window.logger.logger.info('View text set.')
 
 
