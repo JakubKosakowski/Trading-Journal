@@ -10,7 +10,6 @@ class TransactionFormView(QWidget):
         self.main_window = parent
         self.language = self.main_window.toml_data['settings']['language']
         self.logger = Logger(__name__)
-        Utils.set_title(self.main_window, 'Dodaj transakcję', self.language, self.main_window.toml_data)
         self.menu_btn = QPushButton("Go back to menu", self)
         self.menu_btn.move(100, 370)
         self.menu_btn.setObjectName('menu-btn')
@@ -117,5 +116,6 @@ class TransactionFormView(QWidget):
 
     def load_text(self):
         text_setter = TextSetter(self.language, self.main_window.toml_data)
+        text_setter.set_title(self.main_window, 'Dodaj transakcję')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.company_code_label, "Kod spółki")
