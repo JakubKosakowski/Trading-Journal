@@ -9,8 +9,6 @@ class SettingsView(QWidget):
     def __init__(self, parent=None):
         super(SettingsView, self).__init__(parent)
         self.main_window = parent
-        self.language = self.main_window.toml_data['settings']['language']
-        Utils.set_title(self.main_window, 'Ustawienia', self.language, self.main_window.toml_data) # TODO SOLID method for setting title
 
         self.logger = Logger(__name__)
 
@@ -152,7 +150,9 @@ class SettingsView(QWidget):
         self.currency_cb.setStyleSheet(f"background-color: {self.main_window.toml_data['settings']['primary_color']};")
 
     def load_text(self):
+        self.language = self.main_window.toml_data['settings']['language']
         text_setter = TextSetter(self.language, self.main_window.toml_data)
+        text_setter.set_title(self.main_window, 'Ustawienia')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.full_screen_checkbox, "Tryb pełnego ekranu")
         text_setter.set_text(self.currency_cb_label, "Waluta użytkownika")
