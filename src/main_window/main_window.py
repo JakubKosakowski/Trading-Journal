@@ -13,7 +13,7 @@ class MainWindowWidget(QWidget):
         super(MainWindowWidget, self).__init__(parent)
         self.parent_window = parent
         self.language = self.parent_window.toml_data['settings']['language']
-        Utils.set_title(self.parent_window, 'Dziennik transakcji', self.language, self.parent_window.toml_data)
+        # Utils.set_title(self.parent_window, 'Dziennik transakcji', self.language, self.parent_window.toml_data)
         self.settings_btn = QPushButton("", self, objectName='settings-btn')
         self.settings_btn.move(750, 50)
         self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
@@ -53,6 +53,7 @@ class MainWindowWidget(QWidget):
 
     def load_text(self):
         text_setter = TextSetter(self.language, self.parent_window.toml_data)
+        text_setter.set_title(self.parent_window, 'Dziennik transakcji')
         text_setter.set_text(self.transaction_btn, "Dodaj transakcję")
         text_setter.set_text(self.exit_btn, "Wyjdź")
         text_setter.set_text(self.all_transactions_btn, "Wszystkie transakcje")
