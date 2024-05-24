@@ -10,7 +10,7 @@ class AllTransactionsView(QWidget):
         super(AllTransactionsView, self).__init__(parent)
         self.main_window = parent
         self.language = self.main_window.toml_data['settings']['language']
-        Utils.set_title(self.main_window, 'Wszystkie transakcje', self.language, self.main_window.toml_data)
+
         self.logger = Logger(__name__)
         self.database = Database()
         self.logger.logger.info("Database loaded.")
@@ -65,5 +65,6 @@ class AllTransactionsView(QWidget):
 
     def load_text(self):
         text_setter = TextSetter(self.language, self.main_window.toml_data)
+        text_setter.set_title(self.main_window, 'Wszystkie transakcje')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         self.logger.logger.info('View text set.')
