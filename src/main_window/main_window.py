@@ -13,7 +13,6 @@ class MainWindowWidget(QWidget):
         super(MainWindowWidget, self).__init__(parent)
         self.parent_window = parent
         self.language = self.parent_window.toml_data['settings']['language']
-        # Utils.set_title(self.parent_window, 'Dziennik transakcji', self.language, self.parent_window.toml_data)
         self.settings_btn = QPushButton("", self, objectName='settings-btn')
         self.settings_btn.move(750, 50)
         self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
@@ -21,7 +20,6 @@ class MainWindowWidget(QWidget):
         self.parent_window.logger.logger.info('Settings button generated.')
 
         self.transaction_btn = QPushButton("", self, objectName='transaction-btn')
-        # self.set_language_text(self.transaction_btn, "Dodaj transakcję")
         self.transaction_btn.move(50, 140)
         self.parent_window.logger.logger.info("Add transaction button generated")
 
@@ -66,6 +64,7 @@ class MainWindow(QMainWindow):
         self.toml_data = load_toml_settings()
         self.language = self.toml_data['settings']['language']
         super(MainWindow, self).__init__(parent)
+        self.setWindowIcon(QIcon('static/images/favicon.jpg'))
         self.logger.logger.info("Main window generated.")
         self.setGeometry(550, 250, 800, 600)
         self.start_main_window_UI()
