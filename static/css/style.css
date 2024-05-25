@@ -28,6 +28,7 @@ QWidget {
 QTableWidget {
     /* background-color: #00333C; */
     color: #fff;
+    margin-top: 50px;
 }
 
 QHeaderView {
