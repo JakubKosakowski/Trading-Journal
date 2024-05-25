@@ -10,10 +10,15 @@ class Database:
         self.connection = psycopg2.connect(**params)
         self.cursor = self.connection.cursor()
 
-    def select(self, table="test", columns="*", conditions=""):
+    def select(self, table="test", columns="*", conditions="", order_by=""):
         try:
             values = ', '.join(columns) if isinstance(columns, list) else columns if ', ' in columns else columns.replace(' ', ', ')
-            command = f'SELECT {values} FROM {table};' if conditions == '' else f'SELECT {values} FROM {table} WHERE {conditions};'
+            command = f'SELECT {values} FROM {table}'
+            if conditions != '':
+                command += f' WHERE {conditions}'
+            if order_by != '':
+                command += f' ORDER BY {order_by} ASC'
+            command += ';'
             self.cursor.execute(command)
             return self.cursor.fetchall()
         except Exception as e:

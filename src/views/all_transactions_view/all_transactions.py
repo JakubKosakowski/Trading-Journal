@@ -3,7 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger, Utils
 from src.postgres_database import Database
-from src.setters import ButtonColorSetter, TextSetter
+from src.setters import ButtonColorSetter, TextSetter, BackgroundColorSetter
 
 class AllTransactionsView(QWidget):
     def __init__(self, parent=None):
@@ -22,7 +22,16 @@ class AllTransactionsView(QWidget):
         self.create_table()
         self.logger.logger.info('Table widget generated.')
 
+        columns = ["name", "age"]
+        self.sort_cb = QComboBox(self)
+        self.sort_cb.addItems(columns)
+        self.sort_cb.move(100, 200)
+        self.sort_cb.setCurrentIndex(0)
+        self.sort_cb.currentIndexChanged.connect(self.sort_by_column)
+        self.logger.logger.info('Sort column ComboBox generated.')
+
         self.layout = QVBoxLayout()
+        self.layout.addWidget(self.sort_cb)
         self.layout.addWidget(self.table_widget)
         self.layout.addWidget(self.menu_btn)
         self.setLayout(self.layout)
@@ -44,6 +53,9 @@ class AllTransactionsView(QWidget):
             self.table_widget.setItem(ind,0, QTableWidgetItem(record[1]))
             self.table_widget.setItem(ind,1, QTableWidgetItem(str(record[2])))
 
+    def sort_by_column(self):
+        pass
+
     def load_colors(self):
         self.load_menu_button_color()
         self.load_background_color()
@@ -55,12 +67,8 @@ class AllTransactionsView(QWidget):
         self.logger.logger.info('Menu button color set.')
         
     def load_background_color(self):
-        self.table_widget.setStyleSheet("QTableWidget {"
-                                        f"background-color: {self.main_window.toml_data['settings']['secondary_color']};"
-                                        "}"
-                                        "QHeaderView {"
-                                        f"background-color: {self.main_window.toml_data['settings']['secondary_color']};"
-                                        "}")
+        background_color_setter = BackgroundColorSetter(self.main_window.toml_data['settings']['secondary_color'])
+        background_color_setter.set_color(self.table_widget)
         self.logger.logger.info('Table background color set.')
 
     def load_text(self):
