@@ -3,7 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger, Utils
 from src.postgres_database import Database
-from src.setters import ButtonColorSetter, TextSetter
+from src.setters import ButtonColorSetter, TextSetter, BackgroundColorSetter
 
 class AllTransactionsView(QWidget):
     def __init__(self, parent=None):
@@ -55,12 +55,8 @@ class AllTransactionsView(QWidget):
         self.logger.logger.info('Menu button color set.')
         
     def load_background_color(self):
-        self.table_widget.setStyleSheet("QTableWidget {"
-                                        f"background-color: {self.main_window.toml_data['settings']['secondary_color']};"
-                                        "}"
-                                        "QHeaderView {"
-                                        f"background-color: {self.main_window.toml_data['settings']['secondary_color']};"
-                                        "}")
+        background_color_setter = BackgroundColorSetter(self.main_window.toml_data['settings']['secondary_color'])
+        background_color_setter.set_color(self.table_widget)
         self.logger.logger.info('Table background color set.')
 
     def load_text(self):
