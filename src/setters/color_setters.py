@@ -19,3 +19,16 @@ class ButtonColorSetter(ColorSetter):
                                 f"background-color: {self.color};"
                                 f"border: 1px solid #005b60;"
                                 "}")
+        
+
+class BackgroundColorSetter(ColorSetter):
+    def __init__(self, color):
+        self.color = color
+
+    def set_color(self, element):
+       element.setStyleSheet("QTableWidget {"
+                                f"background-color: {self.color};"
+                                "}"
+                                "QHeaderView {"
+                                f"background-color: {self.color};"
+                                "}") 
