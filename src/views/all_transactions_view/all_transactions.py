@@ -22,7 +22,7 @@ class AllTransactionsView(QWidget):
         self.create_table()
         self.logger.logger.info('Table widget generated.')
 
-        columns = ["name", "age"]
+        columns = ["", "name", "age"]
         self.sort_cb = QComboBox(self)
         self.sort_cb.addItems(columns)
         self.sort_cb.move(100, 200)
@@ -54,7 +54,12 @@ class AllTransactionsView(QWidget):
             self.table_widget.setItem(ind,1, QTableWidgetItem(str(record[2])))
 
     def sort_by_column(self):
-        pass
+        if self.sort_cb.currentText() != "":
+            self.records = self.database.select(order_by=f'{self.sort_cb.currentText()}')
+            self.logger.logger.debug(self.records)
+            for ind, record in enumerate(self.records):
+                self.table_widget.setItem(ind,0, QTableWidgetItem(record[1]))
+                self.table_widget.setItem(ind,1, QTableWidgetItem(str(record[2])))
 
     def load_colors(self):
         self.load_menu_button_color()
