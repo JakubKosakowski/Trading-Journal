@@ -18,6 +18,7 @@ class TransactionFormView(QWidget):
         self.add_transaction_btn = QPushButton("Add", self)
         self.add_transaction_btn.move(250, 370)
         self.add_transaction_btn.setObjectName('add-transaction-btn')
+        self.add_transaction_btn.clicked.connect(self.add_transaction)
 
         self.load_reason_to_entry()
         self.load_reason_to_entry_edit_lines()
@@ -124,3 +125,6 @@ class TransactionFormView(QWidget):
         text_setter.set_title(self.main_window, 'Dodaj transakcję')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.company_code_label, "Kod spółki")
+
+    def add_transaction(self):
+        pass
