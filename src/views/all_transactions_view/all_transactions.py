@@ -64,7 +64,7 @@ class AllTransactionsView(QWidget):
 
     def sort_records(self):
         if self.sort_cb.currentText() != "":
-            self.records = self.database.select(order_by=f'{self.sort_cb.currentText()}')
+            self.records = self.database.select(order_by=f'{self.sort_cb.currentText()} {self.order_method_cb.currentText()}')
             self.logger.logger.debug(self.records)
             for ind, record in enumerate(self.records):
                 self.table_widget.setItem(ind,0, QTableWidgetItem(record[1]))
