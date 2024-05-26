@@ -27,11 +27,20 @@ class AllTransactionsView(QWidget):
         self.sort_cb.addItems(columns)
         self.sort_cb.move(100, 200)
         self.sort_cb.setCurrentIndex(0)
-        self.sort_cb.currentIndexChanged.connect(self.sort_by_column)
+        self.sort_cb.currentIndexChanged.connect(self.sort_records)
         self.logger.logger.info('Sort column ComboBox generated.')
+
+        order_method = ['ASC', 'DESC']
+        self.order_method_cb = QComboBox(self)
+        self.order_method_cb.addItems(order_method)
+        self.order_method_cb.move(100, 200)
+        self.order_method_cb.setCurrentIndex(0)
+        self.order_method_cb.currentIndexChanged.connect(self.sort_records)
+        self.logger.logger.info('Order method ComboBox generated.')
 
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.sort_cb)
+        self.layout.addWidget(self.order_method_cb)
         self.layout.addWidget(self.table_widget)
         self.layout.addWidget(self.menu_btn)
         self.setLayout(self.layout)
@@ -53,7 +62,7 @@ class AllTransactionsView(QWidget):
             self.table_widget.setItem(ind,0, QTableWidgetItem(record[1]))
             self.table_widget.setItem(ind,1, QTableWidgetItem(str(record[2])))
 
-    def sort_by_column(self):
+    def sort_records(self):
         if self.sort_cb.currentText() != "":
             self.records = self.database.select(order_by=f'{self.sort_cb.currentText()}')
             self.logger.logger.debug(self.records)
