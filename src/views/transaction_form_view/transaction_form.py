@@ -15,6 +15,11 @@ class TransactionFormView(QWidget):
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
 
+        self.add_transaction_btn = QPushButton("Add", self)
+        self.add_transaction_btn.move(250, 370)
+        self.add_transaction_btn.setObjectName('add-transaction-btn')
+        self.add_transaction_btn.clicked.connect(self.add_transaction)
+
         self.load_reason_to_entry()
         self.load_reason_to_entry_edit_lines()
         self.load_enter_and_exits_section()
@@ -58,6 +63,7 @@ class TransactionFormView(QWidget):
     def load_menu_button_color(self):
         button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'])
         button_color_setter.set_color(self.menu_btn)
+        button_color_setter.set_color(self.add_transaction_btn)
         
     def load_input_lines(self):
         self.load_company_code()
@@ -119,3 +125,6 @@ class TransactionFormView(QWidget):
         text_setter.set_title(self.main_window, 'Dodaj transakcję')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.company_code_label, "Kod spółki")
+
+    def add_transaction(self):
+        pass

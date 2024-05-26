@@ -17,7 +17,7 @@ class Database:
             if conditions != '':
                 command += f' WHERE {conditions}'
             if order_by != '':
-                command += f' ORDER BY {order_by} ASC'
+                command += f' ORDER BY {order_by}'
             command += ';'
             self.cursor.execute(command)
             return self.cursor.fetchall()
