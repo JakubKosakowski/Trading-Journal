@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+
+#Abstract class for every view class in application
 class ViewClass(ABC):
 
     @abstractmethod
