@@ -112,7 +112,7 @@ class MainWindow(QMainWindow):
     def test_view_UI(self):
         self.test_tab = TestView(self)
         self.setCentralWidget(self.test_tab)
-        # self.test_tab.menu_btn.clicked.connect(self.start_main_window_UI)
+        self.test_tab.menu_btn.clicked.connect(self.start_main_window_UI)
         self.show()
         
 # class UIToolTab(QWidget):
