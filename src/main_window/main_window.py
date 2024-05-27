@@ -2,7 +2,7 @@ from src.postgres_database import Database
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from src.views import TransactionFormView, AllTransactionsView, SettingsView
+from src.views import TransactionFormView, AllTransactionsView, SettingsView, TestView
 from src.utils import Logger, Utils
 from config.settings import load_toml_settings
 from src.setters import ButtonColorSetter, TextSetter
@@ -28,7 +28,13 @@ class MainWindowWidget(QWidget):
         self.parent_window.logger.logger.info("Show all transactions button generated")
         
         self.exit_btn = QPushButton("", self, objectName='exit-btn')
-        self.exit_btn.move(50, 260)
+        self.exit_btn.move(50, 320)
+        self.parent_window.logger.logger.info("Exit button generated")
+
+        self.test_btn = QPushButton("", self, objectName='test-btn')
+        self.test_btn.move(50, 260)
+        self.parent_window.logger.logger.info("Test view button generated")
+
         self.version_label = QLabel(self.parent_window , objectName='version-label')
         self.version_label.setText(f"Version: {self.parent_window.toml_data['project']['version']}")
         self.version_label.move(700, 570)
@@ -47,6 +53,7 @@ class MainWindowWidget(QWidget):
         button_color_setter.set_color(self.transaction_btn)
         button_color_setter.set_color(self.all_transactions_btn)
         button_color_setter.set_color(self.exit_btn)
+        button_color_setter.set_color(self.test_btn)
         self.parent_window.logger.logger.info("All window styles set.")
 
     def load_text(self):
@@ -55,6 +62,7 @@ class MainWindowWidget(QWidget):
         text_setter.set_text(self.transaction_btn, "Dodaj transakcję")
         text_setter.set_text(self.exit_btn, "Wyjdź")
         text_setter.set_text(self.all_transactions_btn, "Wszystkie transakcje")
+        text_setter.set_text(self.test_btn, "Test")
         self.parent_window.logger.logger.info('View text set.')
 
 
@@ -76,6 +84,7 @@ class MainWindow(QMainWindow):
         self.main_tab.settings_btn.clicked.connect(self.settings_UI)
         self.main_tab.transaction_btn.clicked.connect(self.add_new_transaction_UI)
         self.main_tab.all_transactions_btn.clicked.connect(self.show_all_transactions_UI)
+        self.main_tab.test_btn.clicked.connect(self.test_view_UI)
         self.main_tab.exit_btn.clicked.connect(self.close)
         self.show()
 
@@ -98,6 +107,12 @@ class MainWindow(QMainWindow):
         self.logger.logger.info('Settings view generated.')
         self.setCentralWidget(self.settings_tab)
         self.settings_tab.menu_btn.clicked.connect(self.start_main_window_UI)
+        self.show()
+
+    def test_view_UI(self):
+        self.test_tab = TestView(self)
+        self.setCentralWidget(self.test_tab)
+        self.test_tab.menu_btn.clicked.connect(self.start_main_window_UI)
         self.show()
         
 # class UIToolTab(QWidget):

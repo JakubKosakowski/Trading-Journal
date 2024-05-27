@@ -12,6 +12,7 @@ LANGUAGES = {
         'Tło widoku transakcji': 'All transactions background',
         'Wersja aplikacji': 'Application version',
         'Tryb pełnego ekranu': 'Full screen mode',
-        'Kod spółki': "Company's code"
+        'Kod spółki': "Company's code",
+        'Test': 'Test'
     }
 }

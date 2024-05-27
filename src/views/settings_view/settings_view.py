@@ -3,9 +3,17 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger, Utils
 from src.setters import ButtonColorSetter, TextSetter
+from src.abstract import ViewClass
 import toml
 
-class SettingsView(QWidget):
+class SettngsViewMeta(type(QWidget), type(ViewClass)):
+    pass
+
+class ViewClass(QWidget):
+    pass
+
+class SettingsView(ViewClass):
+    __metaclass__= SettngsViewMeta
     def __init__(self, parent=None):
         super(SettingsView, self).__init__(parent)
         self.main_window = parent
