@@ -1,8 +1,8 @@
-from abc import ABC, abstractmethod
+from abc import ABCMeta, abstractmethod
 
 
 #Abstract class for every view class in application
-class ViewClass(ABC):
+class ViewClass(ABCMeta):
 
     @abstractmethod
     def load_colors(self):

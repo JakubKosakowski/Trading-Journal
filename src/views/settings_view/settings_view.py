@@ -6,7 +6,14 @@ from src.setters import ButtonColorSetter, TextSetter
 from src.abstract import ViewClass
 import toml
 
-class SettingsView(QWidget, ViewClass):
+class SettngsViewMeta(type(QWidget), type(ViewClass)):
+    pass
+
+class ViewClass(QWidget):
+    pass
+
+class SettingsView(ViewClass):
+    __metaclass__= SettngsViewMeta
     def __init__(self, parent=None):
         super(SettingsView, self).__init__(parent)
         self.main_window = parent
