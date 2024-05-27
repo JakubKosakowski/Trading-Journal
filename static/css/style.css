@@ -48,7 +48,8 @@ QPushButton#menu-btn,
 QPushButton#transaction-btn,
 QPushButton#all-transactions-btn,
 QPushButton#exit-btn,
-QPushButton#add-transaction-btn {
+QPushButton#add-transaction-btn,
+QPushButton#test-btn {
     /* background-color: #00ADB5; */
     color: #fff;
     font-weight: 600;
