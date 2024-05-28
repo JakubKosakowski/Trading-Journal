@@ -3,9 +3,20 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger, Utils
 from src.setters import ButtonColorSetter, TextSetter
+from src.abstract import ViewClass
 
-class TransactionFormView(QWidget):
+
+class TransactionsFormMeta(type(QWidget), type(ViewClass)):
+    pass
+
+
+class ViewClass(QWidget):
+    pass
+
+
+class TransactionFormView(ViewClass):
     def __init__(self, parent=None):
+        __metaclass__ = TransactionsFormMeta
         super(TransactionFormView, self).__init__(parent)
         self.main_window = parent
         self.language = self.main_window.toml_data['settings']['language']
