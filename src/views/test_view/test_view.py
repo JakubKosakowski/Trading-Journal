@@ -5,8 +5,17 @@ from src.utils import Logger
 from src.abstract import ViewClass
 
 
-class TestView(QWidget):
+class TestViewMeta(type(QWidget), type(ViewClass)):
+    pass
+
+
+class ViewClass(QWidget):
+    pass
+
+
+class TestView(ViewClass):
     def __init__(self, parent=None):
+        __metaclass__ = TestViewMeta
         super(TestView, self).__init__(parent)
 
         self.main_window = parent
