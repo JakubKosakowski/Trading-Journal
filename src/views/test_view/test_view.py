@@ -29,8 +29,15 @@ class TestView(ViewClass):
         self.logger.logger.info('Go back to menu button generated.')
 
         self.load_colors()
+        self.load_text()
 
     def load_colors(self):
         button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'])
         button_color_setter.set_color(self.menu_btn)
         self.logger.logger.info('Go back to menu button generated.')
+
+    def load_text(self):
+        self.language = self.main_window.toml_data['settings']['language']
+        text_setter = TextSetter(self.language, self.main_window.toml_data)
+        text_setter.set_title(self.main_window, 'Test')
+        text_setter.set_text(self.menu_btn, "Wróć do menu")
