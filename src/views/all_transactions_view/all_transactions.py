@@ -4,9 +4,18 @@ from PyQt5.QtGui import *
 from src.utils import Logger, Utils
 from src.postgres_database import Database
 from src.setters import ButtonColorSetter, TextSetter, BackgroundColorSetter
+from src.abstract import ViewClass
 
-class AllTransactionsView(QWidget):
+class AllTransactionsMeta(type(QWidget), type(ViewClass)):
+    pass
+
+class ViewClass(QWidget):
+    pass
+
+
+class AllTransactionsView(ViewClass):
     def __init__(self, parent=None):
+        __metaclass__= AllTransactionsMeta
         super(AllTransactionsView, self).__init__(parent)
         self.main_window = parent
         self.language = self.main_window.toml_data['settings']['language']
