@@ -10,13 +10,8 @@ class TransactionsFormMeta(type(QWidget), type(ViewClass)):
     pass
 
 
-class ViewClass(QWidget):
-    pass
-
-
-class TransactionFormView(ViewClass):
+class TransactionFormView(QWidget, ViewClass, metaclass=TransactionsFormMeta):
     def __init__(self, parent=None):
-        __metaclass__ = TransactionsFormMeta
         super(TransactionFormView, self).__init__(parent)
         self.main_window = parent
         self.language = self.main_window.toml_data['settings']['language']
