@@ -4,13 +4,9 @@ from PyQt5.QtGui import *
 from src.utils import Logger
 from src.abstract import ViewClass
 from src.setters import TextSetter, ButtonColorSetter
+from src.meta import MetaClass
 
-
-class TestViewMeta(type(QWidget), type(ViewClass)):
-    pass
-
-
-class TestView(QWidget, ViewClass, metaclass=TestViewMeta):
+class TestView(QWidget, ViewClass, metaclass=MetaClass):
     def __init__(self, parent=None):
         super(TestView, self).__init__(parent)
 

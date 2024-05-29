@@ -5,12 +5,10 @@ from src.utils import Logger, Utils
 from src.postgres_database import Database
 from src.setters import ButtonColorSetter, TextSetter, BackgroundColorSetter
 from src.abstract import ViewClass
-
-class AllTransactionsMeta(type(QWidget), type(ViewClass)):
-    pass
+from src.meta import MetaClass
 
 
-class AllTransactionsView(QWidget, ViewClass, metaclass=AllTransactionsMeta):
+class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
     def __init__(self, parent=None):
         super(AllTransactionsView, self).__init__(parent)
         self.main_window = parent
