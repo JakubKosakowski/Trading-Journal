@@ -9,13 +9,9 @@ from src.abstract import ViewClass
 class AllTransactionsMeta(type(QWidget), type(ViewClass)):
     pass
 
-class ViewClass(QWidget):
-    pass
 
-
-class AllTransactionsView(ViewClass):
+class AllTransactionsView(QWidget, ViewClass, metaclass=AllTransactionsMeta):
     def __init__(self, parent=None):
-        __metaclass__= AllTransactionsMeta
         super(AllTransactionsView, self).__init__(parent)
         self.main_window = parent
         self.language = self.main_window.toml_data['settings']['language']
