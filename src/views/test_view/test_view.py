@@ -22,6 +22,8 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         self.load_colors()
         self.load_text()
 
+        self.show_edit_fields()
+
     def load_colors(self):
         button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'])
         button_color_setter.set_color(self.menu_btn)
@@ -32,3 +34,13 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         text_setter = TextSetter(self.language, self.main_window.toml_data)
         text_setter.set_title(self.main_window, 'Test')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
+
+    def show_edit_fields(self):
+        self.show_name_field()
+
+    def show_name_field(self):
+        self.name_label = QLineEdit(self)
+        self.name_label.setFixedSize(100, 20)
+        self.name_label.move(100, 60)
+        self.name_label.setStyleSheet(f"background-color: #ffffff;")
+        self.logger.logger.info("Name line edit generated.")
