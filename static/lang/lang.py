@@ -13,6 +13,8 @@ LANGUAGES = {
         'Wersja aplikacji': 'Application version',
         'Tryb pełnego ekranu': 'Full screen mode',
         'Kod spółki': "Company's code",
-        'Test': 'Test'
+        'Test': 'Test',
+        'Wiek': 'Age',
+        'Imię': 'Name'
     }
 }
