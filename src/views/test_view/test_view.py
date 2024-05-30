@@ -35,17 +35,18 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         text_setter.set_title(self.main_window, 'Test')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.age_label, 'Wiek')
-
+        text_setter.set_text(self.name_label, 'Imię')
 
     def show_edit_fields(self):
         self.show_name_field()
         self.show_age_field()
 
     def show_name_field(self):
-        self.name_label = QLineEdit(self)
-        self.name_label.setFixedSize(100, 20)
-        self.name_label.move(100, 60)
-        self.name_label.setStyleSheet(f"background-color: #ffffff;")
+        self.load_name_field_label()
+        self.name = QLineEdit(self)
+        self.name.setFixedSize(100, 20)
+        self.name.move(100, 60)
+        self.name.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Name line edit generated.")
 
     def show_age_field(self):
@@ -63,3 +64,10 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         self.age_label.move(100, 100)
         # self.age_label.setStyleSheet(f"border-style: none;")
         self.logger.logger.info("Age info label generated.")
+
+    def load_name_field_label(self):
+        self.name_label = QLabel('', self)
+        self.name_label.setFixedSize(50, 20)
+        self.name_label.move(100, 40)
+        # self.age_label.setStyleSheet(f"border-style: none;")
+        self.logger.logger.info("Name info label generated.")
