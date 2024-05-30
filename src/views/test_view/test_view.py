@@ -37,6 +37,7 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
 
     def show_edit_fields(self):
         self.show_name_field()
+        self.show_age_field()
 
     def show_name_field(self):
         self.name_label = QLineEdit(self)
@@ -44,3 +45,11 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         self.name_label.move(100, 60)
         self.name_label.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Name line edit generated.")
+
+    def show_age_field(self):
+        self.age = QLineEdit(self)
+        self.age.setFixedSize(100, 20)
+        self.age.setValidator(QIntValidator(18,200))
+        self.age.move(100, 100)
+        self.age.setStyleSheet(f"background-color: #ffffff;")
+        self.logger.logger.info("Age edit generated.")
