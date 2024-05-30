@@ -19,10 +19,10 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
 
+        self.show_edit_fields()
+
         self.load_colors()
         self.load_text()
-
-        self.show_edit_fields()
 
     def load_colors(self):
         button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'])
@@ -34,6 +34,8 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         text_setter = TextSetter(self.language, self.main_window.toml_data)
         text_setter.set_title(self.main_window, 'Test')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
+        text_setter.set_text(self.age_label, 'Wiek')
+
 
     def show_edit_fields(self):
         self.show_name_field()
@@ -47,9 +49,17 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         self.logger.logger.info("Name line edit generated.")
 
     def show_age_field(self):
+        self.load_age_field_label()
         self.age = QLineEdit(self)
         self.age.setFixedSize(100, 20)
         self.age.setValidator(QIntValidator(18,200))
-        self.age.move(100, 100)
+        self.age.move(100, 120)
         self.age.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Age edit generated.")
+
+    def load_age_field_label(self):
+        self.age_label = QLabel('', self)
+        self.age_label.setFixedSize(50, 20)
+        self.age_label.move(100, 100)
+        # self.age_label.setStyleSheet(f"border-style: none;")
+        self.logger.logger.info("Age info label generated.")
