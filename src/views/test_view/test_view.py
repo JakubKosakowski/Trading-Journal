@@ -5,12 +5,14 @@ from src.utils import Logger
 from src.abstract import ViewClass
 from src.setters import TextSetter, ButtonColorSetter
 from src.meta import MetaClass
+from src.postgres_database import Database
 
 class TestView(QWidget, ViewClass, metaclass=MetaClass):
     def __init__(self, parent=None):
         super(TestView, self).__init__(parent)
 
         self.main_window = parent
+        self.db = Database()
 
         self.logger = Logger(__name__)
 
@@ -81,4 +83,9 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         self.logger.logger.info("Name info label generated.")
 
     def add_test_values(self):
-        pass
+        self.logger.logger.debug(self.name.text())
+        self.logger.logger.debug(self.age.text())
+        temp = self.db.insert([self.name.text(), int(self.age.text()), 35])
+        self.logger.logger.debug(temp)
+        self.logger.logger.info('Record added.')
+        self.main_window.start_main_window_UI()
