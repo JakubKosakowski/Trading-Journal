@@ -4,10 +4,10 @@ from PyQt5.QtGui import *
 from src.utils import Logger
 from src.abstract import ViewClass
 from src.setters import TextSetter, ButtonColorSetter
-from src.meta import MetaClass
+from src.meta import MetaFormClass
 from src.postgres_database import Database
 
-class TestView(QWidget, ViewClass, metaclass=MetaClass):
+class TestView(QWidget, ViewClass, metaclass=MetaFormClass):
     def __init__(self, parent=None):
         super(TestView, self).__init__(parent)
 
@@ -24,7 +24,7 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         self.add_test_btn = QPushButton('', self)
         self.add_test_btn.move(100, 170)
         self.add_test_btn.setObjectName('add-btn')
-        self.add_test_btn.clicked.connect(self.add_test_values)
+        self.add_test_btn.clicked.connect(self.add_record)
         self.logger.logger.info('Add button generated.')
 
         self.show_edit_fields()
@@ -82,7 +82,7 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         # self.age_label.setStyleSheet(f"border-style: none;")
         self.logger.logger.info("Name info label generated.")
 
-    def add_test_values(self):
+    def add_record(self):
         self.logger.logger.debug(self.name.text())
         self.logger.logger.debug(self.age.text())
         self.db.insert([self.name.text(), int(self.age.text()), 35])
