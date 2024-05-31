@@ -2,12 +2,12 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger
-from src.abstract import ViewClass
+from src.abstract import FormClass
 from src.setters import TextSetter, ButtonColorSetter
 from src.meta import MetaFormClass
 from src.postgres_database import Database
 
-class TestView(QWidget, ViewClass, metaclass=MetaFormClass):
+class TestView(QWidget, FormClass, metaclass=MetaFormClass):
     def __init__(self, parent=None):
         super(TestView, self).__init__(parent)
 
