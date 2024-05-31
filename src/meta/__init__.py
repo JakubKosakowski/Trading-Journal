@@ -1,1 +1,1 @@
-from .classes import MetaClass
+from .classes import MetaClass, MetaFormClass
