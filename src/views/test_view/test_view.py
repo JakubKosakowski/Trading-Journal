@@ -22,6 +22,7 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         self.add_test_btn = QPushButton('', self)
         self.add_test_btn.move(100, 170)
         self.add_test_btn.setObjectName('add-btn')
+        self.add_test_btn.clicked.connect(self.add_test_values)
         self.logger.logger.info('Add button generated.')
 
         self.show_edit_fields()
@@ -78,3 +79,6 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         self.name_label.move(100, 40)
         # self.age_label.setStyleSheet(f"border-style: none;")
         self.logger.logger.info("Name info label generated.")
+
+    def add_test_values(self):
+        pass
