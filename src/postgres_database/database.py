@@ -31,6 +31,7 @@ class Database:
             command_value_part = f"VALUES{tuple(values)} RETURNING test_ident;"
             self.logger.logger.debug(f'{command_table_part} {command_value_part}')
             self.cursor.execute(f'{command_table_part} {command_value_part}');
+            self.connection.commit()
             return self.cursor.fetchone()[0]
         except Exception as e:
             self.connection.rollback()

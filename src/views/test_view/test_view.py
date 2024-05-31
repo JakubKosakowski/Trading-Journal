@@ -85,7 +85,6 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
     def add_test_values(self):
         self.logger.logger.debug(self.name.text())
         self.logger.logger.debug(self.age.text())
-        temp = self.db.insert([self.name.text(), int(self.age.text()), 35])
-        self.logger.logger.debug(temp)
+        self.db.insert([self.name.text(), int(self.age.text()), 35])
         self.logger.logger.info('Record added.')
         self.main_window.start_main_window_UI()
