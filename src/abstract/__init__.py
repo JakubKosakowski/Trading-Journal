@@ -1,1 +1,1 @@
-from .views import ViewClass
+from .views import ViewClass, FormClass

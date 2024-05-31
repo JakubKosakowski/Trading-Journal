@@ -2,6 +2,7 @@ LANGUAGES = {
     'US': {
         'Dziennik transakcji': 'Trading Journal',
         'Dodaj transakcję': 'Add transaction',
+        'Dodaj': 'Add',
         'Wszystkie transakcje': 'Show all transactions',
         'Wyjdź': 'Exit',
         'Wróć do menu': 'Go back to menu',

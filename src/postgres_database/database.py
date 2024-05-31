@@ -25,11 +25,13 @@ class Database:
             self.connection.rollback()
             self.logger.logger.error(f"An error occurred: {e}")
     
-    def insert(self, table, values):
+    def insert(self, values, table="test"):
         try:
             command_table_part = f"INSERT INTO {table}{tuple(self.get_table_columns_names(table))}".replace("'", "")
             command_value_part = f"VALUES{tuple(values)} RETURNING test_ident;"
+            self.logger.logger.debug(f'{command_table_part} {command_value_part}')
             self.cursor.execute(f'{command_table_part} {command_value_part}');
+            self.connection.commit()
             return self.cursor.fetchone()[0]
         except Exception as e:
             self.connection.rollback()

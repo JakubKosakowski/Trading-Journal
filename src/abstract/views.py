@@ -5,9 +5,16 @@ from abc import ABC, abstractmethod
 class ViewClass(ABC):
 
     @abstractmethod
-    def load_colors(self):
+    def load_colors(self) -> None:
         pass
 
     @abstractmethod
-    def load_text(self):
+    def load_text(self) -> None:
+        pass
+
+
+class FormClass(ViewClass):
+
+    @abstractmethod
+    def add_record(self, values: list) -> None:
         pass

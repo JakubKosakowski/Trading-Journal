@@ -2,22 +2,30 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger
-from src.abstract import ViewClass
+from src.abstract import FormClass
 from src.setters import TextSetter, ButtonColorSetter
-from src.meta import MetaClass
+from src.meta import MetaFormClass
+from src.postgres_database import Database
 
-class TestView(QWidget, ViewClass, metaclass=MetaClass):
+class TestView(QWidget, FormClass, metaclass=MetaFormClass):
     def __init__(self, parent=None):
         super(TestView, self).__init__(parent)
 
         self.main_window = parent
+        self.db = Database()
 
         self.logger = Logger(__name__)
 
-        self.menu_btn = QPushButton("Go back to menu", self)
+        self.menu_btn = QPushButton("", self)
         self.menu_btn.move(100, 350)
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
+
+        self.add_test_btn = QPushButton('', self)
+        self.add_test_btn.move(100, 170)
+        self.add_test_btn.setObjectName('add-btn')
+        self.add_test_btn.clicked.connect(self.add_record)
+        self.logger.logger.info('Add button generated.')
 
         self.show_edit_fields()
 
@@ -27,6 +35,7 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
     def load_colors(self):
         button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'])
         button_color_setter.set_color(self.menu_btn)
+        button_color_setter.set_color(self.add_test_btn)
         self.logger.logger.info('Go back to menu button generated.')
 
     def load_text(self):
@@ -34,6 +43,7 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         text_setter = TextSetter(self.language, self.main_window.toml_data)
         text_setter.set_title(self.main_window, 'Test')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
+        text_setter.set_text(self.add_test_btn, 'Dodaj')
         text_setter.set_text(self.age_label, 'Wiek')
         text_setter.set_text(self.name_label, 'Imię')
 
@@ -71,3 +81,10 @@ class TestView(QWidget, ViewClass, metaclass=MetaClass):
         self.name_label.move(100, 40)
         # self.age_label.setStyleSheet(f"border-style: none;")
         self.logger.logger.info("Name info label generated.")
+
+    def add_record(self):
+        self.logger.logger.debug(self.name.text())
+        self.logger.logger.debug(self.age.text())
+        self.db.insert([self.name.text(), int(self.age.text()), 35])
+        self.logger.logger.info('Record added.')
+        self.main_window.start_main_window_UI()
