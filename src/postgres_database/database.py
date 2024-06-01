@@ -16,6 +16,7 @@ class Database:
         self.connection.close()
         if not exists:
             self.create_db(params)
+            self.run_queries(params)
 
         self.connection = psycopg2.connect(**params)
         self.cursor = self.connection.cursor()
@@ -87,6 +88,18 @@ class Database:
         with connection.cursor() as cur:
             cur.execute(f"CREATE DATABASE {params['dbname']};")
         connection.close()
+
+    def run_queries(self, params):
+        self.connection = psycopg2.connect(**params)
+        self.cursor = self.connection.cursor()
+        
+        with open('config/trading_journal_queries.sql', 'r') as f:
+            queries = f.read()
+
+        self.cursor.execute(queries)
+        self.connection.commit()
+
+        self.connection.close()
     
     # def delete(self, checked_value, checked_column="id", table="test"):
     #     self.cursor.execute(f'SELECT price FROM test')
