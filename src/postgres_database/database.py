@@ -1,12 +1,22 @@
 import psycopg2
 from config import config
 from src.utils import Logger
-import inspect
+import os
 
 class Database:
     def __init__(self):
         params = config()
         self.logger = Logger(__name__)
+
+        self.connection = psycopg2.connect(f"user={params['user']} password={params['password']}")
+        self.cursor = self.connection.cursor()
+
+        self.cursor.execute(f"SELECT 1 FROM pg_catalog.pg_database WHERE datname = '{params['dbname']}'")
+        exists = self.cursor.fetchone()
+        self.connection.close()
+        if not exists:
+            self.create_db(params)
+
         self.connection = psycopg2.connect(**params)
         self.cursor = self.connection.cursor()
 
@@ -70,6 +80,13 @@ class Database:
     def get_table_columns_names(self, table):
         self.cursor.execute(f'SELECT * FROM {table}')
         return [desc[0] for desc in self.cursor.description][1:]
+    
+    def create_db(self, params):
+        connection = psycopg2.connect(f"user={params['user']} password={params['password']}")
+        connection.autocommit = True
+        with connection.cursor() as cur:
+            cur.execute(f"CREATE DATABASE {params['dbname']};")
+        connection.close()
     
     # def delete(self, checked_value, checked_column="id", table="test"):
     #     self.cursor.execute(f'SELECT price FROM test')
