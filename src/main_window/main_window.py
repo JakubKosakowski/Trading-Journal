@@ -6,9 +6,11 @@ from src.views import TransactionFormView, AllTransactionsView, SettingsView, Te
 from src.utils import Logger, Utils
 from config.settings import load_toml_settings
 from src.setters import ButtonColorSetter, TextSetter
+from src.abstract import ViewClass
+from src.meta import MetaClass
 
 
-class MainWindowWidget(QWidget):
+class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
     def __init__(self, parent=None):
         super(MainWindowWidget, self).__init__(parent)
         self.parent_window = parent
@@ -45,10 +47,10 @@ class MainWindowWidget(QWidget):
         else:
             self.parent_window.setGeometry(550, 250, 800, 600)
 
-        self.set_colors()
+        self.load_colors()
         self.load_text()
 
-    def set_colors(self):
+    def load_colors(self):
         button_color_setter = ButtonColorSetter(self.parent_window.toml_data['settings']['primary_color'])
         button_color_setter.set_color(self.transaction_btn)
         button_color_setter.set_color(self.all_transactions_btn)

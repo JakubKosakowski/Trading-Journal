@@ -3,11 +3,11 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger, Utils
 from src.setters import ButtonColorSetter, TextSetter
-from src.abstract import ViewClass
-from src.meta import MetaClass
+from src.abstract import FormClass
+from src.meta import MetaFormClass
 
 
-class TransactionFormView(QWidget, ViewClass, metaclass=MetaClass):
+class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
     def __init__(self, parent=None):
         super(TransactionFormView, self).__init__(parent)
         self.main_window = parent
@@ -21,7 +21,7 @@ class TransactionFormView(QWidget, ViewClass, metaclass=MetaClass):
         self.add_transaction_btn = QPushButton("Add", self)
         self.add_transaction_btn.move(250, 370)
         self.add_transaction_btn.setObjectName('add-transaction-btn')
-        self.add_transaction_btn.clicked.connect(self.add_transaction)
+        self.add_transaction_btn.clicked.connect(self.add_record)
 
         self.load_reason_to_entry()
         self.load_reason_to_entry_edit_lines()
@@ -129,5 +129,5 @@ class TransactionFormView(QWidget, ViewClass, metaclass=MetaClass):
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.company_code_label, "Kod spółki")
 
-    def add_transaction(self):
+    def add_record(self):
         pass
