@@ -1,6 +1,7 @@
 LANGUAGES = {
     'US': {
         'Dziennik transakcji': 'Trading Journal',
+        'Z/S: ': 'P/L: ',
         'Dodaj transakcję': 'Add transaction',
         'Dodaj': 'Add',
         'Wszystkie transakcje': 'Show all transactions',

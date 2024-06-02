@@ -42,6 +42,13 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         self.version_label.move(700, 570)
         self.version_label.setAlignment(Qt.AlignCenter)
         self.parent_window.logger.logger.info('Version label generated.')
+
+        self.profit_loss_label = QLabel(self.parent_window, objectName='profit-loss-label')
+        self.profit_loss_label.move(50, 20)
+        self.profit_loss_label.setStyleSheet(f"border-style: none;")
+        self.parent_window.logger.logger.info('Profit/Loss label generated.')
+
+
         if self.parent_window.toml_data['settings']['fullscreen']:
             self.parent_window.showFullScreen()
         else:
@@ -65,6 +72,7 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         text_setter.set_text(self.exit_btn, "Wyjdź")
         text_setter.set_text(self.all_transactions_btn, "Wszystkie transakcje")
         text_setter.set_text(self.test_btn, "Test")
+        text_setter.set_text(self.profit_loss_label, 'Z/S: ')
         self.parent_window.logger.logger.info('View text set.')
 
 
