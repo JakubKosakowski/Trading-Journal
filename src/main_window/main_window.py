@@ -78,6 +78,11 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         self.profit_loss_label.setStyleSheet(f"border-style: none;")
         self.parent_window.logger.logger.info('Profit/Loss label generated.')
 
+        self.profit_loss_value = QLabel(self.parent_window, objectName='profit-loss-label')
+        self.profit_loss_value.move(70, 20)
+        self.profit_loss_value.setStyleSheet(f"border-style: none;")
+        self.parent_window.logger.logger.info('Profit/Loss value generated.')
+
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
