@@ -14,6 +14,7 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
     def __init__(self, parent=None):
         super(MainWindowWidget, self).__init__(parent)
         self.parent_window = parent
+        self.database = Database()
         self.language = self.parent_window.toml_data['settings']['language']
         self.settings_btn = QPushButton("", self, objectName='settings-btn')
         self.settings_btn.move(750, 50)
@@ -43,11 +44,7 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         self.version_label.setAlignment(Qt.AlignCenter)
         self.parent_window.logger.logger.info('Version label generated.')
 
-        self.profit_loss_label = QLabel(self.parent_window, objectName='profit-loss-label')
-        self.profit_loss_label.move(50, 20)
-        self.profit_loss_label.setStyleSheet(f"border-style: none;")
-        self.parent_window.logger.logger.info('Profit/Loss label generated.')
-
+        self.show_profit_loss_info()
 
         if self.parent_window.toml_data['settings']['fullscreen']:
             self.parent_window.showFullScreen()
@@ -74,6 +71,12 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         text_setter.set_text(self.test_btn, "Test")
         text_setter.set_text(self.profit_loss_label, 'Z/S: ')
         self.parent_window.logger.logger.info('View text set.')
+
+    def show_profit_loss_info(self):
+        self.profit_loss_label = QLabel(self.parent_window, objectName='profit-loss-label')
+        self.profit_loss_label.move(50, 20)
+        self.profit_loss_label.setStyleSheet(f"border-style: none;")
+        self.parent_window.logger.logger.info('Profit/Loss label generated.')
 
 
 class MainWindow(QMainWindow):
