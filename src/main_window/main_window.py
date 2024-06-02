@@ -16,6 +16,7 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         self.parent_window = parent
         self.database = Database()
         self.language = self.parent_window.toml_data['settings']['language']
+        self.currency = self.parent_window.toml_data['settings']['user_currency']
         self.settings_btn = QPushButton("", self, objectName='settings-btn')
         self.settings_btn.move(750, 50)
         self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
@@ -79,15 +80,14 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         self.parent_window.logger.logger.info('Profit/Loss label generated.')
 
         self.profit_loss_value = QLabel(self.parent_window, objectName='profit-loss-label')
-        self.profit_loss_value.move(70, 20)
-        self.count_profit_loss_value()
+        self.profit_loss_value.move(80, 20)
+        self.profit_loss_value.setText(f'{str(self.count_profit_loss_value())} {self.currency}')
         self.profit_loss_value.setStyleSheet(f"border-style: none;")
         self.parent_window.logger.logger.info('Profit/Loss value generated.')
 
     def count_profit_loss_value(self):
         values = self.database.select(columns='test_ident')
-        values = sum([x[0] for x in values])
-        self.parent_window.logger.logger.debug(f'Sum of test ident values: {values}')
+        return sum([x[0] for x in values])
 
 
 class MainWindow(QMainWindow):
