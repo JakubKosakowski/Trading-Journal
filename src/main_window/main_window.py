@@ -80,8 +80,14 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
 
         self.profit_loss_value = QLabel(self.parent_window, objectName='profit-loss-label')
         self.profit_loss_value.move(70, 20)
+        self.count_profit_loss_value()
         self.profit_loss_value.setStyleSheet(f"border-style: none;")
         self.parent_window.logger.logger.info('Profit/Loss value generated.')
+
+    def count_profit_loss_value(self):
+        values = self.database.select(columns='test_ident')
+        values = sum([x[0] for x in values])
+        self.parent_window.logger.logger.debug(f'Sum of test ident values: {values}')
 
 
 class MainWindow(QMainWindow):
