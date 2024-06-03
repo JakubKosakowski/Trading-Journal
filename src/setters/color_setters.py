@@ -9,7 +9,7 @@ class ProfitLossColorPicker:
     profit = False
 
     def check_profit(self, value: str):
-        self.profit = [x for x in value.split()][0] >= 0
+        self.profit = int([x for x in value.split()][0]) >= 0
 
     def is_profit(self):
         return self.profit
