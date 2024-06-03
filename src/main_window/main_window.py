@@ -5,7 +5,7 @@ from PyQt5.QtGui import *
 from src.views import TransactionFormView, AllTransactionsView, SettingsView, TestView
 from src.utils import Logger, Utils
 from config.settings import load_toml_settings
-from src.setters import ButtonColorSetter, TextSetter
+from src.setters import ButtonColorSetter, TextSetter, ProfitLossColorPicker, TextColorSetter
 from src.abstract import ViewClass
 from src.meta import MetaClass
 
@@ -83,6 +83,12 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         self.profit_loss_value.move(80, 20)
         self.profit_loss_value.setText(f'{str(self.count_profit_loss_value())} {self.currency}')
         self.profit_loss_value.setStyleSheet(f"border-style: none;")
+
+        self.picker = ProfitLossColorPicker()
+        self.text_color_setter = TextColorSetter(['red', 'green'], self.picker)
+        self.picker.check_profit(self.profit_loss_value.text())
+        self.text_color_setter.set_color(self.profit_loss_value)
+
         self.parent_window.logger.logger.info('Profit/Loss value generated.')
 
     def count_profit_loss_value(self):
