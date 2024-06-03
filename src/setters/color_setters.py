@@ -32,3 +32,13 @@ class BackgroundColorSetter(ColorSetter):
                                 "QHeaderView {"
                                 f"background-color: {self.color};"
                                 "}") 
+       
+
+class TextColorSetter(ColorSetter):
+    def __init__(self, color):
+        self.color = color
+
+    def set_color(self, element):
+        element.setStyleSheet("QLabel {"
+                              f"color: {self.color}"
+                              "}")
