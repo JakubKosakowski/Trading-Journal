@@ -44,10 +44,16 @@ class BackgroundColorSetter(ColorSetter):
        
 
 class TextColorSetter(ColorSetter):
-    def __init__(self, color):
+    def __init__(self, color, picker: ProfitLossColorPicker):
         self.color = color
+        self.picker = picker
 
     def set_color(self, element):
-        element.setStyleSheet("QLabel {"
-                              f"color: {self.color}"
-                              "}")
+        if self.picker.is_profit():
+            element.setStyleSheet("QLabel {"
+                                f"color: {self.color[1]}"
+                                "}")
+        else:
+            element.setStyleSheet("QLabel {"
+                                f"color: {self.color[0]}"
+                                "}")
