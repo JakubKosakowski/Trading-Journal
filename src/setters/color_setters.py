@@ -5,6 +5,15 @@ class ColorSetter(ABC):
     def set_color(self, element):
         pass
 
+class ProfitLossColorPicker:
+    profit = False
+
+    def check_profit(self, value: str):
+        self.profit = [x for x in value.split()][0] >= 0
+
+    def is_profit(self):
+        return self.profit
+
 
 class ButtonColorSetter(ColorSetter):
     def __init__(self, color):
