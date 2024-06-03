@@ -5,6 +5,15 @@ class ColorSetter(ABC):
     def set_color(self, element):
         pass
 
+class ProfitLossColorPicker:
+    profit = False
+
+    def check_profit(self, value: str):
+        self.profit = int([x for x in value.split()][0]) >= 0
+
+    def is_profit(self):
+        return self.profit
+
 
 class ButtonColorSetter(ColorSetter):
     def __init__(self, color):
@@ -32,3 +41,19 @@ class BackgroundColorSetter(ColorSetter):
                                 "QHeaderView {"
                                 f"background-color: {self.color};"
                                 "}") 
+       
+
+class TextColorSetter(ColorSetter):
+    def __init__(self, color, picker: ProfitLossColorPicker):
+        self.color = color
+        self.picker = picker
+
+    def set_color(self, element):
+        if self.picker.is_profit():
+            element.setStyleSheet("QLabel {"
+                                f"color: {self.color[1]}"
+                                "}")
+        else:
+            element.setStyleSheet("QLabel {"
+                                f"color: {self.color[0]}"
+                                "}")
