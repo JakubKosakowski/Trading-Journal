@@ -1,10 +1,11 @@
 from PyQt5.QtWidgets import *
-from src.abstract import ColorSetter
+from src.abstract import ColorSetter, ColorPicker
+from typing import List
 
-class ProfitLossColorPicker:
+class ProfitLossColorPicker(ColorPicker):
     profit = False
 
-    def check_profit(self, value: str):
+    def check_pick_condiditon(self, value: str):
         self.profit = int([x for x in value.split()][0]) >= 0
 
     def is_profit(self):
@@ -40,7 +41,7 @@ class BackgroundColorSetter(ColorSetter):
        
 
 class TextColorSetter(ColorSetter):
-    def __init__(self, color: str, picker: ProfitLossColorPicker):
+    def __init__(self, color: List[str], picker: ProfitLossColorPicker):
         self.color = color
         self.picker = picker
 
