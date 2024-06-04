@@ -1,10 +1,5 @@
-from abc import ABC, abstractmethod
 from PyQt5.QtWidgets import *
-
-class ColorSetter(ABC):
-    @abstractmethod
-    def set_color(self, element):
-        pass
+from src.abstract import ColorSetter
 
 class ProfitLossColorPicker:
     profit = False
