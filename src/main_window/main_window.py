@@ -86,7 +86,7 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
 
         self.picker = ProfitLossColorPicker()
         self.text_color_setter = TextColorSetter(['red', 'green'], self.picker)
-        self.picker.check_profit(self.profit_loss_value.text())
+        self.picker.check_pick_condiditon(self.profit_loss_value.text())
         self.text_color_setter.set_color(self.profit_loss_value)
 
         self.parent_window.logger.logger.info('Profit/Loss value generated.')

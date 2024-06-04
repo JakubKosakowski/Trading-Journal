@@ -1,14 +1,11 @@
-from abc import ABC, abstractmethod
+from PyQt5.QtWidgets import *
+from src.abstract import ColorSetter, ColorPicker
+from typing import List
 
-class ColorSetter(ABC):
-    @abstractmethod
-    def set_color(self, element):
-        pass
-
-class ProfitLossColorPicker:
+class ProfitLossColorPicker(ColorPicker):
     profit = False
 
-    def check_profit(self, value: str):
+    def check_pick_condiditon(self, value: str):
         self.profit = int([x for x in value.split()][0]) >= 0
 
     def is_profit(self):
@@ -16,10 +13,10 @@ class ProfitLossColorPicker:
 
 
 class ButtonColorSetter(ColorSetter):
-    def __init__(self, color):
+    def __init__(self, color: str):
         self.color = color
 
-    def set_color(self, element):
+    def set_color(self, element: QPushButton) -> None:
         element.setStyleSheet("QPushButton {"
                                 f"background-color: {self.color};"
                                 f"border: 1px solid {self.color};"
@@ -31,10 +28,10 @@ class ButtonColorSetter(ColorSetter):
         
 
 class BackgroundColorSetter(ColorSetter):
-    def __init__(self, color):
+    def __init__(self, color: str):
         self.color = color
 
-    def set_color(self, element):
+    def set_color(self, element: QTableWidget) -> None:
        element.setStyleSheet("QTableWidget {"
                                 f"background-color: {self.color};"
                                 "}"
@@ -44,11 +41,11 @@ class BackgroundColorSetter(ColorSetter):
        
 
 class TextColorSetter(ColorSetter):
-    def __init__(self, color, picker: ProfitLossColorPicker):
+    def __init__(self, color: List[str], picker: ProfitLossColorPicker):
         self.color = color
         self.picker = picker
 
-    def set_color(self, element):
+    def set_color(self, element: QLabel) -> None:
         if self.picker.is_profit():
             element.setStyleSheet("QLabel {"
                                 f"color: {self.color[1]}"
