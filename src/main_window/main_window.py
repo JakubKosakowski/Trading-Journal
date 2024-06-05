@@ -5,7 +5,7 @@ from PyQt5.QtGui import *
 from src.views import TransactionFormView, AllTransactionsView, SettingsView, TestView
 from src.utils import Logger, Utils
 from config.settings import load_toml_settings
-from src.setters import ButtonColorSetter, TextSetter, ProfitLossColorPicker, TextColorSetter
+from src.setters import ButtonColorSetter, TextSetter, ProfitLossColorPicker, TextColorSetter, ButtonTextColorPicker
 from src.abstract import ViewClass
 from src.meta import MetaClass
 
@@ -56,7 +56,10 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         self.load_text()
 
     def load_colors(self):
-        button_color_setter = ButtonColorSetter(self.parent_window.toml_data['settings']['primary_color'])
+        button_text_color_picker = ButtonTextColorPicker()
+        text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
+        button_text_color_picker.check_pick_condiditon(self.parent_window.toml_data['settings']['primary_color'])
+        button_color_setter = ButtonColorSetter(self.parent_window.toml_data['settings']['primary_color'], text_color_setter)
         button_color_setter.set_color(self.transaction_btn)
         button_color_setter.set_color(self.all_transactions_btn)
         button_color_setter.set_color(self.exit_btn)
@@ -82,7 +85,6 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         self.profit_loss_value = QLabel(self, objectName='profit-loss-label')
         self.profit_loss_value.move(80, 20)
         self.profit_loss_value.setText(f'{str(self.count_profit_loss_value())} {self.currency}')
-        self.profit_loss_value.setStyleSheet(f"border-style: none;")
 
         self.picker = ProfitLossColorPicker()
         self.text_color_setter = TextColorSetter(['red', 'green'], self.picker)
