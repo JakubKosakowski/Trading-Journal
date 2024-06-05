@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import *
+from PyQt5.QtCore import *
 from src.abstract import ColorSetter, ColorPicker
 from src.utils import Utils
 from typing import List
@@ -27,8 +28,9 @@ class ButtonTextColorPicker(ColorPicker):
     
 
 class ButtonColorSetter(ColorSetter):
-    def __init__(self, color: str):
+    def __init__(self, color: str, text_color_setter: ColorSetter):
         self.color = color
+        self.text_color_setter = text_color_setter
 
     def set_color(self, element: QPushButton) -> None:
         element.setStyleSheet("QPushButton {"
@@ -39,6 +41,7 @@ class ButtonColorSetter(ColorSetter):
                                 f"background-color: {self.color};"
                                 f"border: 1px solid #005b60;"
                                 "}")
+        self.text_color_setter.set_color(element)
         
 
 class BackgroundColorSetter(ColorSetter):
@@ -61,6 +64,12 @@ class TextColorSetter(ColorSetter):
 
     def set_color(self, element) -> None:
         if self.picker.get_condition_value():
-            element.setStyleSheet(f'color: {self.color[1]}')
+            if element.styleSheet() == '':
+                element.setStyleSheet(f'color: {self.color[1]}')
+            else:
+                element.setStyleSheet(element.styleSheet().replace("}", f'color: {self.color[1]}'+"}"))
         else:
-            element.setStyleSheet(f"color: {self.color[0]}")
+            if element.styleSheet() == '':
+                element.setStyleSheet(f'color: {self.color[0]}')
+            else:
+                element.setStyleSheet(element.styleSheet().replace("}", f'color: {self.color[0]}'+"}"))
