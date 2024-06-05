@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from src.abstract import ColorSetter, ColorPicker
 from typing import List
 
+
 class ProfitLossColorPicker(ColorPicker):
     profit = False
 
@@ -11,6 +12,10 @@ class ProfitLossColorPicker(ColorPicker):
     def is_profit(self):
         return self.profit
 
+
+class ButtonTextColorPicker(ColorPicker):
+    pass
+    
 
 class ButtonColorSetter(ColorSetter):
     def __init__(self, color: str):
