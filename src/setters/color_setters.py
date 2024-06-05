@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import *
 from src.abstract import ColorSetter, ColorPicker
+from src.utils import Utils
 from typing import List
 
 
@@ -9,12 +10,20 @@ class ProfitLossColorPicker(ColorPicker):
     def check_pick_condiditon(self, value: str):
         self.profit = int([x for x in value.split()][0]) >= 0
 
-    def is_profit(self):
+    def get_condition_value(self):
         return self.profit
 
 
 class ButtonTextColorPicker(ColorPicker):
-    pass
+    dark_text = False
+
+    def check_pick_condiditon(self, value: str):
+        r, g, b = Utils.hex_to_rgb(value)
+        if (r > 200 and g > 230) or (b > 220):
+            self.dark_text = True
+
+    def get_condition_value(self):
+        return self.dark_text
     
 
 class ButtonColorSetter(ColorSetter):
@@ -46,16 +55,12 @@ class BackgroundColorSetter(ColorSetter):
        
 
 class TextColorSetter(ColorSetter):
-    def __init__(self, color: List[str], picker: ProfitLossColorPicker):
+    def __init__(self, color: List[str], picker: ColorPicker):
         self.color = color
         self.picker = picker
 
-    def set_color(self, element: QLabel) -> None:
-        if self.picker.is_profit():
-            element.setStyleSheet("QLabel {"
-                                f"color: {self.color[1]}"
-                                "}")
+    def set_color(self, element) -> None:
+        if self.picker.get_condition_value():
+            element.setStyleSheet(f'color: {self.color[1]}')
         else:
-            element.setStyleSheet("QLabel {"
-                                f"color: {self.color[0]}"
-                                "}")
+            element.setStyleSheet(f"color: {self.color[0]}")
