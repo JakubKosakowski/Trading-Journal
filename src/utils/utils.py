@@ -46,7 +46,7 @@ class Utils:
         return list_of_columns_names[0]
     
     @staticmethod
-    def set_language_text(obj, text, lang_code, toml_data):
+    def set_language_text(obj, text, lang_code, toml_data): # It works without toml_data !!! Remove it!
         if lang_code == 'PL':
             obj.setText(text)
         else:
@@ -54,7 +54,7 @@ class Utils:
         logger.logger.info('Object text generated.')
 
     @staticmethod
-    def set_title(obj, text, lang_code, toml_data):
+    def set_title(obj, text, lang_code, toml_data): # It works without toml_data !!! Remove it!
         if lang_code == 'PL':
             obj.setWindowTitle(text)
         else:

@@ -3,7 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger
 from src.abstract import FormClass
-from src.setters import TextSetter, ButtonColorSetter
+from src.setters import TextSetter, ButtonColorSetter, TextColorSetter, ButtonTextColorPicker
 from src.meta import MetaFormClass
 from src.postgres_database import Database
 
@@ -33,7 +33,10 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_text()
 
     def load_colors(self):
-        button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'])
+        button_text_color_picker = ButtonTextColorPicker()
+        text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
+        button_text_color_picker.check_pick_condiditon(self.main_window.toml_data['settings']['primary_color'])
+        button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'], text_color_setter)
         button_color_setter.set_color(self.menu_btn)
         button_color_setter.set_color(self.add_test_btn)
         self.logger.logger.info('Go back to menu button generated.')
