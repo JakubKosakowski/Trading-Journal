@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger, Utils
-from src.setters import ButtonColorSetter, TextSetter
+from src.setters import ButtonColorSetter, TextSetter, TextColorSetter, ButtonTextColorPicker
 from src.abstract import FormClass
 from src.meta import MetaFormClass
 
@@ -64,7 +64,10 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_menu_button_color()
 
     def load_menu_button_color(self):
-        button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'])
+        button_text_color_picker = ButtonTextColorPicker()
+        text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
+        button_text_color_picker.check_pick_condiditon(self.main_window.toml_data['settings']['primary_color'])
+        button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'], text_color_setter)
         button_color_setter.set_color(self.menu_btn)
         button_color_setter.set_color(self.add_transaction_btn)
         
