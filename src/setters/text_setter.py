@@ -19,6 +19,7 @@ class TextSetter:
     set_titles(obj, text)
         Use Utils class static method to set widnow title as words in lang dictionary for choosen language
     """
+
     def __init__(self, lang, data):
         """
         Parameters
@@ -28,6 +29,7 @@ class TextSetter:
         data:
             Data from .toml file
         """
+
         self.lang = lang
         self.data = data
 
@@ -42,6 +44,7 @@ class TextSetter:
         text: str
             Text, which we will set in object
         """
+
         Utils.set_language_text(obj, text, self.lang, self.data)
 
     def set_title(self, obj, text):
@@ -55,4 +58,5 @@ class TextSetter:
         text: str
             Text, which we will set in object
         """
+        
         Utils.set_title(obj, text, self.lang, self.data)
