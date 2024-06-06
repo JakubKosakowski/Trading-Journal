@@ -3,7 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.utils import Logger, Utils
 from src.postgres_database import Database
-from src.setters import ButtonColorSetter, TextSetter, BackgroundColorSetter
+from src.setters import ButtonColorSetter, TextSetter, BackgroundColorSetter, TextColorSetter, ButtonTextColorPicker
 from src.abstract import ViewClass
 from src.meta import MetaClass
 
@@ -79,7 +79,10 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
         self.logger.logger.info("All view colors loaded.")
 
     def load_menu_button_color(self):
-        button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'])
+        button_text_color_picker = ButtonTextColorPicker()
+        text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
+        button_text_color_picker.check_pick_condiditon(self.main_window.toml_data['settings']['primary_color'])
+        button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'], text_color_setter)
         button_color_setter.set_color(self.menu_btn)
         self.logger.logger.info('Menu button color set.')
         
