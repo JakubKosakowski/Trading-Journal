@@ -65,7 +65,7 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         """
 
         super(MainWindowWidget, self).__init__(parent)
-        
+
         # Initiate all used attributes
         self.main_window = parent
         self.database = Database()
@@ -120,10 +120,19 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         self.load_text()
 
     def load_colors(self):
+        """Load colors for all elements in main window"""
+
+        # Initiate ButtonTextColorPicker and TextColorSetter
         button_text_color_picker = ButtonTextColorPicker()
         text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
+
+        # Check if primary color is not enough bright for white text color
         button_text_color_picker.check_pick_condiditon(self.main_window.toml_data['settings']['primary_color'])
+
+        # Initiate ButtonColorSetter 
         button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'], text_color_setter)
+
+        # Set colors for all buttons in main window
         button_color_setter.set_color(self.transaction_btn)
         button_color_setter.set_color(self.all_transactions_btn)
         button_color_setter.set_color(self.exit_btn)
