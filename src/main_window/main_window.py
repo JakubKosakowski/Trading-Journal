@@ -155,18 +155,27 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         self.main_window.logger.logger.info('View text set.')
 
     def show_profit_loss_info(self):
+        """Display information about profit or loss in transactions account"""
+
+        # Create Profit/Loss information label
         self.profit_loss_label = QLabel(self, objectName='profit-loss-label')
         self.profit_loss_label.move(50, 20)
         self.profit_loss_label.setStyleSheet(f"border-style: none;")
         self.main_window.logger.logger.info('Profit/Loss label generated.')
 
+        # Create all transactions value label
         self.profit_loss_value = QLabel(self, objectName='profit-loss-label')
         self.profit_loss_value.move(80, 20)
         self.profit_loss_value.setText(f'{str(self.count_profit_loss_value())} {self.currency}')
 
+        # Initiate ProfitLossColorPicker and TextColorSetter
         self.picker = ProfitLossColorPicker()
         self.text_color_setter = TextColorSetter(['red', 'green'], self.picker)
+
+        # Check if value of all transactions if negative or positive
         self.picker.check_pick_condiditon(self.profit_loss_value.text())
+
+        # Set color for value of all transactions
         self.text_color_setter.set_color(self.profit_loss_value)
 
         self.main_window.logger.logger.info('Profit/Loss value generated.')
