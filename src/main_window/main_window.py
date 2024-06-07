@@ -17,7 +17,7 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
     ---------
     QWidget (class): Class used to create widgets
     ViewClass (class): Abstract class used to override methods for view type classes
-    metaclass (class): Class used to inherit by two classes. Defaults to MetaClass.
+    metaclass (class, optional): Class used to inherit by two classes. Defaults to MetaClass.
 
     Attributes
     ----------
@@ -58,46 +58,64 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
     """
 
     def __init__(self, parent=None):
+        """Initializes the instance based on parent window.
+
+        Arguments:
+            parent (QMainWindow, optional): window, which show this widget. Defaults to None.
+        """
+
         super(MainWindowWidget, self).__init__(parent)
+        
+        # Initiate all used attributes
         self.main_window = parent
         self.database = Database()
         self.language = self.main_window.toml_data['settings']['language']
         self.currency = self.main_window.toml_data['settings']['user_currency']
+
+        # Create settings button
         self.settings_btn = QPushButton("", self, objectName='settings-btn')
         self.settings_btn.move(750, 50)
         self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
         self.settings_btn.setCursor(QCursor(Qt.PointingHandCursor))
         self.main_window.logger.logger.info('Settings button generated.')
 
+        # Create trasnsactions button
         self.transaction_btn = QPushButton("", self, objectName='transaction-btn')
         self.transaction_btn.move(50, 140)
         self.main_window.logger.logger.info("Add transaction button generated")
 
+        # Create all transactions button
         self.all_transactions_btn = QPushButton("", self, objectName='all-transactions-btn')
         self.all_transactions_btn.move(50, 200)
         self.main_window.logger.logger.info("Show all transactions button generated")
         
+        # Create exit button
         self.exit_btn = QPushButton("", self, objectName='exit-btn')
         self.exit_btn.move(50, 320)
         self.main_window.logger.logger.info("Exit button generated")
 
+        # Create test button
         self.test_btn = QPushButton("", self, objectName='test-btn')
         self.test_btn.move(50, 260)
         self.main_window.logger.logger.info("Test view button generated")
 
+        # Create version label
         self.version_label = QLabel(self, objectName='version-label')
         self.version_label.setText(f"Version: {self.main_window.toml_data['project']['version']}")
         self.version_label.move(700, 570)
         self.version_label.setAlignment(Qt.AlignCenter)
         self.main_window.logger.logger.info('Version label generated.')
 
+        # Show profile/loss information
         self.show_profit_loss_info()
 
+        # Check if show window in full screen
         if self.main_window.toml_data['settings']['fullscreen']:
             self.main_window.showFullScreen()
         else:
             self.main_window.setGeometry(550, 250, 800, 600)
 
+        # Load colors and texts
         self.load_colors()
         self.load_text()
 
