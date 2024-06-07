@@ -11,87 +11,174 @@ from src.meta import MetaClass
 
 
 class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
+    """A class used to build widget for main window
+
+    Arguments
+    ---------
+    QWidget (class): Class used to create widgets
+    ViewClass (class): Abstract class used to override methods for view type classes
+    metaclass (class, optional): Class used to inherit by two classes. Defaults to MetaClass.
+
+    Attributes
+    ----------
+    currency: str
+        a main currency choosen in settings
+    database: Database
+        a database contains all transactions created in application
+    language: str
+        an application language choosen in settings
+    main_window: QMainWindow
+        an object represents whole main window
+
+    all_transactions_btn: QPushButton
+        button moves user into all transactions table
+    exit_btn: QPushButton
+        button to close application
+    settings_btn: QPushButton
+        button moves user into settings
+    test_btn: QPushButton
+        button moves user into test view
+    transaction_btn: QPushButton
+        button moves user into add transaction form
+        
+    version_label: QLabel
+        label shows version on application
+
+
+    Methods
+    -------
+    count_profit_loss_value()
+        Count values for all transactions added to application    
+    load_colors()
+        Load colors for all elements in main window
+    load_text()
+        Load text for all elements in main window
+    show_profit_loss_info()
+        Display information about profit or loss in transactions account
+    """
+
     def __init__(self, parent=None):
+        """Initializes the instance based on parent window.
+
+        Arguments:
+            parent (QMainWindow, optional): window, which show this widget. Defaults to None.
+        """
+
         super(MainWindowWidget, self).__init__(parent)
-        self.parent_window = parent
+
+        # Initiate all used attributes
+        self.main_window = parent
         self.database = Database()
-        self.language = self.parent_window.toml_data['settings']['language']
-        self.currency = self.parent_window.toml_data['settings']['user_currency']
+        self.language = self.main_window.toml_data['settings']['language']
+        self.currency = self.main_window.toml_data['settings']['user_currency']
+
+        # Create settings button
         self.settings_btn = QPushButton("", self, objectName='settings-btn')
         self.settings_btn.move(750, 50)
         self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
         self.settings_btn.setCursor(QCursor(Qt.PointingHandCursor))
-        self.parent_window.logger.logger.info('Settings button generated.')
+        self.main_window.logger.logger.info('Settings button generated.')
 
+        # Create trasnsactions button
         self.transaction_btn = QPushButton("", self, objectName='transaction-btn')
         self.transaction_btn.move(50, 140)
-        self.parent_window.logger.logger.info("Add transaction button generated")
+        self.main_window.logger.logger.info("Add transaction button generated")
 
+        # Create all transactions button
         self.all_transactions_btn = QPushButton("", self, objectName='all-transactions-btn')
         self.all_transactions_btn.move(50, 200)
-        self.parent_window.logger.logger.info("Show all transactions button generated")
+        self.main_window.logger.logger.info("Show all transactions button generated")
         
+        # Create exit button
         self.exit_btn = QPushButton("", self, objectName='exit-btn')
         self.exit_btn.move(50, 320)
-        self.parent_window.logger.logger.info("Exit button generated")
+        self.main_window.logger.logger.info("Exit button generated")
 
+        # Create test button
         self.test_btn = QPushButton("", self, objectName='test-btn')
         self.test_btn.move(50, 260)
-        self.parent_window.logger.logger.info("Test view button generated")
+        self.main_window.logger.logger.info("Test view button generated")
 
+        # Create version label
         self.version_label = QLabel(self, objectName='version-label')
-        self.version_label.setText(f"Version: {self.parent_window.toml_data['project']['version']}")
+        self.version_label.setText(f"Version: {self.main_window.toml_data['project']['version']}")
         self.version_label.move(700, 570)
         self.version_label.setAlignment(Qt.AlignCenter)
-        self.parent_window.logger.logger.info('Version label generated.')
+        self.main_window.logger.logger.info('Version label generated.')
 
+        # Show profile/loss information
         self.show_profit_loss_info()
 
-        if self.parent_window.toml_data['settings']['fullscreen']:
-            self.parent_window.showFullScreen()
+        # Check if show window in full screen
+        if self.main_window.toml_data['settings']['fullscreen']:
+            self.main_window.showFullScreen()
         else:
-            self.parent_window.setGeometry(550, 250, 800, 600)
+            self.main_window.setGeometry(550, 250, 800, 600)
 
+        # Load colors and texts
         self.load_colors()
         self.load_text()
 
     def load_colors(self):
+        """Load colors for all elements in main window"""
+
+        # Initiate ButtonTextColorPicker and TextColorSetter
         button_text_color_picker = ButtonTextColorPicker()
         text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
-        button_text_color_picker.check_pick_condiditon(self.parent_window.toml_data['settings']['primary_color'])
-        button_color_setter = ButtonColorSetter(self.parent_window.toml_data['settings']['primary_color'], text_color_setter)
+
+        # Check if primary color is not enough bright for white text color
+        button_text_color_picker.check_pick_condiditon(self.main_window.toml_data['settings']['primary_color'])
+
+        # Initiate ButtonColorSetter 
+        button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'], text_color_setter)
+
+        # Set colors for all buttons in main window
         button_color_setter.set_color(self.transaction_btn)
         button_color_setter.set_color(self.all_transactions_btn)
         button_color_setter.set_color(self.exit_btn)
         button_color_setter.set_color(self.test_btn)
-        self.parent_window.logger.logger.info("All window styles set.")
+        self.main_window.logger.logger.info("All window styles set.")
 
     def load_text(self):
-        text_setter = TextSetter(self.language, self.parent_window.toml_data)
-        text_setter.set_title(self.parent_window, 'Dziennik transakcji')
+        """Load texts for all elements in main window"""
+
+        # Initiate TextSetter
+        text_setter = TextSetter(self.language, self.main_window.toml_data)
+
+        # Set text for window title and all buttons in main window 
+        text_setter.set_title(self.main_window, 'Dziennik transakcji')
         text_setter.set_text(self.transaction_btn, "Dodaj transakcję")
         text_setter.set_text(self.exit_btn, "Wyjdź")
         text_setter.set_text(self.all_transactions_btn, "Wszystkie transakcje")
         text_setter.set_text(self.test_btn, "Test")
         text_setter.set_text(self.profit_loss_label, 'Z/S: ')
-        self.parent_window.logger.logger.info('View text set.')
+        self.main_window.logger.logger.info('View text set.')
 
     def show_profit_loss_info(self):
+        """Display information about profit or loss in transactions account"""
+
+        # Create Profit/Loss information label
         self.profit_loss_label = QLabel(self, objectName='profit-loss-label')
         self.profit_loss_label.move(50, 20)
         self.profit_loss_label.setStyleSheet(f"border-style: none;")
-        self.parent_window.logger.logger.info('Profit/Loss label generated.')
+        self.main_window.logger.logger.info('Profit/Loss label generated.')
 
+        # Create all transactions value label
         self.profit_loss_value = QLabel(self, objectName='profit-loss-label')
         self.profit_loss_value.move(80, 20)
         self.profit_loss_value.setText(f'{str(self.count_profit_loss_value())} {self.currency}')
 
+        # Initiate ProfitLossColorPicker and TextColorSetter
         self.picker = ProfitLossColorPicker()
         self.text_color_setter = TextColorSetter(['red', 'green'], self.picker)
+
+        # Check if value of all transactions if negative or positive
         self.picker.check_pick_condiditon(self.profit_loss_value.text())
+
+        # Set color for value of all transactions
         self.text_color_setter.set_color(self.profit_loss_value)
 
-        self.parent_window.logger.logger.info('Profit/Loss value generated.')
+        self.main_window.logger.logger.info('Profit/Loss value generated.')
 
     def count_profit_loss_value(self):
         values = self.database.select(columns='test_ident')
