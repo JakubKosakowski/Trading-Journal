@@ -226,14 +226,22 @@ class MainWindow(QMainWindow):
         test_view_UI():
             Loads test widget
     """
-    def __init__(self, parent=None):
+    def __init__(self):
+        """Initializes the instance based on parent window."""
+
+        super(MainWindow, self).__init__()
+
+        # Initiate all used attributes
         self.logger = Logger(__name__)
         self.toml_data = load_toml_settings()
         self.language = self.toml_data['settings']['language']
-        super(MainWindow, self).__init__(parent)
+
+        # Set window settings
         self.setWindowIcon(QIcon('static/images/favicon.jpg'))
         self.logger.logger.info("Main window generated.")
         self.setGeometry(550, 250, 800, 600)
+
+        # Generate main window UI
         self.start_main_window_UI()
 
     def start_main_window_UI(self):
