@@ -245,14 +245,21 @@ class MainWindow(QMainWindow):
         self.start_main_window_UI()
 
     def start_main_window_UI(self):
+        """Load main window UI"""
+
+        # Create MainWindowWidget class instance
         self.main_tab = MainWindowWidget(self)
         self.logger.logger.info("Main window widget generated.")
         self.setCentralWidget(self.main_tab)
+
+        # Connect all buttons in UI into class methods
         self.main_tab.settings_btn.clicked.connect(self.settings_UI)
         self.main_tab.transaction_btn.clicked.connect(self.add_new_transaction_UI)
         self.main_tab.all_transactions_btn.clicked.connect(self.show_all_transactions_UI)
         self.main_tab.test_btn.clicked.connect(self.test_view_UI)
         self.main_tab.exit_btn.clicked.connect(self.close)
+
+        #Show UI
         self.show()
 
     def add_new_transaction_UI(self):
