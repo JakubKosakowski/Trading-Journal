@@ -186,6 +186,46 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
 
 
 class MainWindow(QMainWindow):
+    """A class used to show all widgets in application
+
+        Arguments
+        ---------
+        QMainWindow (class): Class used to generate application main window
+
+        Attributes
+        ----------
+        logger: Logger
+            object used to show appication's logs
+        toml_data: dict
+            datas from .toml file
+        language: str
+            code of language choosen in settings
+
+        all_transactions_tab: AllTransactionsView
+            widget contains all transactions table
+        main_tab: MainWindowWidget
+            widget contains main window view
+        settings_tab: SettingsView
+            widget contains settings view
+        test_tab: TestView
+            widget contains test view
+        transaction_tab: TransactionFormView
+            widget contains new transaction form
+
+        
+        Methods
+        -------
+        add_new_transaction_UI():
+            Loads new transaction form
+        settings_UI():
+            Loads widget with application's settings
+        show_all_transactions_UI():
+            Loads widget with all transactions in database
+        start_main_window_UI():
+            Loads MainWindowWidget with all buttons
+        test_view_UI():
+            Loads test widget
+    """
     def __init__(self, parent=None):
         self.logger = Logger(__name__)
         self.toml_data = load_toml_settings()
@@ -233,15 +273,3 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.test_tab)
         self.test_tab.menu_btn.clicked.connect(self.start_main_window_UI)
         self.show()
-        
-# class UIToolTab(QWidget):
-#     def __init__(self, parent=None):
-#         super(UIToolTab, self).__init__(parent)
-#         self.CPSBTN = QPushButton("text2", self)
-#         self.CPSBTN.move(100, 350)
-
-# class NextToolTab(QWidget):
-#     def __init__(self, parent=None):
-#         super(NextToolTab, self).__init__(parent)
-#         self.CPSBTN = QPushButton("text4", self)
-#         self.CPSBTN.move(150, 24)
