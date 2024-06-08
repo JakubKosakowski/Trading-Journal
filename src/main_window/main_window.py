@@ -263,10 +263,17 @@ class MainWindow(QMainWindow):
         self.show()
 
     def add_new_transaction_UI(self):
+        """Load new transaction form UI"""
+
+        # Create TransactionFormView class instance
         self.transaction_tab = TransactionFormView(self)
         self.logger.logger.info("Transaction form view generated.")
         self.setCentralWidget(self.transaction_tab)
+
+        # Connect "Back to menu" button into start_main_window_UI method
         self.transaction_tab.menu_btn.clicked.connect(self.start_main_window_UI)
+
+        # Show UI
         self.show()
         
     def show_all_transactions_UI(self):
