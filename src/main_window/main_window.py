@@ -277,10 +277,17 @@ class MainWindow(QMainWindow):
         self.show()
         
     def show_all_transactions_UI(self):
+        """Load all transactions table UI"""
+
+        # Create AllTransactionsView class instance
         self.all_transactions_tab = AllTransactionsView(self)
         self.logger.logger.info("All transactions view generated.")
         self.setCentralWidget(self.all_transactions_tab)
+
+        # Connect "Back to menu" button into start_main_window_UI method
         self.all_transactions_tab.menu_btn.clicked.connect(self.start_main_window_UI)
+        
+        # Show UI
         self.show()
 
     def settings_UI(self):
