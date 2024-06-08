@@ -186,39 +186,108 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
 
 
 class MainWindow(QMainWindow):
-    def __init__(self, parent=None):
+    """A class used to show all widgets in application
+
+        Arguments
+        ---------
+        QMainWindow (class): Class used to generate application main window
+
+        Attributes
+        ----------
+        logger: Logger
+            object used to show appication's logs
+        toml_data: dict
+            datas from .toml file
+        language: str
+            code of language choosen in settings
+
+        all_transactions_tab: AllTransactionsView
+            widget contains all transactions table
+        main_tab: MainWindowWidget
+            widget contains main window view
+        settings_tab: SettingsView
+            widget contains settings view
+        test_tab: TestView
+            widget contains test view
+        transaction_tab: TransactionFormView
+            widget contains new transaction form
+
+        
+        Methods
+        -------
+        add_new_transaction_UI():
+            Loads new transaction form
+        settings_UI():
+            Loads widget with application's settings
+        show_all_transactions_UI():
+            Loads widget with all transactions in database
+        start_main_window_UI():
+            Loads MainWindowWidget with all buttons
+        test_view_UI():
+            Loads test widget
+    """
+    def __init__(self):
+        """Initializes the instance based on parent window."""
+
+        super(MainWindow, self).__init__()
+
+        # Initiate all used attributes
         self.logger = Logger(__name__)
         self.toml_data = load_toml_settings()
         self.language = self.toml_data['settings']['language']
-        super(MainWindow, self).__init__(parent)
+
+        # Set window settings
         self.setWindowIcon(QIcon('static/images/favicon.jpg'))
         self.logger.logger.info("Main window generated.")
         self.setGeometry(550, 250, 800, 600)
+
+        # Generate main window UI
         self.start_main_window_UI()
 
     def start_main_window_UI(self):
+        """Load main window UI"""
+
+        # Create MainWindowWidget class instance
         self.main_tab = MainWindowWidget(self)
         self.logger.logger.info("Main window widget generated.")
         self.setCentralWidget(self.main_tab)
+
+        # Connect all buttons in UI into class methods
         self.main_tab.settings_btn.clicked.connect(self.settings_UI)
         self.main_tab.transaction_btn.clicked.connect(self.add_new_transaction_UI)
         self.main_tab.all_transactions_btn.clicked.connect(self.show_all_transactions_UI)
         self.main_tab.test_btn.clicked.connect(self.test_view_UI)
         self.main_tab.exit_btn.clicked.connect(self.close)
+
+        #Show UI
         self.show()
 
     def add_new_transaction_UI(self):
+        """Load new transaction form UI"""
+
+        # Create TransactionFormView class instance
         self.transaction_tab = TransactionFormView(self)
         self.logger.logger.info("Transaction form view generated.")
         self.setCentralWidget(self.transaction_tab)
+
+        # Connect "Back to menu" button into start_main_window_UI method
         self.transaction_tab.menu_btn.clicked.connect(self.start_main_window_UI)
+
+        # Show UI
         self.show()
         
     def show_all_transactions_UI(self):
+        """Load all transactions table UI"""
+
+        # Create AllTransactionsView class instance
         self.all_transactions_tab = AllTransactionsView(self)
         self.logger.logger.info("All transactions view generated.")
         self.setCentralWidget(self.all_transactions_tab)
+
+        # Connect "Back to menu" button into start_main_window_UI method
         self.all_transactions_tab.menu_btn.clicked.connect(self.start_main_window_UI)
+        
+        # Show UI
         self.show()
 
     def settings_UI(self):
@@ -233,15 +302,3 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.test_tab)
         self.test_tab.menu_btn.clicked.connect(self.start_main_window_UI)
         self.show()
-        
-# class UIToolTab(QWidget):
-#     def __init__(self, parent=None):
-#         super(UIToolTab, self).__init__(parent)
-#         self.CPSBTN = QPushButton("text2", self)
-#         self.CPSBTN.move(100, 350)
-
-# class NextToolTab(QWidget):
-#     def __init__(self, parent=None):
-#         super(NextToolTab, self).__init__(parent)
-#         self.CPSBTN = QPushButton("text4", self)
-#         self.CPSBTN.move(150, 24)
