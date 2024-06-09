@@ -291,10 +291,17 @@ class MainWindow(QMainWindow):
         self.show()
 
     def settings_UI(self):
+        """Load settings panel UI"""
+
+        # Create SettingsView class instance
         self.settings_tab = SettingsView(self)
         self.logger.logger.info('Settings view generated.')
         self.setCentralWidget(self.settings_tab)
+
+        # Connect "Back to menu" button into start_main_window_UI method
         self.settings_tab.menu_btn.clicked.connect(self.start_main_window_UI)
+
+        # Show UI
         self.show()
 
     def test_view_UI(self):
