@@ -28,11 +28,40 @@ class ButtonTextColorPicker(ColorPicker):
     
 
 class ButtonColorSetter(ColorSetter):
+    """A class used to coloring buttons for choosen primary color
+
+    Arguments
+    ---------
+    ColorSetter (class): An abstract class
+
+    Attributes
+    ----------
+    color: str
+        buttons' color
+    text_color_setter: ColorSetter
+        object used to set the button text color 
+
+    Methods
+    -------
+    set_color(element: QPushButton)
+        Set background and text color for button
+    """
     def __init__(self, color: str, text_color_setter: ColorSetter):
+        """Initializes the instance based on primary color and text color
+
+        Args:
+            color (str): Color choosen for button
+            text_color_setter (ColorSetter): object checked button color to choose proper text color
+        """
         self.color = color
         self.text_color_setter = text_color_setter
 
     def set_color(self, element: QPushButton) -> None:
+        """Set text and background color for button
+
+        Args:
+            element (QPushButton): button object
+        """
         element.setStyleSheet("QPushButton {"
                                 f"background-color: {self.color};"
                                 f"border: 1px solid {self.color};"
