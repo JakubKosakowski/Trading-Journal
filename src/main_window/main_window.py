@@ -305,7 +305,15 @@ class MainWindow(QMainWindow):
         self.show()
 
     def test_view_UI(self):
+        """Load test form UI"""
+
+        # Create TestView class instance
         self.test_tab = TestView(self)
+        self.logger.logger.info('Test view generated.')
         self.setCentralWidget(self.test_tab)
+
+        # Connect "Back to menu" button into start_main_window_UI method
         self.test_tab.menu_btn.clicked.connect(self.start_main_window_UI)
+
+        # Show UI
         self.show()
