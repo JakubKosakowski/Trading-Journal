@@ -57,6 +57,11 @@ class ButtonColorSetter(ColorSetter):
         self.text_color_setter = text_color_setter
 
     def set_color(self, element: QPushButton) -> None:
+        """Set text and background color for button
+
+        Args:
+            element (QPushButton): button object
+        """
         element.setStyleSheet("QPushButton {"
                                 f"background-color: {self.color};"
                                 f"border: 1px solid {self.color};"
