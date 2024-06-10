@@ -100,6 +100,12 @@ class BackgroundColorSetter(ColorSetter):
         self.color = color
 
     def set_color(self, element: QTableWidget) -> None:
+       """Set background color for table
+
+        Arguments
+        ---------
+            element (QPushButton): table object
+        """
        element.setStyleSheet("QTableWidget {"
                                 f"background-color: {self.color};"
                                 "}"
