@@ -46,6 +46,7 @@ class ButtonColorSetter(ColorSetter):
     set_color(element: QPushButton)
         Set background and text color for button
     """
+    
     def __init__(self, color: str, text_color_setter: ColorSetter):
         """Initializes the instance based on primary color and text color
 
@@ -92,6 +93,7 @@ class BackgroundColorSetter(ColorSetter):
     set_color()
         set background color for transactions table
     """
+
     def __init__(self, color: str):
         """Initializes the instance based on secondary color
 
