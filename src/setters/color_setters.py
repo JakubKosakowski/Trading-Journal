@@ -49,7 +49,8 @@ class ButtonColorSetter(ColorSetter):
     def __init__(self, color: str, text_color_setter: ColorSetter):
         """Initializes the instance based on primary color and text color
 
-        Args:
+        Arguments
+        ---------
             color (str): Color choosen for button
             text_color_setter (ColorSetter): object checked button color to choose proper text color
         """
@@ -59,7 +60,8 @@ class ButtonColorSetter(ColorSetter):
     def set_color(self, element: QPushButton) -> None:
         """Set text and background color for button
 
-        Args:
+        Arguments
+        ---------
             element (QPushButton): button object
         """
         element.setStyleSheet("QPushButton {"
