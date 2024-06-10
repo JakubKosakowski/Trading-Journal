@@ -46,10 +46,12 @@ class ButtonColorSetter(ColorSetter):
     set_color(element: QPushButton)
         Set background and text color for button
     """
+    
     def __init__(self, color: str, text_color_setter: ColorSetter):
         """Initializes the instance based on primary color and text color
 
-        Args:
+        Arguments
+        ---------
             color (str): Color choosen for button
             text_color_setter (ColorSetter): object checked button color to choose proper text color
         """
@@ -59,7 +61,8 @@ class ButtonColorSetter(ColorSetter):
     def set_color(self, element: QPushButton) -> None:
         """Set text and background color for button
 
-        Args:
+        Arguments
+        ---------
             element (QPushButton): button object
         """
         element.setStyleSheet("QPushButton {"
@@ -74,10 +77,39 @@ class ButtonColorSetter(ColorSetter):
         
 
 class BackgroundColorSetter(ColorSetter):
+    """Class used to set transactions table background color
+
+    Arguments
+    ---------
+    ColorSetter (class): An abstract class 
+
+    Attributes
+    ----------
+    color: str
+        secondary color choosen in settings 
+    
+    Methods
+    -------
+    set_color()
+        set background color for transactions table
+    """
+
     def __init__(self, color: str):
+        """Initializes the instance based on secondary color
+
+        Arguments
+        ---------
+            color (str): Color choosen for background
+        """
         self.color = color
 
     def set_color(self, element: QTableWidget) -> None:
+       """Set background color for table
+
+        Arguments
+        ---------
+            element (QPushButton): table object
+        """
        element.setStyleSheet("QTableWidget {"
                                 f"background-color: {self.color};"
                                 "}"
