@@ -74,6 +74,22 @@ class ButtonColorSetter(ColorSetter):
         
 
 class BackgroundColorSetter(ColorSetter):
+    """Class used to set transactions table background color
+
+    Arguments
+    ---------
+    ColorSetter (class): An abstract class 
+
+    Attributes
+    ----------
+    color: str
+        secondary color choosen in settings 
+    
+    Methods
+    -------
+    set_color()
+        set background color for transactions table
+    """
     def __init__(self, color: str):
         self.color = color
 
