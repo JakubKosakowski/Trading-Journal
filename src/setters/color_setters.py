@@ -91,6 +91,12 @@ class BackgroundColorSetter(ColorSetter):
         set background color for transactions table
     """
     def __init__(self, color: str):
+        """Initializes the instance based on secondary color
+
+        Arguments
+        ---------
+            color (str): Color choosen for background
+        """
         self.color = color
 
     def set_color(self, element: QTableWidget) -> None:
