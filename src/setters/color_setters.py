@@ -16,14 +16,38 @@ class ProfitLossColorPicker(ColorPicker):
 
 
 class ButtonTextColorPicker(ColorPicker):
+    """Color picker used to check button color and choice properly text color
+
+    Arguments
+    ---------
+        ColorPicker (class): An abstract class
+
+    Returns
+    -------
+        boolean: tell if text should be dark
+    """
+
     dark_text = False
 
     def check_pick_condiditon(self, value: str):
+        """Check if button background color is enough bright to set dark text
+
+        Arguments
+        ---------
+            value (str): Hexadecimal color value
+        """
+
         r, g, b = Utils.hex_to_rgb(value)
         if (r > 200 and g > 230) or (b > 220):
             self.dark_text = True
 
     def get_condition_value(self):
+        """Class main attribute getter
+
+        Returns:
+            boolean: tell if text should be dark
+        """
+        
         return self.dark_text
     
 
@@ -90,7 +114,7 @@ class BackgroundColorSetter(ColorSetter):
     
     Methods
     -------
-    set_color()
+    set_color(element)
         set background color for transactions table
     """
 
@@ -119,11 +143,45 @@ class BackgroundColorSetter(ColorSetter):
        
 
 class TextColorSetter(ColorSetter):
+    """Class used to set text color in buttons
+
+    Arguments
+    ---------
+        ColorSetter (class): An abstract class
+    
+    Attributes
+    ----------
+    color: List[str]
+        list of available text colors
+    picker: ColorPicker
+        object used to check condition to pick a correct color
+
+    Methods
+    -------
+    set_color(element)
+        set text color for button
+    """
+
     def __init__(self, color: List[str], picker: ColorPicker):
+        """Initializes the instance based on list of available text colors and color picker with specific condition checker
+
+        Arguments
+        ---------
+            color (List[str]): List of available colors
+            picker (ColorPicker): object used to check condition
+        """
+
         self.color = color
         self.picker = picker
 
     def set_color(self, element) -> None:
+        """Set text color in button
+
+        Arguments
+        ---------
+            element (QPushButton): button object
+        """
+
         if self.picker.get_condition_value():
             if element.styleSheet() == '':
                 element.setStyleSheet(f'color: {self.color[1]}')
