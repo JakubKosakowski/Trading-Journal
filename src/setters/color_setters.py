@@ -139,6 +139,13 @@ class TextColorSetter(ColorSetter):
     """
 
     def __init__(self, color: List[str], picker: ColorPicker):
+        """Initializes the instance based on list of available text colors and color picker with specific condition checker
+
+        Args:
+            color (List[str]): List of available colors
+            picker (ColorPicker): object used to check condition
+        """
+        
         self.color = color
         self.picker = picker
 
