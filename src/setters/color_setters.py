@@ -30,6 +30,13 @@ class ButtonTextColorPicker(ColorPicker):
     dark_text = False
 
     def check_pick_condiditon(self, value: str):
+        """Check if button background color is enough bright to set dark text
+
+        Arguments
+        ---------
+            value (str): Hexadecimal color value
+        """
+        
         r, g, b = Utils.hex_to_rgb(value)
         if (r > 200 and g > 230) or (b > 220):
             self.dark_text = True
