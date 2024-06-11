@@ -16,6 +16,17 @@ class ProfitLossColorPicker(ColorPicker):
 
 
 class ButtonTextColorPicker(ColorPicker):
+    """Color picker used to check button color and choice properly text color
+
+    Arguments
+    ---------
+        ColorPicker (class): An abstract class
+
+    Returns
+    -------
+        boolean: tell if text should be dark
+    """
+
     dark_text = False
 
     def check_pick_condiditon(self, value: str):
