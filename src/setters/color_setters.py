@@ -141,15 +141,23 @@ class TextColorSetter(ColorSetter):
     def __init__(self, color: List[str], picker: ColorPicker):
         """Initializes the instance based on list of available text colors and color picker with specific condition checker
 
-        Args:
+        Arguments
+        ---------
             color (List[str]): List of available colors
             picker (ColorPicker): object used to check condition
         """
-        
+
         self.color = color
         self.picker = picker
 
     def set_color(self, element) -> None:
+        """Set text color in button
+
+        Arguments
+        ---------
+            element (QPushButton): button object
+        """
+
         if self.picker.get_condition_value():
             if element.styleSheet() == '':
                 element.setStyleSheet(f'color: {self.color[1]}')
