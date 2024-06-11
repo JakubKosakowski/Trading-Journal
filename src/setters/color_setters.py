@@ -90,7 +90,7 @@ class BackgroundColorSetter(ColorSetter):
     
     Methods
     -------
-    set_color()
+    set_color(element)
         set background color for transactions table
     """
 
@@ -119,6 +119,25 @@ class BackgroundColorSetter(ColorSetter):
        
 
 class TextColorSetter(ColorSetter):
+    """Class used to set text color in buttons
+
+    Arguments
+    ---------
+        ColorSetter (class): An abstract class
+    
+    Attributes
+    ----------
+    color: List[str]
+        list of available text colors
+    picker: ColorPicker
+        object used to check condition to pick a correct color
+
+    Methods
+    -------
+    set_color(element)
+        set text color for button
+    """
+
     def __init__(self, color: List[str], picker: ColorPicker):
         self.color = color
         self.picker = picker
