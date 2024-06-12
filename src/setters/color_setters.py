@@ -8,10 +8,12 @@ from typing import List
 class ProfitLossColorPicker(ColorPicker):
     """Color picker used to check if value is positive or negatice an choice correct text color
 
-    Args:
+    Arguments
+    ---------
         ColorPicker (class): An abstract class
 
-    Returns:
+    Returns
+    --------
         boolean: tell if text should be in profit color
     """
     profit = False
