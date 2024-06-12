@@ -6,6 +6,14 @@ from typing import List
 
 
 class ProfitLossColorPicker(ColorPicker):
+    """Color picker used to check if value is positive or negatice an choice correct text color
+
+    Args:
+        ColorPicker (class): An abstract class
+
+    Returns:
+        boolean: tell if text should be in profit color
+    """
     profit = False
 
     def check_pick_condiditon(self, value: str):
