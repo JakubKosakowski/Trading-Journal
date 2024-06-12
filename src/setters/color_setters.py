@@ -6,12 +6,36 @@ from typing import List
 
 
 class ProfitLossColorPicker(ColorPicker):
+    """Color picker used to check if value is positive or negatice an choice correct text color
+
+    Arguments
+    ---------
+        ColorPicker (class): An abstract class
+
+    Returns
+    --------
+        boolean: tell if text should be in profit color
+    """
     profit = False
 
     def check_pick_condiditon(self, value: str):
+        """Check if value is positive or negative
+
+        Arguments
+        ---------
+            value (str): Transactions result value
+        """
+
         self.profit = int([x for x in value.split()][0]) >= 0
 
     def get_condition_value(self):
+        """Class main attribute getter
+
+        Returns
+        -------
+            boolean: tell if text should be in profit color
+        """
+
         return self.profit
 
 
@@ -44,7 +68,8 @@ class ButtonTextColorPicker(ColorPicker):
     def get_condition_value(self):
         """Class main attribute getter
 
-        Returns:
+        Returns
+        -------
             boolean: tell if text should be dark
         """
         
