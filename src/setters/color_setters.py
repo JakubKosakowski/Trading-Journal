@@ -19,6 +19,12 @@ class ProfitLossColorPicker(ColorPicker):
     profit = False
 
     def check_pick_condiditon(self, value: str):
+        """Check if value is positive or negative
+
+        Arguments
+        ---------
+            value (str): Transactions result value
+        """
         self.profit = int([x for x in value.split()][0]) >= 0
 
     def get_condition_value(self):
