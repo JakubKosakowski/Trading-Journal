@@ -25,7 +25,7 @@ class ProfitLossColorPicker(ColorPicker):
         ---------
             value (str): Transactions result value
         """
-        
+
         self.profit = int([x for x in value.split()][0]) >= 0
 
     def get_condition_value(self):
@@ -68,7 +68,8 @@ class ButtonTextColorPicker(ColorPicker):
     def get_condition_value(self):
         """Class main attribute getter
 
-        Returns:
+        Returns
+        -------
             boolean: tell if text should be dark
         """
         
