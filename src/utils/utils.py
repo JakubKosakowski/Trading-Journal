@@ -27,6 +27,19 @@ class Utils:
 
     @staticmethod
     def download_file(url, filename, destination='./config'):
+        """Download file from given URL path
+
+        Arguments
+        ---------
+            url (str): URL path
+            filename (str): name of file
+            destination (str, optional): file main directory. Defaults to './config'.
+
+        Returns
+        -------
+            str: information about success
+        """
+        
         try:
             urlretrieve(url, f'{destination}/{filename}')
         except (error.URLError) as err:
