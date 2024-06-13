@@ -85,7 +85,7 @@ class Utils:
         -------
             list: list of all columns names
         """
-        
+
         with open(file_path) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=";")
 
@@ -98,6 +98,16 @@ class Utils:
     
     @staticmethod
     def set_language_text(obj, text, lang_code, toml_data): # It works without toml_data !!! Remove it!
+        """Get object and set text in language choosen in settings
+
+        Arguments
+        ---------
+            obj (object): PyQt object
+            text (str): Text showed in object
+            lang_code (str): Choosen language code
+            toml_data (dict): .toml data dictionary
+        """
+
         if lang_code == 'PL':
             obj.setText(text)
         else:
