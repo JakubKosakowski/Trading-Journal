@@ -39,7 +39,7 @@ class Utils:
         -------
             str: information about success
         """
-        
+
         try:
             urlretrieve(url, f'{destination}/{filename}')
         except (error.URLError) as err:
@@ -48,6 +48,18 @@ class Utils:
     
     @staticmethod
     def convert_csv_to_json(csv_file_path, json_file_path="config/data.json"):
+        """Convert .csv file columns into JSON data
+
+        Arguments
+        ---------
+            csv_file_path (str): path of .csv file
+            json_file_path (str, optional): path of .json file. Defaults to "config/data.json".
+
+        Returns
+        -------
+            str: information about success
+        """
+        
         csvfile = open(csv_file_path, 'r')
         jsonfile = open(json_file_path, 'w')
 
