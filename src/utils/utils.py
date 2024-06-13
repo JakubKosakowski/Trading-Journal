@@ -59,7 +59,7 @@ class Utils:
         -------
             str: information about success
         """
-        
+
         csvfile = open(csv_file_path, 'r')
         jsonfile = open(json_file_path, 'w')
 
@@ -75,6 +75,17 @@ class Utils:
 
     @staticmethod
     def get_list_of_csv_file_columns(file_path):
+        """Get list of all columns names from .csv file
+
+        Arguments
+        ---------
+            file_path (str): path of .csv file
+
+        Returns
+        -------
+            list: list of all columns names
+        """
+        
         with open(file_path) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=";")
 
