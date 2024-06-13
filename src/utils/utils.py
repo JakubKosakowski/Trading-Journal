@@ -7,8 +7,23 @@ from static.lang.lang import LANGUAGES
 logger = Logger(__name__)
 
 class Utils:
-    def __init__(self):
-        pass
+    """Class used to supply utility methods
+
+    Methods
+    -------
+    download_file(url, filename, destination='./config')
+        Download file from given URL path
+    convert_csv_to_json(csv_file_path, json_file_path="config/data.json")
+        Get .csv file and convert all columns into JSON data
+    get_list_of_csv_file_columns(file_path)
+        Get list of all columns in given .csv file
+    set_language_text(obj, text, lang_code, toml_data)
+        Set text in choosen language
+    set_title(obj, text, lang_code, toml_data)
+        Set window title in choosen language
+    hex_to_rgb(value)
+        Convert hexadecimal color value into RGB tuple
+    """
 
     @staticmethod
     def download_file(url, filename, destination='./config'):
