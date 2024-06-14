@@ -92,7 +92,7 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
         self.logger.logger.info('Table background color set.')
 
     def load_text(self):
-        text_setter = TextSetter(self.language, self.main_window.toml_data)
+        text_setter = TextSetter(self.language)
         text_setter.set_title(self.main_window, 'Wszystkie transakcje')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         self.logger.logger.info('View text set.')

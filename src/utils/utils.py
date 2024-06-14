@@ -44,7 +44,6 @@ class Utils:
             urlretrieve(url, f'{destination}/{filename}')
         except (error.URLError) as err:
             logger.logger.error(f"An error occurred: {err}")
-        return 'Success'
     
     @staticmethod
     def convert_csv_to_json(csv_file_path, json_file_path="config/data.json"):
@@ -97,7 +96,7 @@ class Utils:
         return list_of_columns_names[0]
     
     @staticmethod
-    def set_language_text(obj, text, lang_code, toml_data): # It works without toml_data !!! Remove it!
+    def set_language_text(obj, text, lang_code): # It works without toml_data !!! Remove it!
         """Get object and set text in language choosen in settings
 
         Arguments
@@ -111,19 +110,38 @@ class Utils:
         if lang_code == 'PL':
             obj.setText(text)
         else:
-            obj.setText(LANGUAGES[toml_data['settings']['language']][text])
+            obj.setText(LANGUAGES[lang_code][text])
         logger.logger.info('Object text generated.')
 
     @staticmethod
-    def set_title(obj, text, lang_code, toml_data): # It works without toml_data !!! Remove it!
+    def set_title(obj, text, lang_code): # It works without toml_data !!! Remove it!
+        """Get window and set title in language choosen in settings
+
+        Arguments
+        ---------
+            obj (object): PyQT window
+            text (str): Window title
+            lang_code (str): Choosen language code
+            toml_data (dict): .toml data dictionary
+        """
         if lang_code == 'PL':
             obj.setWindowTitle(text)
         else:
-            obj.setWindowTitle(LANGUAGES[toml_data['settings']['language']][text])
+            obj.setWindowTitle(LANGUAGES[lang_code][text])
         logger.logger.info('Window title generated.')
 
     @staticmethod
     def hex_to_rgb(value):
+        """Convert hexadecimal color into RGB tuple
+
+        Arguments
+        ---------
+            value (str): Hexadecimal representation of color
+
+        Returns
+        -------
+            tuple: Red, Green and Blue values of color
+        """
         value = value.lstrip('#')
         lv = len(value)
         return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
