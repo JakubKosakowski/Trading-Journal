@@ -20,7 +20,7 @@ class TextSetter:
         Use Utils class static method to set widnow title as words in lang dictionary for choosen language
     """
 
-    def __init__(self, lang, data):
+    def __init__(self, lang):
         """
         Parameters
         ----------

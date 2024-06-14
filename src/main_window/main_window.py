@@ -143,7 +143,7 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         """Load texts for all elements in main window"""
 
         # Initiate TextSetter
-        text_setter = TextSetter(self.language, self.main_window.toml_data)
+        text_setter = TextSetter(self.language)
 
         # Set text for window title and all buttons in main window 
         text_setter.set_title(self.main_window, 'Dziennik transakcji')

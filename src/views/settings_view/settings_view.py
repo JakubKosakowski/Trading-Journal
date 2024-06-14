@@ -157,7 +157,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
 
     def load_text(self):
         self.language = self.main_window.toml_data['settings']['language']
-        text_setter = TextSetter(self.language, self.main_window.toml_data)
+        text_setter = TextSetter(self.language)
         text_setter.set_title(self.main_window, 'Ustawienia')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.full_screen_checkbox, "Tryb pełnego ekranu")

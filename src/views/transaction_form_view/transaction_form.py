@@ -127,7 +127,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Slippage line edit generated.")
 
     def load_text(self):
-        text_setter = TextSetter(self.language, self.main_window.toml_data)
+        text_setter = TextSetter(self.language)
         text_setter.set_title(self.main_window, 'Dodaj transakcję')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.company_code_label, "Kod spółki")
