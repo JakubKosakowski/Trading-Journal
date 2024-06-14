@@ -44,7 +44,6 @@ class Utils:
             urlretrieve(url, f'{destination}/{filename}')
         except (error.URLError) as err:
             logger.logger.error(f"An error occurred: {err}")
-        return 'Success'
     
     @staticmethod
     def convert_csv_to_json(csv_file_path, json_file_path="config/data.json"):
