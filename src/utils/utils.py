@@ -116,6 +116,14 @@ class Utils:
 
     @staticmethod
     def set_title(obj, text, lang_code, toml_data): # It works without toml_data !!! Remove it!
+        """Get window and set title in language choosen in settings
+
+        Args:
+            obj (object): PyQT window
+            text (str): Window title
+            lang_code (str): Choosen language code
+            toml_data (dict): .toml data dictionary
+        """
         if lang_code == 'PL':
             obj.setWindowTitle(text)
         else:
