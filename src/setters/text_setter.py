@@ -31,7 +31,6 @@ class TextSetter:
         """
 
         self.lang = lang
-        self.data = data
 
     def set_text(self, obj, text):
         """
@@ -45,7 +44,7 @@ class TextSetter:
             Text, which we will set in object
         """
 
-        Utils.set_language_text(obj, text, self.lang, self.data)
+        Utils.set_language_text(obj, text, self.lang)
 
     def set_title(self, obj, text):
         """
@@ -59,4 +58,4 @@ class TextSetter:
             Text, which we will set in object
         """
         
-        Utils.set_title(obj, text, self.lang, self.data)
+        Utils.set_title(obj, text, self.lang)

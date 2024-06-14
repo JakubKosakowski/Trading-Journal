@@ -97,7 +97,7 @@ class Utils:
         return list_of_columns_names[0]
     
     @staticmethod
-    def set_language_text(obj, text, lang_code, toml_data): # It works without toml_data !!! Remove it!
+    def set_language_text(obj, text, lang_code): # It works without toml_data !!! Remove it!
         """Get object and set text in language choosen in settings
 
         Arguments
@@ -111,11 +111,11 @@ class Utils:
         if lang_code == 'PL':
             obj.setText(text)
         else:
-            obj.setText(LANGUAGES[toml_data['settings']['language']][text])
+            obj.setText(LANGUAGES[lang_code][text])
         logger.logger.info('Object text generated.')
 
     @staticmethod
-    def set_title(obj, text, lang_code, toml_data): # It works without toml_data !!! Remove it!
+    def set_title(obj, text, lang_code): # It works without toml_data !!! Remove it!
         """Get window and set title in language choosen in settings
 
         Arguments
@@ -128,7 +128,7 @@ class Utils:
         if lang_code == 'PL':
             obj.setWindowTitle(text)
         else:
-            obj.setWindowTitle(LANGUAGES[toml_data['settings']['language']][text])
+            obj.setWindowTitle(LANGUAGES[lang_code][text])
         logger.logger.info('Window title generated.')
 
     @staticmethod
