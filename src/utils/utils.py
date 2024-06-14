@@ -118,7 +118,8 @@ class Utils:
     def set_title(obj, text, lang_code, toml_data): # It works without toml_data !!! Remove it!
         """Get window and set title in language choosen in settings
 
-        Args:
+        Arguments
+        ---------
             obj (object): PyQT window
             text (str): Window title
             lang_code (str): Choosen language code
@@ -132,6 +133,16 @@ class Utils:
 
     @staticmethod
     def hex_to_rgb(value):
+        """Convert hexadecimal color into RGB tuple
+
+        Arguments
+        ---------
+            value (str): Hexadecimal representation of color
+
+        Returns
+        -------
+            tuple: Red, Green and Blue values of color
+        """
         value = value.lstrip('#')
         lv = len(value)
         return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
