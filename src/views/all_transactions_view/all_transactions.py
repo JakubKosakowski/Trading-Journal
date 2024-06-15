@@ -53,23 +53,34 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
     load_background_color()
         Load choosen secondary color for database records table
     """
-    
+
     def __init__(self, parent=None):
+        """Initializes the instance based on parent window.
+
+        Arguments:
+            parent (QMainWindow, optional): window, which show this widget. Defaults to None.
+        """
+
         super(AllTransactionsView, self).__init__(parent)
+    
+         # Initiate all used attributes
         self.main_window = parent
         self.language = self.main_window.toml_data['settings']['language']
-
         self.logger = Logger(__name__)
         self.database = Database()
         self.logger.logger.info("Database loaded.")
+
+        # Create 'Go back to menu' button
         self.menu_btn = QPushButton("", self)
         self.menu_btn.move(100, 350)
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
 
+        # Create table widget
         self.create_table()
         self.logger.logger.info('Table widget generated.')
 
+        # Create sort column ComboBox
         columns = ["", "name", "age"]
         self.sort_cb = QComboBox(self)
         self.sort_cb.addItems(columns)
@@ -78,6 +89,7 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
         self.sort_cb.currentIndexChanged.connect(self.sort_records)
         self.logger.logger.info('Sort column ComboBox generated.')
 
+        # Create order method ComboBox
         order_method = ['ASC', 'DESC']
         self.order_method_cb = QComboBox(self)
         self.order_method_cb.addItems(order_method)
@@ -86,6 +98,7 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
         self.order_method_cb.currentIndexChanged.connect(self.sort_records)
         self.logger.logger.info('Order method ComboBox generated.')
 
+        # Create layout for all PyQt elements and set them as main layout
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.sort_cb)
         self.layout.addWidget(self.order_method_cb)
@@ -94,8 +107,10 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
         self.setLayout(self.layout)
         self.logger.logger.info("Table layout set up.")
 
+        # Load colors
         self.load_colors()
 
+        # Load text
         self.load_text()
 
     def create_table(self):
