@@ -114,14 +114,18 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
         self.load_text()
 
     def create_table(self):
+        """Load data from database and show them in table"""
+
         self.table_widget = QTableWidget()
-        self.table_widget.setShowGrid(False)
-        self.records = self.database.select()
+        self.table_widget.setShowGrid(False) # Disable clickable headers
+        self.records = self.database.select() # Select all columns from test table
+
+        # Set table sizes
         self.table_widget.setRowCount(len(self.records))
         self.table_widget.setColumnCount(2)
 
-        self.table_widget.setHorizontalHeaderLabels(["name", "age"])
-        for ind, record in enumerate(self.records):
+        self.table_widget.setHorizontalHeaderLabels(["name", "age"]) # Set header labels
+        for ind, record in enumerate(self.records): # Set items in table widget
             self.table_widget.setItem(ind,0, QTableWidgetItem(record[1]))
             self.table_widget.setItem(ind,1, QTableWidgetItem(str(record[2])))
 
