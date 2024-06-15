@@ -130,9 +130,9 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
             self.table_widget.setItem(ind,1, QTableWidgetItem(str(record[2])))
 
     def sort_records(self):
+        """Method is triggered when value in any ComboBox is changed"""
         if self.sort_cb.currentText() != "":
             self.records = self.database.select(order_by=f'{self.sort_cb.currentText()} {self.order_method_cb.currentText()}')
-            self.logger.logger.debug(self.records)
             for ind, record in enumerate(self.records):
                 self.table_widget.setItem(ind,0, QTableWidgetItem(record[1]))
                 self.table_widget.setItem(ind,1, QTableWidgetItem(str(record[2])))
