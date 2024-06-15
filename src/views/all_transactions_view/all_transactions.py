@@ -131,6 +131,7 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
 
     def sort_records(self):
         """Method is triggered when value in any ComboBox is changed"""
+
         if self.sort_cb.currentText() != "":
             self.records = self.database.select(order_by=f'{self.sort_cb.currentText()} {self.order_method_cb.currentText()}')
             for ind, record in enumerate(self.records):
@@ -138,6 +139,8 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
                 self.table_widget.setItem(ind,1, QTableWidgetItem(str(record[2])))
 
     def load_colors(self):
+        """Method used to load all colors for widget"""
+        
         self.load_menu_button_color()
         self.load_background_color()
         self.logger.logger.info("All view colors loaded.")
