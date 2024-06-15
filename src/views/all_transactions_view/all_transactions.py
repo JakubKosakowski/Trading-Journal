@@ -9,6 +9,51 @@ from src.meta import MetaClass
 
 
 class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
+    """A class used to build all transactions table widget for window
+
+    Arguments
+    ---------
+        QWidget (class): Class used to create widgets
+        ViewClass (class): Abstract class used to override methods for view type classes
+        metaclass (class, optional): Class used to inherit by two classes. Defaults to MetaClass.
+
+    Attributes
+    ----------
+    language: str
+        Language code
+    main_window: object
+        Main window object
+
+    database: Database
+        Database object
+    logger: Logger
+        Logger object
+
+    layout: QVBoxLayout
+        Layout for adding other PyQt elements
+    menu_btn: QPushButton
+        Button moving user into main window
+    order_method_cb: QComboBox
+        Combo box used to setting method of order (ASC, DESC)
+    sort_cb: QComboBox
+        Combo box used to setting column, which app will sort
+
+    Methods
+    -------
+    create_table()
+        Create table widget with loaded database datas
+    sort_records()
+        Sort entire table by choosen column
+    load_colors()
+        Load colors for widget
+    load_text()
+        Load text in choosen language for widget and window
+    load_menu_button_color()
+        Load choosen primary color for 'Go back to menu' button
+    load_background_color()
+        Load choosen secondary color for database records table
+    """
+    
     def __init__(self, parent=None):
         super(AllTransactionsView, self).__init__(parent)
         self.main_window = parent
