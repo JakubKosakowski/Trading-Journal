@@ -147,7 +147,7 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
 
     def load_menu_button_color(self):
         """Method used to load menu button background and text color"""
-        
+
         button_text_color_picker = ButtonTextColorPicker()
         text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
         button_text_color_picker.check_pick_condiditon(self.main_window.toml_data['settings']['primary_color'])
@@ -156,6 +156,8 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
         self.logger.logger.info('Menu button color set.')
         
     def load_background_color(self):
+        """Method used to load table background color"""
+        
         background_color_setter = BackgroundColorSetter(self.main_window.toml_data['settings']['secondary_color'])
         background_color_setter.set_color(self.table_widget)
         self.logger.logger.info('Table background color set.')
