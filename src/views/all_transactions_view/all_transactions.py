@@ -157,12 +157,14 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
         
     def load_background_color(self):
         """Method used to load table background color"""
-        
+
         background_color_setter = BackgroundColorSetter(self.main_window.toml_data['settings']['secondary_color'])
         background_color_setter.set_color(self.table_widget)
         self.logger.logger.info('Table background color set.')
 
     def load_text(self):
+        """Method used to load widget text in chosen language"""
+        
         text_setter = TextSetter(self.language)
         text_setter.set_title(self.main_window, 'Wszystkie transakcje')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
