@@ -43,15 +43,15 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
     create_table()
         Create table widget with loaded database datas
     sort_records()
-        Sort entire table by choosen column
+        Sort entire table by chosen column
     load_colors()
         Load colors for widget
     load_text()
-        Load text in choosen language for widget and window
+        Load text in chosen language for widget and window
     load_menu_button_color()
-        Load choosen primary color for 'Go back to menu' button
+        Load chosen primary color for 'Go back to menu' button
     load_background_color()
-        Load choosen secondary color for database records table
+        Load chosen secondary color for database records table
     """
 
     def __init__(self, parent=None):
@@ -164,7 +164,7 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
 
     def load_text(self):
         """Method used to load widget text in chosen language"""
-        
+
         text_setter = TextSetter(self.language)
         text_setter.set_title(self.main_window, 'Wszystkie transakcje')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
