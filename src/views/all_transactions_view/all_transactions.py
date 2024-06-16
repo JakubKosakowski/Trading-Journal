@@ -43,15 +43,15 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
     create_table()
         Create table widget with loaded database datas
     sort_records()
-        Sort entire table by choosen column
+        Sort entire table by chosen column
     load_colors()
         Load colors for widget
     load_text()
-        Load text in choosen language for widget and window
+        Load text in chosen language for widget and window
     load_menu_button_color()
-        Load choosen primary color for 'Go back to menu' button
+        Load chosen primary color for 'Go back to menu' button
     load_background_color()
-        Load choosen secondary color for database records table
+        Load chosen secondary color for database records table
     """
 
     def __init__(self, parent=None):
@@ -146,6 +146,8 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
         self.logger.logger.info("All view colors loaded.")
 
     def load_menu_button_color(self):
+        """Method used to load menu button background and text color"""
+
         button_text_color_picker = ButtonTextColorPicker()
         text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
         button_text_color_picker.check_pick_condiditon(self.main_window.toml_data['settings']['primary_color'])
@@ -154,11 +156,15 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
         self.logger.logger.info('Menu button color set.')
         
     def load_background_color(self):
+        """Method used to load table background color"""
+
         background_color_setter = BackgroundColorSetter(self.main_window.toml_data['settings']['secondary_color'])
         background_color_setter.set_color(self.table_widget)
         self.logger.logger.info('Table background color set.')
 
     def load_text(self):
+        """Method used to load widget text in chosen language"""
+
         text_setter = TextSetter(self.language)
         text_setter.set_title(self.main_window, 'Wszystkie transakcje')
         text_setter.set_text(self.menu_btn, "Wróć do menu")

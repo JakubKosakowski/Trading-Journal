@@ -22,11 +22,11 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
     Attributes
     ----------
     currency: str
-        a main currency choosen in settings
+        a main currency chosen in settings
     database: Database
         a database contains all transactions created in application
     language: str
-        an application language choosen in settings
+        an application language chosen in settings
     main_window: QMainWindow
         an object represents whole main window
 
@@ -199,7 +199,7 @@ class MainWindow(QMainWindow):
         toml_data: dict
             datas from .toml file
         language: str
-            code of language choosen in settings
+            code of language chosen in settings
 
         all_transactions_tab: AllTransactionsView
             widget contains all transactions table
