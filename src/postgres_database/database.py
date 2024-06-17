@@ -109,19 +109,38 @@ class Database:
             self.logger.logger.error(f"An error occurred: {e}")
     
     def update(self, table=None, columns=None, new_values=None, ident_column=None, ident_value=None):
+        """Update existed record from table
+
+        Arguments
+        ---------
+            table (str, optional): Name of table. Defaults to None.
+            columns ([str, list], optional): Column name or list of columns names. Defaults to None.
+            new_values ([[str, int], list], optional): New value or list of new values for record. Defaults to None.
+            ident_column ([str, int], optional): Identification column. Defaults to None.
+            ident_value ([srt, int], optional): Identification value. Defaults to None.
+
+        Raises
+        ------
+            Exception: One of parameters is None!
+            Exception: Column and new value have to be the same type!
+
+        Returns
+        -------
+            int: Id of updated record
+        """
         try:
-            if any(value is None for value in locals().values()):
+            if any(value is None for value in locals().values()): # Check if all parameters are given
                 raise Exception('One of parameters is None!')    
             command_set_new_values = ''
-            if isinstance(columns, list) and isinstance(new_values, list):
-                for i in range(len(columns)):
+            if isinstance(columns, list) and isinstance(new_values, list): # Check if columns and new_values are the same type
+                for i in range(len(columns)): # Create list of all new SET values
                     command_set_new_values += f" {columns[i]} = '{new_values[i]}'" if isinstance(new_values[i], str) else f' {columns[i]} = {new_values[i]}'
                     command_set_new_values += ',' if i < len(columns)-1 else ''
-                command_returning = f'RETURNING {columns[0]};'.replace("'", "")
+                command_returning = f'RETURNING {columns[0]};'.replace("'", "") # Create RETURNING statement
             else:
                 raise Exception("Column and new value have to be the same type!")
-            self.cursor.execute(f'UPDATE {table} SET{command_set_new_values} WHERE {ident_column} = {ident_value} {command_returning}')   
-            return self.cursor.fetchone()[0]
+            self.cursor.execute(f'UPDATE {table} SET{command_set_new_values} WHERE {ident_column} = {ident_value} {command_returning}') # Execute UPDATE query
+            return self.cursor.fetchone()[0] # Return id of updated record
         except Exception as e:
             self.connection.rollback()
             self.logger.logger.error(f"An error occurred: {e}")
