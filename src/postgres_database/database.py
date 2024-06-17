@@ -85,13 +85,25 @@ class Database:
             self.logger.logger.error(f"An error occurred: {e}")
     
     def insert(self, values, table="test"):
+        """Insert new record into table
+
+        Arguments
+        ---------
+            values (list): List of values inserted as new record
+            table (str, optional): Name of table from database. Defaults to "test".
+
+        Returns
+        -------
+            int: New record id number
+        """
+
         try:
-            command_table_part = f"INSERT INTO {table}{tuple(self.get_table_columns_names(table))}".replace("'", "")
-            command_value_part = f"VALUES{tuple(values)} RETURNING test_ident;"
+            command_table_part = f"INSERT INTO {table}{tuple(self.get_table_columns_names(table))}".replace("'", "") # Create INSERT INTO query
+            command_value_part = f"VALUES{tuple(values)} RETURNING test_ident;" # Create VALUES RETURNING query
             self.logger.logger.debug(f'{command_table_part} {command_value_part}')
-            self.cursor.execute(f'{command_table_part} {command_value_part}');
+            self.cursor.execute(f'{command_table_part} {command_value_part}') # Connect and run both queries
             self.connection.commit()
-            return self.cursor.fetchone()[0]
+            return self.cursor.fetchone()[0] # Return id of new record
         except Exception as e:
             self.connection.rollback()
             self.logger.logger.error(f"An error occurred: {e}")
