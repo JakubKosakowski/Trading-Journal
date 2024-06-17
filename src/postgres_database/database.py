@@ -4,6 +4,35 @@ from src.utils import Logger
 import os
 
 class Database:
+    """ A class used to operate on database tables
+
+    Attributes
+    ----------
+    logger: Logger
+        Application logger
+    connection: connection
+        Handles the connection to a PostgreSQL database instance
+    cursor: curson
+        Read-only attribute describing the result of a query
+
+    Methods
+    -------
+    create_db(params)
+        Create database if application is started for the first time
+    delete(table=None, condition=None)
+        Delete record from table according to condition
+    select(table="test", columns="*", conditions="", order_by="")
+        Get selected columns from table
+    insert(values, table="test")
+        Insert new record into table
+    update(table=None, columns=None, new_values=None, ident_column=None, ident_value=None)
+        Update table record according to selected parameters
+    get_table_columns_names(table)
+        Get all columns names from selected table
+    run_queries(params)
+        Run queries storage in config/trading_journal_queries.sql file
+    """
+
     def __init__(self):
         params = config()
         self.logger = Logger(__name__)
