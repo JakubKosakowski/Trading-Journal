@@ -56,16 +56,30 @@ class Database:
         self.cursor = self.connection.cursor()
 
     def select(self, table="test", columns="*", conditions="", order_by=""):
+        """Create SELECT query 
+
+        Arguments
+        ---------
+            table (str, optional): Table from database. Defaults to "test".
+            columns ([str, list], optional): one or many columns, which we want to return. Defaults to "*".
+            conditions (str, optional): condition for WHERE statement. Defaults to "".
+            order_by (str, optional): columns for ORDER BY statement. Defaults to "".
+
+        Returns
+        -------
+            list: List of all record returned by SELECT query
+        """
+
         try:
-            values = ', '.join(columns) if isinstance(columns, list) else columns if ', ' in columns else columns.replace(' ', ', ')
-            command = f'SELECT {values} FROM {table}'
-            if conditions != '':
+            values = ', '.join(columns) if isinstance(columns, list) else columns if ', ' in columns else columns.replace(' ', ', ') # Create list of selected columns
+            command = f'SELECT {values} FROM {table}' # Create basic SELECT FROM query
+            if conditions != '': # Check if condition is selected
                 command += f' WHERE {conditions}'
-            if order_by != '':
+            if order_by != '': # Check if order_by is selected
                 command += f' ORDER BY {order_by}'
             command += ';'
-            self.cursor.execute(command)
-            return self.cursor.fetchall()
+            self.cursor.execute(command) # Execute query
+            return self.cursor.fetchall() # Return all records
         except Exception as e:
             self.connection.rollback()
             self.logger.logger.error(f"An error occurred: {e}")
