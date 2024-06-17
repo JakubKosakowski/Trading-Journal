@@ -34,16 +34,21 @@ class Database:
     """
 
     def __init__(self):
+        """Initializes the instance of Database class"""
+
+        # Get params from database.ini file
         params = config()
         self.logger = Logger(__name__)
 
+        # Create connection and cursor
         self.connection = psycopg2.connect(f"user={params['user']} password={params['password']}")
         self.cursor = self.connection.cursor()
 
+        # Check if database exists
         self.cursor.execute(f"SELECT 1 FROM pg_catalog.pg_database WHERE datname = '{params['dbname']}'")
         exists = self.cursor.fetchone()
         self.connection.close()
-        if not exists:
+        if not exists: # If database doesn't exist: create database and run queries from .sql file
             self.create_db(params)
             self.run_queries(params)
 
