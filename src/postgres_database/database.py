@@ -1,7 +1,6 @@
 import psycopg2
 from config import config
 from src.utils import Logger
-import os
 
 class Database:
     """ A class used to operate on database tables
