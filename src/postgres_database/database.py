@@ -128,6 +128,7 @@ class Database:
         -------
             int: Id of updated record
         """
+
         try:
             if any(value is None for value in locals().values()): # Check if all parameters are given
                 raise Exception('One of parameters is None!')    
@@ -147,11 +148,27 @@ class Database:
 
     
     def delete(self, table=None, condition=None):
+        """Delete record from table
+
+        Arguments
+        ---------
+            table (str, optional): Name of table in database. Defaults to None.
+            condition (str, optional): Condition for WHERE statement. Defaults to None.
+
+        Raises
+        ------
+            Exception: One of parameters is None!
+
+        Returns
+        -------
+            int: Id of deleted record
+        """
+
         try:
-            if any(value is None for value in locals().values()):
+            if any(value is None for value in locals().values()): # Check if any parameter was None
                 raise Exception('One of parameters is None!') 
-            self.cursor.execute(f'DELETE FROM {table} WHERE {condition} RETURNING id;')
-            return self.cursor.fetchone()[0]
+            self.cursor.execute(f'DELETE FROM {table} WHERE {condition} RETURNING id;') # Execute DELETE query
+            return self.cursor.fetchone()[0] # Return id of deleted record
         except Exception as e:
             self.connection.rollback()
             self.logger.logger.error(f"An error occurred: {e}")
