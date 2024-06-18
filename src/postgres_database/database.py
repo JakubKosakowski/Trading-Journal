@@ -175,6 +175,16 @@ class Database:
         
 
     def get_table_columns_names(self, table):
+        """Get list of all columns names in table
+
+        Arguments
+        ---------
+            table (str): Name of table in database
+
+        Returns:
+            list: List of columns names
+        """
+        
         self.cursor.execute(f'SELECT * FROM {table}')
         return [desc[0] for desc in self.cursor.description][1:]
     
