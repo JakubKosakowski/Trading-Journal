@@ -1,7 +1,6 @@
 import psycopg2
 from config import config
 from src.utils import Logger
-import os
 
 class Database:
     """ A class used to operate on database tables
@@ -128,6 +127,7 @@ class Database:
         -------
             int: Id of updated record
         """
+
         try:
             if any(value is None for value in locals().values()): # Check if all parameters are given
                 raise Exception('One of parameters is None!')    
@@ -147,21 +147,54 @@ class Database:
 
     
     def delete(self, table=None, condition=None):
+        """Delete record from table
+
+        Arguments
+        ---------
+            table (str, optional): Name of table in database. Defaults to None.
+            condition (str, optional): Condition for WHERE statement. Defaults to None.
+
+        Raises
+        ------
+            Exception: One of parameters is None!
+
+        Returns
+        -------
+            int: Id of deleted record
+        """
+
         try:
-            if any(value is None for value in locals().values()):
+            if any(value is None for value in locals().values()): # Check if any parameter was None
                 raise Exception('One of parameters is None!') 
-            self.cursor.execute(f'DELETE FROM {table} WHERE {condition} RETURNING id;')
-            return self.cursor.fetchone()[0]
+            self.cursor.execute(f'DELETE FROM {table} WHERE {condition} RETURNING id;') # Execute DELETE query
+            return self.cursor.fetchone()[0] # Return id of deleted record
         except Exception as e:
             self.connection.rollback()
             self.logger.logger.error(f"An error occurred: {e}")
         
 
     def get_table_columns_names(self, table):
+        """Get list of all columns names in table
+
+        Arguments
+        ---------
+            table (str): Name of table in database
+
+        Returns:
+            list: List of columns names
+        """
+
         self.cursor.execute(f'SELECT * FROM {table}')
         return [desc[0] for desc in self.cursor.description][1:]
     
     def create_db(self, params):
+        """Create database if application is started for the first time
+
+        Arguments
+        ---------
+            params (dict): data from database.ini file
+        """
+
         connection = psycopg2.connect(f"user={params['user']} password={params['password']}")
         connection.autocommit = True
         with connection.cursor() as cur:
@@ -169,20 +202,20 @@ class Database:
         connection.close()
 
     def run_queries(self, params):
+        """Run queries from .sql file
+
+        Arguments
+        ---------
+            params (dict): data from database.ini file
+        """
+
         self.connection = psycopg2.connect(**params)
         self.cursor = self.connection.cursor()
         
-        with open('config/trading_journal_queries.sql', 'r') as f:
+        with open('config/trading_journal_queries.sql', 'r') as f: # Open file with queries
             queries = f.read()
 
         self.cursor.execute(queries)
         self.connection.commit()
 
         self.connection.close()
-    
-    # def delete(self, checked_value, checked_column="id", table="test"):
-    #     self.cursor.execute(f'SELECT price FROM test')
-    #     try:
-    #         self.cursor.execute(f'DELETE FROM {table} WHERE {checked_column} = {checked_value}')
-    #     except:
-    #         print("error")
