@@ -184,11 +184,18 @@ class Database:
         Returns:
             list: List of columns names
         """
-        
+
         self.cursor.execute(f'SELECT * FROM {table}')
         return [desc[0] for desc in self.cursor.description][1:]
     
     def create_db(self, params):
+        """Create database if application is started for the first time
+
+        Arguments
+        ---------
+            params (dict): data from database.ini file
+        """
+
         connection = psycopg2.connect(f"user={params['user']} password={params['password']}")
         connection.autocommit = True
         with connection.cursor() as cur:
