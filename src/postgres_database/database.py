@@ -203,20 +203,20 @@ class Database:
         connection.close()
 
     def run_queries(self, params):
+        """Run queries from .sql file
+
+        Arguments
+        ---------
+            params (dict): data from database.ini file
+        """
+
         self.connection = psycopg2.connect(**params)
         self.cursor = self.connection.cursor()
         
-        with open('config/trading_journal_queries.sql', 'r') as f:
+        with open('config/trading_journal_queries.sql', 'r') as f: # Open file with queries
             queries = f.read()
 
         self.cursor.execute(queries)
         self.connection.commit()
 
         self.connection.close()
-    
-    # def delete(self, checked_value, checked_column="id", table="test"):
-    #     self.cursor.execute(f'SELECT price FROM test')
-    #     try:
-    #         self.cursor.execute(f'DELETE FROM {table} WHERE {checked_column} = {checked_value}')
-    #     except:
-    #         print("error")
