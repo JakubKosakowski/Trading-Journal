@@ -72,7 +72,15 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
     """
 
     def __init__(self, parent=None):
+        """Initializes the instance based on parent window.
+
+        Arguments:
+            parent (QMainWindow, optional): window, which show this widget. Defaults to None.
+        """
+
         super(SettingsView, self).__init__(parent)
+
+        # Initiate all used attributes
         self.main_window = parent
 
         self.logger = Logger(__name__)
@@ -82,6 +90,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
 
+        # Create fullscreen checkbox
         self.full_screen_checkbox = QCheckBox('', self)
         if self.main_window.toml_data['settings']['fullscreen']:
             self.full_screen_checkbox.setChecked(True)
@@ -89,6 +98,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.full_screen_checkbox.stateChanged.connect(self.set_screen_size)
         self.logger.logger.info('Full screen mode checkbox generated.')
 
+        # Create currency combobox
         currencies = ['PLN', 'USD', 'GBP', 'CHF', 'JPY']
         self.currency_cb = QComboBox(self)
         self.currency_cb.addItems(currencies)
@@ -101,6 +111,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.currency_cb_label.move(160, 153)
         self.logger.logger.info('User currency info label generated.')
 
+        # Create language combobox
         languages = ['US', 'PL']
         self.app_language = QComboBox(self)
         self.app_language.addItems(languages)
@@ -113,6 +124,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.app_language_label.move(160, 203)
         self.logger.logger.info('Application language info label generated.')
 
+        # Create primary color picker
         self.primary_color_picker = QPushButton('', self, objectName='primary-color-btn')
         self.primary_color_picker.move(300, 100)
         self.primary_color_picker.resize(20, 20)
@@ -120,6 +132,10 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.primary_color_picker.clicked.connect(self.primary_on_click)
         self.logger.logger.info('Primary color picker generated.')
 
+        self.primary_color_label = QLabel(self)
+        self.primary_color_label.move(330, 100)
+
+        # Create secondary color picker
         self.secondary_color_picker = QPushButton('', self, objectName='secondary-color-btn')
         self.secondary_color_picker.move(300, 130)
         self.secondary_color_picker.resize(20, 20)
@@ -127,14 +143,11 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.secondary_color_picker.clicked.connect(self.secondary_on_click)
         self.logger.logger.info('Secondary color picker generated.')
 
-        self.load_colors()
-
-        self.primary_color_label = QLabel(self)
-        self.primary_color_label.move(330, 100)
-
         self.secondary_color_label = QLabel(self)
         self.secondary_color_label.move(330, 130)
 
+        # Load colors and text
+        self.load_colors()
         self.load_text()
         
 
