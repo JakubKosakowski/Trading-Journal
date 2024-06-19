@@ -178,6 +178,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
             self.logger.logger.error(f'An error occurred: {err}')
 
     def set_app_language(self):
+        """Get application language and update it in .toml file"""
         try:
             self.main_window.toml_data['settings']['language'] = self.app_language.currentText()
             with open("config/myproject.toml", "w") as file:
