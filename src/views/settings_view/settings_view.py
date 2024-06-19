@@ -152,6 +152,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         
 
     def set_screen_size(self):
+        """Set screen size as fullscreen or window"""
         try:
             self.main_window.toml_data['settings']['fullscreen'] = not self.main_window.toml_data['settings']['fullscreen']
             if self.main_window.toml_data['settings']['fullscreen']:
