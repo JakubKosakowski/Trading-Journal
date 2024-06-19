@@ -9,8 +9,78 @@ import toml
 
 
 class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
+    """A class used to build settings widget
+
+    Arguments
+    ---------
+        QWidget (class): Class used to create widgets
+        ViewClass (class): Abstract class used to override methods for view type classes
+        metaclass (class, optional): Class used to inherit by two classes. Defaults to MetaClass.
+
+    Attributes
+    ----------
+        logger: Logger
+            Application logger
+        main_window: QMainWindow
+            Main window object
+        full_screen_checkbox: QCheckBox
+            Full screen checkbox
+
+        app_language: QComboBox
+            ComboBox for selecting application language
+        currency_cb: QComboBox
+            ComboBox for selecting main application currency
+
+        menu_btn: QPushButton
+            'Go back to menu' button
+        primary_color_picker: QPushButton
+            Primary color picker
+        secondary_color_picker: QPushButton
+            Secondary color picker
+
+        app_language_label: QLabel
+            Language info label
+        currency_cb_label: QLabel
+            Currency info label
+        primary_color_label: QLabel
+            Primary color info label
+        secondary_color_label: QLabel
+            Secondary color info label
+
+    Methods
+    -------
+        change_primary_color()
+            Set picked color as primary color
+        change_secondary_color()
+            Set picked color as secondary color
+        load_colors()
+            Load colors for buttons
+        load_text()
+            Load text in selected language
+        load_combobox_style()
+            Load style for comboboxes(test method)
+        primary_on_click()
+            PyQtslot method for loading pop-up color picker window for primary color
+        secondary_on_click()
+            PyQtslot method for loading pop-up color picker window for secondary color
+        set_app_language()
+            Set selected language as application language
+        set_screen_size()
+            Set size of screen
+        set_user_currency()
+            Set selected currency as main application currency
+    """
+
     def __init__(self, parent=None):
+        """Initializes the instance based on parent window.
+
+        Arguments:
+            parent (QMainWindow, optional): window, which show this widget. Defaults to None.
+        """
+
         super(SettingsView, self).__init__(parent)
+
+        # Initiate all used attributes
         self.main_window = parent
 
         self.logger = Logger(__name__)
@@ -20,6 +90,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
 
+        # Create fullscreen checkbox
         self.full_screen_checkbox = QCheckBox('', self)
         if self.main_window.toml_data['settings']['fullscreen']:
             self.full_screen_checkbox.setChecked(True)
@@ -27,6 +98,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.full_screen_checkbox.stateChanged.connect(self.set_screen_size)
         self.logger.logger.info('Full screen mode checkbox generated.')
 
+        # Create currency combobox
         currencies = ['PLN', 'USD', 'GBP', 'CHF', 'JPY']
         self.currency_cb = QComboBox(self)
         self.currency_cb.addItems(currencies)
@@ -39,6 +111,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.currency_cb_label.move(160, 153)
         self.logger.logger.info('User currency info label generated.')
 
+        # Create language combobox
         languages = ['US', 'PL']
         self.app_language = QComboBox(self)
         self.app_language.addItems(languages)
@@ -51,6 +124,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.app_language_label.move(160, 203)
         self.logger.logger.info('Application language info label generated.')
 
+        # Create primary color picker
         self.primary_color_picker = QPushButton('', self, objectName='primary-color-btn')
         self.primary_color_picker.move(300, 100)
         self.primary_color_picker.resize(20, 20)
@@ -58,6 +132,10 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.primary_color_picker.clicked.connect(self.primary_on_click)
         self.logger.logger.info('Primary color picker generated.')
 
+        self.primary_color_label = QLabel(self)
+        self.primary_color_label.move(330, 100)
+
+        # Create secondary color picker
         self.secondary_color_picker = QPushButton('', self, objectName='secondary-color-btn')
         self.secondary_color_picker.move(300, 130)
         self.secondary_color_picker.resize(20, 20)
@@ -65,18 +143,16 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.secondary_color_picker.clicked.connect(self.secondary_on_click)
         self.logger.logger.info('Secondary color picker generated.')
 
-        self.load_colors()
-
-        self.primary_color_label = QLabel(self)
-        self.primary_color_label.move(330, 100)
-
         self.secondary_color_label = QLabel(self)
         self.secondary_color_label.move(330, 130)
 
+        # Load colors and text
+        self.load_colors()
         self.load_text()
         
 
     def set_screen_size(self):
+        """Set screen size as fullscreen or window"""
         try:
             self.main_window.toml_data['settings']['fullscreen'] = not self.main_window.toml_data['settings']['fullscreen']
             if self.main_window.toml_data['settings']['fullscreen']:
@@ -92,6 +168,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
             self.logger.logger.error(f'An error occurred: {err}')
 
     def set_user_currency(self):
+        """Get application main currency and update it in .toml file"""
         try:
             self.main_window.toml_data['settings']['user_currency'] = self.currency_cb.currentText()
             with open("config/myproject.toml", "w") as file:
@@ -101,6 +178,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
             self.logger.logger.error(f'An error occurred: {err}')
 
     def set_app_language(self):
+        """Get application language and update it in .toml file"""
         try:
             self.main_window.toml_data['settings']['language'] = self.app_language.currentText()
             with open("config/myproject.toml", "w") as file:
