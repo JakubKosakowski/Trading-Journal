@@ -9,6 +9,68 @@ import toml
 
 
 class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
+    """A class used to build settings widget
+
+    Arguments
+    ---------
+        QWidget (class): Class used to create widgets
+        ViewClass (class): Abstract class used to override methods for view type classes
+        metaclass (class, optional): Class used to inherit by two classes. Defaults to MetaClass.
+
+    Attributes
+    ----------
+        logger: Logger
+            Application logger
+        main_window: QMainWindow
+            Main window object
+        full_screen_checkbox: QCheckBox
+            Full screen checkbox
+
+        app_language: QComboBox
+            ComboBox for selecting application language
+        currency_cb: QComboBox
+            ComboBox for selecting main application currency
+
+        menu_btn: QPushButton
+            'Go back to menu' button
+        primary_color_picker: QPushButton
+            Primary color picker
+        secondary_color_picker: QPushButton
+            Secondary color picker
+
+        app_language_label: QLabel
+            Language info label
+        currency_cb_label: QLabel
+            Currency info label
+        primary_color_label: QLabel
+            Primary color info label
+        secondary_color_label: QLabel
+            Secondary color info label
+
+    Methods
+    -------
+        change_primary_color()
+            Set picked color as primary color
+        change_secondary_color()
+            Set picked color as secondary color
+        load_colors()
+            Load colors for buttons
+        load_text()
+            Load text in selected language
+        load_combobox_style()
+            Load style for comboboxes(test method)
+        primary_on_click()
+            PyQtslot method for loading pop-up color picker window for primary color
+        secondary_on_click()
+            PyQtslot method for loading pop-up color picker window for secondary color
+        set_app_language()
+            Set selected language as application language
+        set_screen_size()
+            Set size of screen
+        set_user_currency()
+            Set selected currency as main application currency
+    """
+
     def __init__(self, parent=None):
         super(SettingsView, self).__init__(parent)
         self.main_window = parent
