@@ -168,6 +168,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
             self.logger.logger.error(f'An error occurred: {err}')
 
     def set_user_currency(self):
+        """Get application main currency and update it in .toml file"""
         try:
             self.main_window.toml_data['settings']['user_currency'] = self.currency_cb.currentText()
             with open("config/myproject.toml", "w") as file:
