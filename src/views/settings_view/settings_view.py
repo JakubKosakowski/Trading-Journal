@@ -197,6 +197,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.change_secondary_color()
 
     def change_primary_color(self):
+        """Open color picker and set selected color as primary"""
         color = QColorDialog.getColor()
 
         try:
