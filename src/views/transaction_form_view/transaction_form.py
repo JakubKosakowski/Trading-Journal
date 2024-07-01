@@ -27,6 +27,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_reason_to_entry_edit_lines()
         self.load_enter_and_exits_section()
         self.load_reason_for_exit_section()
+        self.load_exit_tactic_section()
         self.load_fields_labels()
         self.load_colors()
 
@@ -67,6 +68,12 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.reason_for_exit_textfield.setFixedSize(360, 30)
         self.reason_for_exit_textfield.move(20, 410)
         self.logger.logger.info("Reason for exit section generated.")
+
+    def load_exit_tactic_section(self):
+        self.exit_tactic_section = QLabel('', self)
+        self.exit_tactic_section.setFixedSize(350 ,100)
+        self.exit_tactic_section.move(440, 400)
+        self.logger.logger.info("Exit tactic section generated.")
 
     def load_colors(self):
         self.load_menu_button_color()
