@@ -73,6 +73,10 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.exit_tactic_section = QLabel('', self)
         self.exit_tactic_section.setFixedSize(350 ,100)
         self.exit_tactic_section.move(440, 400)
+
+        self.exit_tactic_cb = QComboBox(self)
+        self.exit_tactic_cb.setFixedSize(330, 30)
+        self.exit_tactic_cb.move(450, 410)
         self.logger.logger.info("Exit tactic section generated.")
 
     def load_colors(self):
