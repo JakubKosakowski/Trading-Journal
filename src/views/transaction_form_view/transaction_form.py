@@ -14,18 +14,19 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.language = self.main_window.toml_data['settings']['language']
         self.logger = Logger(__name__)
         self.menu_btn = QPushButton("Go back to menu", self)
-        self.menu_btn.move(100, 370)
+        self.menu_btn.move(100,600)
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
 
         self.add_transaction_btn = QPushButton("Add", self)
-        self.add_transaction_btn.move(250, 370)
+        self.add_transaction_btn.move(250, 600)
         self.add_transaction_btn.setObjectName('add-transaction-btn')
         self.add_transaction_btn.clicked.connect(self.add_record)
 
         self.load_reason_to_entry()
         self.load_reason_to_entry_edit_lines()
         self.load_enter_and_exits_section()
+        self.load_reason_for_exit_section()
         self.load_fields_labels()
         self.load_colors()
 
@@ -58,7 +59,10 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_input_lines()
 
     def load_reason_for_exit_section(self):
-        pass
+        self.reason_for_exit_section = QLabel('', self)
+        self.reason_for_exit_section.setFixedSize(380 ,200)
+        self.reason_for_exit_section.move(10, 400)
+        self.logger.logger.info("Reason for exit section generated.")
 
     def load_colors(self):
         self.load_menu_button_color()
