@@ -113,7 +113,7 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         if self.main_window.toml_data['settings']['fullscreen']:
             self.main_window.showFullScreen()
         else:
-            self.main_window.setGeometry(550, 250, 800, 600)
+            self.main_window.setGeometry(550, 200, 800, 800)
 
         # Load colors and texts
         self.load_colors()
