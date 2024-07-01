@@ -14,18 +14,20 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.language = self.main_window.toml_data['settings']['language']
         self.logger = Logger(__name__)
         self.menu_btn = QPushButton("Go back to menu", self)
-        self.menu_btn.move(100, 370)
+        self.menu_btn.move(100,600)
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
 
         self.add_transaction_btn = QPushButton("Add", self)
-        self.add_transaction_btn.move(250, 370)
+        self.add_transaction_btn.move(250, 600)
         self.add_transaction_btn.setObjectName('add-transaction-btn')
         self.add_transaction_btn.clicked.connect(self.add_record)
 
         self.load_reason_to_entry()
         self.load_reason_to_entry_edit_lines()
         self.load_enter_and_exits_section()
+        self.load_reason_for_exit_section()
+        self.load_exit_tactic_section()
         self.load_fields_labels()
         self.load_colors()
 
@@ -58,7 +60,24 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_input_lines()
 
     def load_reason_for_exit_section(self):
-        pass
+        self.reason_for_exit_section = QLabel('', self)
+        self.reason_for_exit_section.setFixedSize(380 ,200)
+        self.reason_for_exit_section.move(10, 400)
+
+        self.reason_for_exit_textfield = QPlainTextEdit(self, objectName='reason-text')
+        self.reason_for_exit_textfield.setFixedSize(360, 30)
+        self.reason_for_exit_textfield.move(20, 410)
+        self.logger.logger.info("Reason for exit section generated.")
+
+    def load_exit_tactic_section(self):
+        self.exit_tactic_section = QLabel('', self)
+        self.exit_tactic_section.setFixedSize(350 ,100)
+        self.exit_tactic_section.move(440, 400)
+
+        self.exit_tactic_cb = QComboBox(self)
+        self.exit_tactic_cb.setFixedSize(330, 30)
+        self.exit_tactic_cb.move(450, 410)
+        self.logger.logger.info("Exit tactic section generated.")
 
     def load_colors(self):
         self.load_menu_button_color()
