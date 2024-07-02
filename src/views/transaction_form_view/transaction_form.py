@@ -82,6 +82,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.add_exit_tactic_btn.move(760, 415)
         self.add_exit_tactic_btn.setIcon(QIcon('static/images/plus.png'))
         self.add_exit_tactic_btn.setCursor(QCursor(Qt.PointingHandCursor))
+        self.add_exit_tactic_btn.clicked.connect(self.exit_tactic_on_click)
         self.logger.logger.info("Exit tactic section generated.")
 
     def load_colors(self):
@@ -155,6 +156,13 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter.set_title(self.main_window, 'Dodaj transakcję')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.company_code_label, "Kod spółki")
+
+    @pyqtSlot()
+    def exit_tactic_on_click(self):
+        self.add_exit_tactic()
+
+    def add_exit_tactic(self):
+        pass
 
     def add_record(self):
         pass
