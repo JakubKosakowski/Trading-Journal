@@ -78,9 +78,9 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.exit_tactic_cb.setFixedSize(300, 30)
         self.exit_tactic_cb.move(450, 410)
 
-        self.add_exit_tactic_btn = QPushButton(self)
-        self.add_exit_tactic_btn.move(755, 412)
-        self.add_exit_tactic_btn.setIcon(QIcon('static/images/plus.jpg'))
+        self.add_exit_tactic_btn = QPushButton("", self, objectName='add-exit-tactic-btn')
+        self.add_exit_tactic_btn.move(760, 415)
+        self.add_exit_tactic_btn.setIcon(QIcon('static/images/plus.png'))
         self.add_exit_tactic_btn.setCursor(QCursor(Qt.PointingHandCursor))
         self.logger.logger.info("Exit tactic section generated.")
 
