@@ -11,14 +11,15 @@ class AddExitTacticPopupWindow(QWidget):
         self.setWindowTitle('Add exit tactic')
         self.setFixedWidth(200)
         self.setFixedHeight(200)
-        self.exit_tactic_text = QLabel()
+        self.exit_tactic_text = QLabel('Exit tactic', self)
         self.exit_tactic_text.move(10, 20)
 
-        self.exit_tactic_value = QLineEdit()
-        self.exit_tactic_value.resize(80, 5)
-        self.exit_tactic_value.move(15, 20)
+        self.exit_tactic_value = QLineEdit(self)
+        self.exit_tactic_value.resize(80, 20)
+        self.exit_tactic_value.move(10, 40)
 
-        self.submit = QPushButton('OK')
+        self.submit = QPushButton('OK', self)
+        self.submit.move(10, 80)
         self.submit.clicked.connect(self.send_values)
 
     def send_values(self):
