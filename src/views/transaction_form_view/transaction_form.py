@@ -5,6 +5,7 @@ from src.utils import Logger, Utils
 from src.setters import ButtonColorSetter, TextSetter, TextColorSetter, ButtonTextColorPicker
 from src.abstract import FormClass
 from src.meta import MetaFormClass
+from src.popup_window import AddExitTacticPopupWindow
 
 
 class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
@@ -75,8 +76,14 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.exit_tactic_section.move(440, 400)
 
         self.exit_tactic_cb = QComboBox(self)
-        self.exit_tactic_cb.setFixedSize(330, 30)
+        self.exit_tactic_cb.setFixedSize(300, 30)
         self.exit_tactic_cb.move(450, 410)
+
+        self.add_exit_tactic_btn = QPushButton("", self, objectName='add-exit-tactic-btn')
+        self.add_exit_tactic_btn.move(760, 415)
+        self.add_exit_tactic_btn.setIcon(QIcon('static/images/plus.png'))
+        self.add_exit_tactic_btn.setCursor(QCursor(Qt.PointingHandCursor))
+        self.add_exit_tactic_btn.clicked.connect(self.add_exit_tactic)
         self.logger.logger.info("Exit tactic section generated.")
 
     def load_colors(self):
@@ -150,6 +157,15 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter.set_title(self.main_window, 'Dodaj transakcję')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.company_code_label, "Kod spółki")
+
+    @pyqtSlot(str)
+    def update_exit_tactic(self, exit_tactic):
+        self.logger.logger.debug(exit_tactic)
+
+    def add_exit_tactic(self):
+        self.ui = AddExitTacticPopupWindow()
+        self.ui.submitted.connect(self.update_exit_tactic)
+        self.ui.show()
 
     def add_record(self):
         pass

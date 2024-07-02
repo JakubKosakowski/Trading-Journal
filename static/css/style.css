@@ -61,7 +61,8 @@ QPushButton#add-btn {
     outline: 0px;
 }
 
-QPushButton#settings-btn {
+QPushButton#settings-btn,
+QPushButton#add-exit-tactic-btn {
     background-color: #EEEEEE;
     border-style: none;
 }
