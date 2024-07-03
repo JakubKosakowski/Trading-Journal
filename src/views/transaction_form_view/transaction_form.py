@@ -6,6 +6,7 @@ from src.setters import ButtonColorSetter, TextSetter, TextColorSetter, ButtonTe
 from src.abstract import FormClass
 from src.meta import MetaFormClass
 from src.popup_window import AddExitTacticPopupWindow
+from src.postgres_database import Database
 
 
 class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
@@ -23,6 +24,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.add_transaction_btn.move(250, 600)
         self.add_transaction_btn.setObjectName('add-transaction-btn')
         self.add_transaction_btn.clicked.connect(self.add_record)
+
+        self.database = Database()
 
         self.load_reason_to_entry()
         self.load_reason_to_entry_edit_lines()
@@ -78,6 +81,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.exit_tactic_cb = QComboBox(self)
         self.exit_tactic_cb.setFixedSize(300, 30)
         self.exit_tactic_cb.move(450, 410)
+
+        self.load_exit_tactics_cb_items()
 
         self.add_exit_tactic_btn = QPushButton("", self, objectName='add-exit-tactic-btn')
         self.add_exit_tactic_btn.move(760, 415)
@@ -158,9 +163,16 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.company_code_label, "Kod spółki")
 
+    def load_exit_tactics_cb_items(self):
+        exit_tactics_list = self.database.select('exit_tactics')
+        for exit_tactic in exit_tactics_list:
+            self.exit_tactic_cb.addItem(f'{exit_tactic[0]} {exit_tactic[1]}')
+
     @pyqtSlot(str)
     def update_exit_tactic(self, exit_tactic):
-        self.logger.logger.debug(exit_tactic)
+        self.database.insert([exit_tactic], "exit_tactics")
+        self.exit_tactic_cb.clear()
+        self.load_exit_tactics_cb_items()
 
     def add_exit_tactic(self):
         self.ui = AddExitTacticPopupWindow()
