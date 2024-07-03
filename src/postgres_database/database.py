@@ -97,7 +97,7 @@ class Database:
         """
 
         try:
-            command_table_part = f"INSERT INTO {table}{tuple(self.get_table_columns_names(table))}".replace("'", "") # Create INSERT INTO query
+            command_table_part = f"INSERT INTO {table}({', '.join(self.get_table_columns_names(table))})".replace("'", "") # Create INSERT INTO query
             command_value_part = f"VALUES({', '.join(['%s' for x in range(len(values))])}) RETURNING id;" # Create VALUES RETURNING query
             self.logger.logger.debug(f'{command_table_part} {command_value_part}')
             self.cursor.execute(f'{command_table_part} {command_value_part}', tuple(values)) # Connect and run both queries

@@ -82,6 +82,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.exit_tactic_cb.setFixedSize(300, 30)
         self.exit_tactic_cb.move(450, 410)
 
+        self.load_exit_tactics_cb_items()
+
         self.add_exit_tactic_btn = QPushButton("", self, objectName='add-exit-tactic-btn')
         self.add_exit_tactic_btn.move(760, 415)
         self.add_exit_tactic_btn.setIcon(QIcon('static/images/plus.png'))
@@ -168,8 +170,9 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
 
     @pyqtSlot(str)
     def update_exit_tactic(self, exit_tactic):
-        self.logger.logger.debug(exit_tactic)
         self.database.insert([exit_tactic], "exit_tactics")
+        self.exit_tactic_cb.clear()
+        self.load_exit_tactics_cb_items()
 
     def add_exit_tactic(self):
         self.ui = AddExitTacticPopupWindow()
