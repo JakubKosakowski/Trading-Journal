@@ -161,6 +161,11 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.company_code_label, "Kod spółki")
 
+    def load_exit_tactics_cb_items(self):
+        exit_tactics_list = self.database.select('exit_tactics')
+        for exit_tactic in exit_tactics_list:
+            self.exit_tactic_cb.addItem(f'{exit_tactic[0]} {exit_tactic[1]}')
+
     @pyqtSlot(str)
     def update_exit_tactic(self, exit_tactic):
         self.logger.logger.debug(exit_tactic)
