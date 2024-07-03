@@ -6,6 +6,7 @@ from src.setters import ButtonColorSetter, TextSetter, TextColorSetter, ButtonTe
 from src.abstract import FormClass
 from src.meta import MetaFormClass
 from src.popup_window import AddExitTacticPopupWindow
+from src.postgres_database import Database
 
 
 class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
@@ -23,6 +24,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.add_transaction_btn.move(250, 600)
         self.add_transaction_btn.setObjectName('add-transaction-btn')
         self.add_transaction_btn.clicked.connect(self.add_record)
+
+        self.database = Database()
 
         self.load_reason_to_entry()
         self.load_reason_to_entry_edit_lines()
@@ -161,6 +164,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
     @pyqtSlot(str)
     def update_exit_tactic(self, exit_tactic):
         self.logger.logger.debug(exit_tactic)
+        self.database.insert([exit_tactic], "exit_tactics")
 
     def add_exit_tactic(self):
         self.ui = AddExitTacticPopupWindow()
