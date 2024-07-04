@@ -1,6 +1,10 @@
-QLabel {
+/* QLabel#text-label {
+    background-color: #f0f0f0;
+} */
+
+QLabel#section-label {
     border: 1px solid #222831;
-    border-radius: 8px;
+    border-radius: 8px;  
 }
 
 QLabel#version-label {

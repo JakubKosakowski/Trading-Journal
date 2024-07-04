@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from src.utils import Logger, Utils
+from src.utils import Logger
 from src.setters import ButtonColorSetter, TextSetter, TextColorSetter, ButtonTextColorPicker
 from src.abstract import FormClass
 from src.meta import MetaFormClass
@@ -16,12 +16,12 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.language = self.main_window.toml_data['settings']['language']
         self.logger = Logger(__name__)
         self.menu_btn = QPushButton("Go back to menu", self)
-        self.menu_btn.move(100,600)
+        self.menu_btn.move(100, 750)
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
 
         self.add_transaction_btn = QPushButton("Add", self)
-        self.add_transaction_btn.move(250, 600)
+        self.add_transaction_btn.move(250, 750)
         self.add_transaction_btn.setObjectName('add-transaction-btn')
         self.add_transaction_btn.clicked.connect(self.add_record)
 
@@ -33,12 +33,13 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_reason_for_exit_section()
         self.load_exit_tactic_section()
         self.load_fields_labels()
+        self.load_post_trade_analysis_section()
         self.load_colors()
 
         self.load_text()
 
     def load_reason_to_entry(self):
-        self.entry_reason_label = QLabel('', self)
+        self.entry_reason_label = QLabel('', self, objectName="section-label")
         self.entry_reason_label.setFixedSize(780, 100)
         self.entry_reason_label.move(10, 10)
         self.logger.logger.info("Reason to entry section generated.")
@@ -50,13 +51,14 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Reason to entry(edit line) section generated.")
 
     def load_enter_and_exits_section(self):
-        self.enter_exit_label = QLabel('', self)
+        self.enter_exit_label = QLabel('', self, objectName="section-label")
         self.enter_exit_label.setFixedSize(780, 220)
         self.enter_exit_label.move(10, 150)
         self.logger.logger.info("Enter and exits section generated.")
 
     def load_fields_labels(self):
-        self.fields_labels = QLabel("        Date\t\tOrder Price           Filled Priced           Slippage           Filled Shares           Total Cost           Day's High           Day's Low           Grade        ", self)
+        self.fields_labels = QLabel("        Date\t\tOrder Price           Filled Priced           Slippage           Filled Shares           Total Cost           Day's High           Day's Low           Grade        ",
+                                    self, objectName="section-label")
         self.fields_labels.setObjectName('transaction-data-info')
         self.fields_labels.setFixedSize(760, 30)
         self.fields_labels.move(20, 300)
@@ -64,7 +66,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_input_lines()
 
     def load_reason_for_exit_section(self):
-        self.reason_for_exit_section = QLabel('', self)
+        self.reason_for_exit_section = QLabel('', self, objectName="section-label")
         self.reason_for_exit_section.setFixedSize(380 ,200)
         self.reason_for_exit_section.move(10, 400)
 
@@ -74,7 +76,10 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Reason for exit section generated.")
 
     def load_exit_tactic_section(self):
-        self.exit_tactic_section = QLabel('', self)
+        self.exit_tactic_label = QLabel('Exit Tactic', self, objectName="text-label")
+        self.exit_tactic_label.move(440, 380)
+
+        self.exit_tactic_section = QLabel('', self, objectName="section-label")
         self.exit_tactic_section.setFixedSize(350 ,100)
         self.exit_tactic_section.move(440, 400)
 
@@ -156,6 +161,15 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.transaction_slippage.move(290, 330)
         self.transaction_slippage.setStyleSheet(f"background-color: gray;")
         self.logger.logger.info("Slippage line edit generated.")
+
+    def load_post_trade_analysis_section(self):
+        self.post_trade_analysis_section = QLabel('', self, objectName="section-label")
+        self.post_trade_analysis_section.setFixedSize(780, 100)
+        self.post_trade_analysis_section.move(10, 630)
+
+        self.post_trade_analysis_textfield = QPlainTextEdit(self, objectName='reason-text')
+        self.post_trade_analysis_textfield.setFixedSize(760, 50)
+        self.post_trade_analysis_textfield.move(20, 640)
 
     def load_text(self):
         text_setter = TextSetter(self.language)
