@@ -50,13 +50,14 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Reason to entry(edit line) section generated.")
 
     def load_enter_and_exits_section(self):
-        self.enter_exit_label = QLabel('', self)
+        self.enter_exit_label = QLabel('', self, objectName="section-label")
         self.enter_exit_label.setFixedSize(780, 220)
         self.enter_exit_label.move(10, 150)
         self.logger.logger.info("Enter and exits section generated.")
 
     def load_fields_labels(self):
-        self.fields_labels = QLabel("        Date\t\tOrder Price           Filled Priced           Slippage           Filled Shares           Total Cost           Day's High           Day's Low           Grade        ", self)
+        self.fields_labels = QLabel("        Date\t\tOrder Price           Filled Priced           Slippage           Filled Shares           Total Cost           Day's High           Day's Low           Grade        ",
+                                    self, objectName="section-label")
         self.fields_labels.setObjectName('transaction-data-info')
         self.fields_labels.setFixedSize(760, 30)
         self.fields_labels.move(20, 300)
