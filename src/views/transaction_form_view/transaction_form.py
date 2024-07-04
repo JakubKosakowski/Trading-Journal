@@ -16,12 +16,12 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.language = self.main_window.toml_data['settings']['language']
         self.logger = Logger(__name__)
         self.menu_btn = QPushButton("Go back to menu", self)
-        self.menu_btn.move(100,600)
+        self.menu_btn.move(100, 750)
         self.menu_btn.setObjectName('menu-btn')
         self.logger.logger.info('Go back to menu button generated.')
 
         self.add_transaction_btn = QPushButton("Add", self)
-        self.add_transaction_btn.move(250, 600)
+        self.add_transaction_btn.move(250, 750)
         self.add_transaction_btn.setObjectName('add-transaction-btn')
         self.add_transaction_btn.clicked.connect(self.add_record)
 
@@ -33,6 +33,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_reason_for_exit_section()
         self.load_exit_tactic_section()
         self.load_fields_labels()
+        self.load_post_trade_analysis_section()
         self.load_colors()
 
         self.load_text()
@@ -75,7 +76,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Reason for exit section generated.")
 
     def load_exit_tactic_section(self):
-        self.exit_tactic_label = QLabel('Exit Tactic', self)
+        self.exit_tactic_label = QLabel('Exit Tactic', self, objectName="text-label")
         self.exit_tactic_label.move(440, 380)
 
         self.exit_tactic_section = QLabel('', self, objectName="section-label")
@@ -160,6 +161,11 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.transaction_slippage.move(290, 330)
         self.transaction_slippage.setStyleSheet(f"background-color: gray;")
         self.logger.logger.info("Slippage line edit generated.")
+
+    def load_post_trade_analysis_section(self):
+        self.post_trade_analysis_section = QLabel('', self, objectName="section-label")
+        self.post_trade_analysis_section.setFixedSize(780, 100)
+        self.post_trade_analysis_section.move(10, 630)
 
     def load_text(self):
         text_setter = TextSetter(self.language)
