@@ -38,7 +38,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_text()
 
     def load_reason_to_entry(self):
-        self.entry_reason_label = QLabel('', self)
+        self.entry_reason_label = QLabel('', self, objectName="section-label")
         self.entry_reason_label.setFixedSize(780, 100)
         self.entry_reason_label.move(10, 10)
         self.logger.logger.info("Reason to entry section generated.")
@@ -64,7 +64,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_input_lines()
 
     def load_reason_for_exit_section(self):
-        self.reason_for_exit_section = QLabel('', self)
+        self.reason_for_exit_section = QLabel('', self, objectName="section-label")
         self.reason_for_exit_section.setFixedSize(380 ,200)
         self.reason_for_exit_section.move(10, 400)
 
@@ -74,7 +74,10 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Reason for exit section generated.")
 
     def load_exit_tactic_section(self):
-        self.exit_tactic_section = QLabel('', self)
+        self.exit_tactic_label = QLabel('Exit Tactic', self)
+        self.exit_tactic_label.move(440, 380)
+
+        self.exit_tactic_section = QLabel('', self, objectName="section-label")
         self.exit_tactic_section.setFixedSize(350 ,100)
         self.exit_tactic_section.move(440, 400)
 
