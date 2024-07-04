@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-from src.utils import Logger, Utils
+from src.utils import Logger
 from src.setters import ButtonColorSetter, TextSetter, TextColorSetter, ButtonTextColorPicker
 from src.abstract import FormClass
 from src.meta import MetaFormClass
