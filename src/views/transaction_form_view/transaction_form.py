@@ -41,13 +41,17 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
     def load_reason_to_entry(self):
         self.entry_reason_label = QLabel('', self, objectName="section-label")
         self.entry_reason_label.setFixedSize(780, 100)
-        self.entry_reason_label.move(10, 10)
+        self.entry_reason_label.move(10, 30)
+
+        self.entry_reason_info = QLabel('Reason for Entry', self, objectName="reason-text")
+        self.entry_reason_info.move(10, 10)
+
         self.logger.logger.info("Reason to entry section generated.")
 
     def load_reason_to_entry_edit_lines(self):
         self.entry_reason_textfield = QPlainTextEdit(self, objectName='reason-text')
         self.entry_reason_textfield.setFixedSize(760, 30)
-        self.entry_reason_textfield.move(20, 20)
+        self.entry_reason_textfield.move(20, 50)
         self.logger.logger.info("Reason to entry(edit line) section generated.")
 
     def load_enter_and_exits_section(self):
@@ -125,14 +129,14 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_company_code_label()
         self.company_code = QLineEdit(self)
         self.company_code.setFixedSize(40, 20)
-        self.company_code.move(100, 60)
+        self.company_code.move(100, 100)
         self.company_code.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Company code line edit generated.")
 
     def load_company_code_label(self):
         self.company_code_label = QLabel('', self)
         self.company_code_label.setFixedSize(80, 20)
-        self.company_code_label.move(20, 60)
+        self.company_code_label.move(20, 100)
         self.company_code_label.setStyleSheet(f"border-style: none;")
         self.logger.logger.info("Company code info label generated.")
 
