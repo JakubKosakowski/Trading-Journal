@@ -81,6 +81,10 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.reason_for_exit_textfield = QPlainTextEdit(self, objectName='reason-text')
         self.reason_for_exit_textfield.setFixedSize(360, 30)
         self.reason_for_exit_textfield.move(20, 410)
+        
+        self.reason_for_exit_info = QLabel('Reason for Exit', self, objectName="reason-text")
+        self.reason_for_exit_info.move(10, 380)
+
         self.logger.logger.info("Reason for exit section generated.")
 
     def load_exit_tactic_section(self):
