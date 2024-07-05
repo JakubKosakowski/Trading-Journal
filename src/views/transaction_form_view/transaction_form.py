@@ -41,19 +41,27 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
     def load_reason_to_entry(self):
         self.entry_reason_label = QLabel('', self, objectName="section-label")
         self.entry_reason_label.setFixedSize(780, 100)
-        self.entry_reason_label.move(10, 10)
+        self.entry_reason_label.move(10, 30)
+
+        self.entry_reason_info = QLabel('Reason for Entry', self, objectName="reason-text")
+        self.entry_reason_info.move(10, 10)
+
         self.logger.logger.info("Reason to entry section generated.")
 
     def load_reason_to_entry_edit_lines(self):
         self.entry_reason_textfield = QPlainTextEdit(self, objectName='reason-text')
         self.entry_reason_textfield.setFixedSize(760, 30)
-        self.entry_reason_textfield.move(20, 20)
+        self.entry_reason_textfield.move(20, 50)
         self.logger.logger.info("Reason to entry(edit line) section generated.")
 
     def load_enter_and_exits_section(self):
         self.enter_exit_label = QLabel('', self, objectName="section-label")
-        self.enter_exit_label.setFixedSize(780, 220)
-        self.enter_exit_label.move(10, 150)
+        self.enter_exit_label.setFixedSize(780, 200)
+        self.enter_exit_label.move(10, 160)
+
+        self.enter_exit_info = QLabel('Entries & Exits', self, objectName="reason-text")
+        self.enter_exit_info.move(10, 140)
+
         self.logger.logger.info("Enter and exits section generated.")
 
     def load_fields_labels(self):
@@ -73,6 +81,10 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.reason_for_exit_textfield = QPlainTextEdit(self, objectName='reason-text')
         self.reason_for_exit_textfield.setFixedSize(360, 30)
         self.reason_for_exit_textfield.move(20, 410)
+        
+        self.reason_for_exit_info = QLabel('Reason for Exit', self, objectName="reason-text")
+        self.reason_for_exit_info.move(10, 380)
+
         self.logger.logger.info("Reason for exit section generated.")
 
     def load_exit_tactic_section(self):
@@ -125,14 +137,14 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_company_code_label()
         self.company_code = QLineEdit(self)
         self.company_code.setFixedSize(40, 20)
-        self.company_code.move(100, 60)
+        self.company_code.move(100, 100)
         self.company_code.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Company code line edit generated.")
 
     def load_company_code_label(self):
         self.company_code_label = QLabel('', self)
         self.company_code_label.setFixedSize(80, 20)
-        self.company_code_label.move(20, 60)
+        self.company_code_label.move(20, 100)
         self.company_code_label.setStyleSheet(f"border-style: none;")
         self.logger.logger.info("Company code info label generated.")
 
@@ -170,6 +182,10 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.post_trade_analysis_textfield = QPlainTextEdit(self, objectName='reason-text')
         self.post_trade_analysis_textfield.setFixedSize(760, 50)
         self.post_trade_analysis_textfield.move(20, 640)
+
+        self.post_trade_analysis_info = QLabel('Post Trade Analysis', self, objectName="reason-text")
+        self.post_trade_analysis_info.move(10, 610)
+        self.logger.logger.info("Post Trade Analysis section generated.")
 
     def load_text(self):
         text_setter = TextSetter(self.language)
