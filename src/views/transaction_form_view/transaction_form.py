@@ -185,6 +185,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
 
         self.post_trade_analysis_info = QLabel('Post Trade Analysis', self, objectName="reason-text")
         self.post_trade_analysis_info.move(10, 610)
+        self.logger.logger.info("Post Trade Analysis section generated.")
 
     def load_text(self):
         text_setter = TextSetter(self.language)
