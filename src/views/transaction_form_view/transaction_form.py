@@ -56,8 +56,12 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
 
     def load_enter_and_exits_section(self):
         self.enter_exit_label = QLabel('', self, objectName="section-label")
-        self.enter_exit_label.setFixedSize(780, 220)
-        self.enter_exit_label.move(10, 150)
+        self.enter_exit_label.setFixedSize(780, 200)
+        self.enter_exit_label.move(10, 160)
+
+        self.enter_exit_info = QLabel('Entries & Exits', self, objectName="reason-text")
+        self.enter_exit_info.move(10, 140)
+
         self.logger.logger.info("Enter and exits section generated.")
 
     def load_fields_labels(self):
