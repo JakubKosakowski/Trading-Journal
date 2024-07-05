@@ -183,6 +183,9 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.post_trade_analysis_textfield.setFixedSize(760, 50)
         self.post_trade_analysis_textfield.move(20, 640)
 
+        self.post_trade_analysis_info = QLabel('Post Trade Analysis', self, objectName="reason-text")
+        self.post_trade_analysis_info.move(10, 610)
+
     def load_text(self):
         text_setter = TextSetter(self.language)
         text_setter.set_title(self.main_window, 'Dodaj transakcję')
