@@ -126,6 +126,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_transaction_filled_priced()
         self.load_transaction_slippage()
         self.load_transaction_filled_shares()
+        self.load_transaction_total_cost()
 
     def load_transaction_date_picker(self):
         self.transaction_date = QDateEdit(self, calendarPopup=True)
@@ -182,6 +183,16 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.transaction_filled_shares.move(370, 330)
         self.transaction_filled_shares.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Filled share line edit generated.")
+
+    def load_transaction_total_cost(self):
+        self.transaction_total_cost = QLineEdit(self)
+        self.transaction_total_cost.setReadOnly(True)
+        self.transaction_total_cost.setValidator(QDoubleValidator(0.001,99999.999,3))
+        self.transaction_total_cost.setText('0.000')
+        self.transaction_total_cost.setFixedSize(50, 20)
+        self.transaction_total_cost.move(460, 330)
+        self.transaction_total_cost.setStyleSheet(f"background-color: gray;")
+        self.logger.logger.info("Total cost line edit generated.")
 
     def load_post_trade_analysis_section(self):
         self.post_trade_analysis_section = QLabel('', self, objectName="section-label")
