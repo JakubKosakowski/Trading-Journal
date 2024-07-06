@@ -15,6 +15,11 @@ LANGUAGES = {
         'Wersja aplikacji': 'Application version',
         'Tryb pełnego ekranu': 'Full screen mode',
         'Kod spółki': "Company's code",
+        'Powód wejścia': "Reason for Entry",
+        'Powód wyjścia': '"Reason for Exit',
+        'Taktyka wyjścia': 'Exit Tactic',
+        'Wejścia i Wyjścia': 'Entries & Exits',
+        'Analiza potransakzyjna': 'Post Trade Analysis',
         'Test': 'Test',
         'Wiek': 'Age',
         'Imię': 'Name'
