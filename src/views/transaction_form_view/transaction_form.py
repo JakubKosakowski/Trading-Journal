@@ -125,6 +125,9 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_transaction_order_price()
         self.load_transaction_filled_priced()
         self.load_transaction_slippage()
+        self.load_transaction_filled_shares()
+        self.load_transaction_total_cost()
+        self.load_transaction_days_high()
 
     def load_transaction_date_picker(self):
         self.transaction_date = QDateEdit(self, calendarPopup=True)
@@ -174,6 +177,32 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.transaction_slippage.setStyleSheet(f"background-color: gray;")
         self.logger.logger.info("Slippage line edit generated.")
 
+    def load_transaction_filled_shares(self):
+        self.transaction_filled_shares = QLineEdit(self)
+        self.transaction_filled_shares.setValidator(QDoubleValidator(1,99999,0))
+        self.transaction_filled_shares.setFixedSize(50, 20)
+        self.transaction_filled_shares.move(370, 330)
+        self.transaction_filled_shares.setStyleSheet(f"background-color: #ffffff;")
+        self.logger.logger.info("Filled share line edit generated.")
+
+    def load_transaction_total_cost(self):
+        self.transaction_total_cost = QLineEdit(self)
+        self.transaction_total_cost.setReadOnly(True)
+        self.transaction_total_cost.setValidator(QDoubleValidator(0.001,99999.999,3))
+        self.transaction_total_cost.setText('0.000')
+        self.transaction_total_cost.setFixedSize(50, 20)
+        self.transaction_total_cost.move(460, 330)
+        self.transaction_total_cost.setStyleSheet(f"background-color: gray;")
+        self.logger.logger.info("Total cost line edit generated.")
+
+    def load_transaction_days_high(self):
+        self.transaction_days_high = QLineEdit(self)
+        self.transaction_days_high.setValidator(QDoubleValidator(0.001,99999.999,3))
+        self.transaction_days_high.setFixedSize(50, 20)
+        self.transaction_days_high.move(545, 330)
+        self.transaction_days_high.setStyleSheet(f"background-color: #ffffff;")
+        self.logger.logger.info("Day's high line edit generated.")
+
     def load_post_trade_analysis_section(self):
         self.post_trade_analysis_section = QLabel('', self, objectName="section-label")
         self.post_trade_analysis_section.setFixedSize(780, 100)
@@ -191,7 +220,12 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter = TextSetter(self.language)
         text_setter.set_title(self.main_window, 'Dodaj transakcję')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
+        text_setter.set_text(self.entry_reason_info, 'Powód wejścia')
+        text_setter.set_text(self.enter_exit_info, 'Wejścia i Wyjścia')
         text_setter.set_text(self.company_code_label, "Kod spółki")
+        text_setter.set_text(self.reason_for_exit_info, 'Powód wyjścia')
+        text_setter.set_text(self.exit_tactic_label, 'Taktyka wyjścia')
+        text_setter.set_text(self.post_trade_analysis_info, 'Analiza potransakzyjna')
 
     def load_exit_tactics_cb_items(self):
         exit_tactics_list = self.database.select('exit_tactics')
