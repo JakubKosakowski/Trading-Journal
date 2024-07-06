@@ -191,7 +191,12 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter = TextSetter(self.language)
         text_setter.set_title(self.main_window, 'Dodaj transakcję')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
+        text_setter.set_text(self.entry_reason_info, 'Powód wejścia')
+        text_setter.set_text(self.enter_exit_info, 'Wejścia i Wyjścia')
         text_setter.set_text(self.company_code_label, "Kod spółki")
+        text_setter.set_text(self.reason_for_exit_info, 'Powód wyjścia')
+        text_setter.set_text(self.exit_tactic_label, 'Taktyka wyjścia')
+        text_setter.set_text(self.post_trade_analysis_info, 'Analiza potransakzyjna')
 
     def load_exit_tactics_cb_items(self):
         exit_tactics_list = self.database.select('exit_tactics')
