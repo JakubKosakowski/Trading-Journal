@@ -18,19 +18,24 @@ class AddExitTacticPopupWindow(QWidget):
         Label with infomation
     exit_tactic_value(QLineEdit)
         QLineEdit field for exit tactic name
-        
+
     Methods
     -------
     send_values()
         Emit values for method in other class
     """
+
     submitted = pyqtSignal(str)
 
     def __init__(self):
+        """Initializes the instance of class"""
+
         super().__init__()
+        # Set popup window parameters
         self.setWindowTitle('Add exit tactic')
         self.setFixedWidth(200)
         self.setFixedHeight(200)
+        # Set used attributes
         self.exit_tactic_text = QLabel('Exit tactic', self)
         self.exit_tactic_text.move(10, 20)
 
