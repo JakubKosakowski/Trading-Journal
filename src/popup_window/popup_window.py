@@ -48,5 +48,7 @@ class AddExitTacticPopupWindow(QWidget):
         self.submit.clicked.connect(self.send_values)
 
     def send_values(self):
+        """Emit exit tactic name for other method"""
+        
         self.submitted.emit(self.exit_tactic_value.text())
         self.close()
