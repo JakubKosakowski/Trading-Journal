@@ -125,6 +125,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         button_color_setter.set_color(self.add_transaction_btn)
         
     def load_input_lines(self):
+        """Load all input lines in transaction form view"""
+        
         self.load_company_code()
         self.load_transaction_date_picker()
         self.load_transaction_order_price()
