@@ -88,19 +88,26 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Reason for exit section generated.")
 
     def load_exit_tactic_section(self):
+        """Load exit tactic section with ComboBox and plus button for adding new exit tactic"""
+
+        # Create info label
         self.exit_tactic_label = QLabel('Exit Tactic', self, objectName="text-label")
         self.exit_tactic_label.move(440, 380)
 
+        # Create section label
         self.exit_tactic_section = QLabel('', self, objectName="section-label")
         self.exit_tactic_section.setFixedSize(350 ,100)
         self.exit_tactic_section.move(440, 400)
 
+        # Create ComboBox
         self.exit_tactic_cb = QComboBox(self)
         self.exit_tactic_cb.setFixedSize(300, 30)
         self.exit_tactic_cb.move(450, 410)
 
+        # Load exit tactics from database
         self.load_exit_tactics_cb_items()
 
+        # Create button and connect them into method
         self.add_exit_tactic_btn = QPushButton("", self, objectName='add-exit-tactic-btn')
         self.add_exit_tactic_btn.move(760, 415)
         self.add_exit_tactic_btn.setIcon(QIcon('static/images/plus.png'))
