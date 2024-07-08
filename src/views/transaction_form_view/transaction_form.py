@@ -153,7 +153,12 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Transaction date picker generated.")
 
     def load_company_code(self):
+        """Load company code section"""
+
+        # Create company code info label
         self.load_company_code_label()
+
+        # Create company code edit line
         self.company_code = QLineEdit(self)
         self.company_code.setFixedSize(40, 20)
         self.company_code.move(100, 100)
