@@ -174,6 +174,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Company code info label generated.")
 
     def load_transaction_order_price(self):
+        """Load transaction order price input section"""
+        
         self.transaction_order_price = QLineEdit(self)
         self.transaction_order_price.setValidator(QDoubleValidator(0.001,99999.999,3))
         self.transaction_order_price.setFixedSize(50, 20)
