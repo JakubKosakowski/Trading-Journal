@@ -144,6 +144,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_transaction_days_high()
 
     def load_transaction_date_picker(self):
+        """Load data field in form"""
+
         self.transaction_date = QDateEdit(self, calendarPopup=True)
         self.transaction_date.move(20, 320)
         self.transaction_date.setDateTime(QDateTime.currentDateTime())
