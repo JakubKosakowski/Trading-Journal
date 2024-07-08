@@ -88,19 +88,26 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Reason for exit section generated.")
 
     def load_exit_tactic_section(self):
+        """Load exit tactic section with ComboBox and plus button for adding new exit tactic"""
+
+        # Create info label
         self.exit_tactic_label = QLabel('Exit Tactic', self, objectName="text-label")
         self.exit_tactic_label.move(440, 380)
 
+        # Create section label
         self.exit_tactic_section = QLabel('', self, objectName="section-label")
         self.exit_tactic_section.setFixedSize(350 ,100)
         self.exit_tactic_section.move(440, 400)
 
+        # Create ComboBox
         self.exit_tactic_cb = QComboBox(self)
         self.exit_tactic_cb.setFixedSize(300, 30)
         self.exit_tactic_cb.move(450, 410)
 
+        # Load exit tactics from database
         self.load_exit_tactics_cb_items()
 
+        # Create button and connect them into method
         self.add_exit_tactic_btn = QPushButton("", self, objectName='add-exit-tactic-btn')
         self.add_exit_tactic_btn.move(760, 415)
         self.add_exit_tactic_btn.setIcon(QIcon('static/images/plus.png'))
@@ -137,6 +144,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_transaction_days_high()
 
     def load_transaction_date_picker(self):
+        """Load data field in form"""
+
         self.transaction_date = QDateEdit(self, calendarPopup=True)
         self.transaction_date.move(20, 320)
         self.transaction_date.setDateTime(QDateTime.currentDateTime())
@@ -144,7 +153,12 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Transaction date picker generated.")
 
     def load_company_code(self):
+        """Load company code section"""
+
+        # Create company code info label
         self.load_company_code_label()
+
+        # Create company code edit line
         self.company_code = QLineEdit(self)
         self.company_code.setFixedSize(40, 20)
         self.company_code.move(100, 100)
@@ -152,6 +166,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Company code line edit generated.")
 
     def load_company_code_label(self):
+        """Load company code info label"""
         self.company_code_label = QLabel('', self)
         self.company_code_label.setFixedSize(80, 20)
         self.company_code_label.move(20, 100)
@@ -159,6 +174,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Company code info label generated.")
 
     def load_transaction_order_price(self):
+        """Load transaction order price input section"""
+        
         self.transaction_order_price = QLineEdit(self)
         self.transaction_order_price.setValidator(QDoubleValidator(0.001,99999.999,3))
         self.transaction_order_price.setFixedSize(50, 20)
