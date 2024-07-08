@@ -166,6 +166,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Company code line edit generated.")
 
     def load_company_code_label(self):
+        """Load company code info label"""
         self.company_code_label = QLabel('', self)
         self.company_code_label.setFixedSize(80, 20)
         self.company_code_label.move(20, 100)
