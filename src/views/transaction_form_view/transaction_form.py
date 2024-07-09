@@ -39,10 +39,14 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_text()
 
     def load_reason_to_entry(self):
+        """Load reason for entry section"""
+
+        # Create reason to entry section label with border
         self.entry_reason_label = QLabel('', self, objectName="section-label")
         self.entry_reason_label.setFixedSize(780, 100)
         self.entry_reason_label.move(10, 30)
 
+        # Create entry reason info label
         self.entry_reason_info = QLabel('Reason for Entry', self, objectName="reason-text")
         self.entry_reason_info.move(10, 10)
 
@@ -50,7 +54,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
 
     def load_reason_to_entry_edit_lines(self):
         """Load edit line for reason to entry"""
-        
+
         self.entry_reason_textfield = QPlainTextEdit(self, objectName='reason-text')
         self.entry_reason_textfield.setFixedSize(760, 30)
         self.entry_reason_textfield.move(20, 50)
