@@ -55,10 +55,14 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Reason to entry(edit line) section generated.")
 
     def load_enter_and_exits_section(self):
+        """Load entry and exits section"""
+
+        # Create Entries and exits section with border
         self.enter_exit_label = QLabel('', self, objectName="section-label")
         self.enter_exit_label.setFixedSize(780, 200)
         self.enter_exit_label.move(10, 160)
 
+        # Create Entries and Exits info
         self.enter_exit_info = QLabel('Entries & Exits', self, objectName="reason-text")
         self.enter_exit_info.move(10, 140)
 
