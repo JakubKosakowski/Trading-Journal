@@ -39,49 +39,68 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_text()
 
     def load_reason_to_entry(self):
+        """Load reason for entry section"""
+
+        # Create reason to entry section label with border
         self.entry_reason_label = QLabel('', self, objectName="section-label")
         self.entry_reason_label.setFixedSize(780, 100)
         self.entry_reason_label.move(10, 30)
 
+        # Create entry reason info label
         self.entry_reason_info = QLabel('Reason for Entry', self, objectName="reason-text")
         self.entry_reason_info.move(10, 10)
 
         self.logger.logger.info("Reason to entry section generated.")
 
     def load_reason_to_entry_edit_lines(self):
+        """Load edit line for reason to entry"""
+
         self.entry_reason_textfield = QPlainTextEdit(self, objectName='reason-text')
         self.entry_reason_textfield.setFixedSize(760, 30)
         self.entry_reason_textfield.move(20, 50)
         self.logger.logger.info("Reason to entry(edit line) section generated.")
 
     def load_enter_and_exits_section(self):
+        """Load entry and exits section"""
+
+        # Create Entries and exits section with border
         self.enter_exit_label = QLabel('', self, objectName="section-label")
         self.enter_exit_label.setFixedSize(780, 200)
         self.enter_exit_label.move(10, 160)
 
+        # Create Entries and Exits info
         self.enter_exit_info = QLabel('Entries & Exits', self, objectName="reason-text")
         self.enter_exit_info.move(10, 140)
 
         self.logger.logger.info("Enter and exits section generated.")
 
     def load_fields_labels(self):
+        """Load section with input field info's"""
+
         self.fields_labels = QLabel("        Date\t\tOrder Price           Filled Priced           Slippage           Filled Shares           Total Cost           Day's High           Day's Low           Grade        ",
                                     self, objectName="section-label")
         self.fields_labels.setObjectName('transaction-data-info')
         self.fields_labels.setFixedSize(760, 30)
         self.fields_labels.move(20, 300)
         self.logger.logger.info("Fields labels section generated.")
+
+        # Generate input fields
         self.load_input_lines()
 
     def load_reason_for_exit_section(self):
+        """Load reason for exit section"""
+
+        # Create reason for exit section with border
         self.reason_for_exit_section = QLabel('', self, objectName="section-label")
         self.reason_for_exit_section.setFixedSize(380 ,200)
         self.reason_for_exit_section.move(10, 400)
 
+        # Create reason for exit textfield
         self.reason_for_exit_textfield = QPlainTextEdit(self, objectName='reason-text')
         self.reason_for_exit_textfield.setFixedSize(360, 30)
         self.reason_for_exit_textfield.move(20, 410)
         
+        # Create reason for exit info
         self.reason_for_exit_info = QLabel('Reason for Exit', self, objectName="reason-text")
         self.reason_for_exit_info.move(10, 380)
 
