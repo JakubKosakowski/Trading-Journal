@@ -49,6 +49,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Reason to entry section generated.")
 
     def load_reason_to_entry_edit_lines(self):
+        """Load edit line for reason to entry"""
+        
         self.entry_reason_textfield = QPlainTextEdit(self, objectName='reason-text')
         self.entry_reason_textfield.setFixedSize(760, 30)
         self.entry_reason_textfield.move(20, 50)
