@@ -246,8 +246,15 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
         self.currency_cb.setStyleSheet(f"background-color: {self.main_window.toml_data['settings']['primary_color']};")
 
     def load_text(self):
+        """Load text in choosed language"""
+
+        # Get language code
         self.language = self.main_window.toml_data['settings']['language']
+
+        # Create text_setter
         text_setter = TextSetter(self.language)
+
+        # Load text for all texts in widget
         text_setter.set_title(self.main_window, 'Ustawienia')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.full_screen_checkbox, "Tryb pełnego ekranu")
