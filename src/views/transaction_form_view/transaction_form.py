@@ -213,6 +213,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Filled priced line edit generated.")
 
     def load_transaction_slippage(self):
+        """Load transaction slippage input section"""
+        
         self.transaction_slippage = QLineEdit(self)
         self.transaction_slippage.setReadOnly(True)
         self.transaction_slippage.setValidator(QDoubleValidator(0.001,99999.999,3))
