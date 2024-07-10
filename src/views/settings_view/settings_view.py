@@ -210,6 +210,8 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
             self.logger.logger.error(f'An error occurred: {err}')
 
     def change_secondary_color(self):
+        """Change secondary color and update it in .toml file"""
+        
         color = QColorDialog.getColor()
 
         try:
