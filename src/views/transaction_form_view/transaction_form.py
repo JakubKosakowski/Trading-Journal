@@ -203,6 +203,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Order price line edit generated.")
 
     def load_transaction_filled_priced(self):
+        """Load transaction filled price input section"""
+        
         self.transaction_filled_priced = QLineEdit(self)
         self.transaction_filled_priced.setValidator(QDoubleValidator(0.001,99999.999,3))
         self.transaction_filled_priced.setFixedSize(50, 20)
