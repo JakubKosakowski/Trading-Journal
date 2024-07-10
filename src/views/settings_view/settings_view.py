@@ -211,7 +211,7 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
 
     def change_secondary_color(self):
         """Change secondary color and update it in .toml file"""
-        
+
         color = QColorDialog.getColor()
 
         try:
@@ -224,11 +224,20 @@ class SettingsView(QWidget, ViewClass, metaclass=MetaClass):
             self.logger.logger.error(f'An error occurred: {err}')
 
     def load_colors(self):
+        """Load colors for all buttons in widget"""
+
+        # Create and set button_text_color_picker
         button_text_color_picker = ButtonTextColorPicker()
         text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
         button_text_color_picker.check_pick_condiditon(self.main_window.toml_data['settings']['primary_color'])
+
+        # Create button_color_setter
         button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'], text_color_setter)
+
+        # Set color with proper text color
         button_color_setter.set_color(self.menu_btn)
+
+        # Load color for other elements
         self.load_combobox_style()
         self.primary_color_picker.setStyleSheet(f"border-style: none; background-color: {self.main_window.toml_data['settings']['primary_color']}")
         self.secondary_color_picker.setStyleSheet(f"border-style: none; background-color: {self.main_window.toml_data['settings']['secondary_color']}")
