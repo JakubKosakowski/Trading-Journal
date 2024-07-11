@@ -225,6 +225,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Slippage line edit generated.")
 
     def load_transaction_filled_shares(self):
+        """Load transaction filled shares input section"""
+        
         self.transaction_filled_shares = QLineEdit(self)
         self.transaction_filled_shares.setValidator(QDoubleValidator(1,99999,0))
         self.transaction_filled_shares.setFixedSize(50, 20)
