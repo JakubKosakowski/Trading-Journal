@@ -226,7 +226,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
 
     def load_transaction_filled_shares(self):
         """Load transaction filled shares input section"""
-        
+
         self.transaction_filled_shares = QLineEdit(self)
         self.transaction_filled_shares.setValidator(QDoubleValidator(1,99999,0))
         self.transaction_filled_shares.setFixedSize(50, 20)
@@ -235,6 +235,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Filled share line edit generated.")
 
     def load_transaction_total_cost(self):
+        """Load transaction total cost input section"""
+        
         self.transaction_total_cost = QLineEdit(self)
         self.transaction_total_cost.setReadOnly(True)
         self.transaction_total_cost.setValidator(QDoubleValidator(0.001,99999.999,3))
