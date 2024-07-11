@@ -236,7 +236,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
 
     def load_transaction_total_cost(self):
         """Load transaction total cost input section"""
-        
+
         self.transaction_total_cost = QLineEdit(self)
         self.transaction_total_cost.setReadOnly(True)
         self.transaction_total_cost.setValidator(QDoubleValidator(0.001,99999.999,3))
@@ -247,6 +247,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Total cost line edit generated.")
 
     def load_transaction_days_high(self):
+        """Load transaction days high input section"""
+        
         self.transaction_days_high = QLineEdit(self)
         self.transaction_days_high.setValidator(QDoubleValidator(0.001,99999.999,3))
         self.transaction_days_high.setFixedSize(50, 20)
