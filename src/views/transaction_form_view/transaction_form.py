@@ -225,6 +225,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Slippage line edit generated.")
 
     def load_transaction_filled_shares(self):
+        """Load transaction filled shares input section"""
+
         self.transaction_filled_shares = QLineEdit(self)
         self.transaction_filled_shares.setValidator(QDoubleValidator(1,99999,0))
         self.transaction_filled_shares.setFixedSize(50, 20)
@@ -233,6 +235,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Filled share line edit generated.")
 
     def load_transaction_total_cost(self):
+        """Load transaction total cost input section"""
+
         self.transaction_total_cost = QLineEdit(self)
         self.transaction_total_cost.setReadOnly(True)
         self.transaction_total_cost.setValidator(QDoubleValidator(0.001,99999.999,3))
@@ -243,6 +247,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Total cost line edit generated.")
 
     def load_transaction_days_high(self):
+        """Load transaction days high input section"""
+
         self.transaction_days_high = QLineEdit(self)
         self.transaction_days_high.setValidator(QDoubleValidator(0.001,99999.999,3))
         self.transaction_days_high.setFixedSize(50, 20)
@@ -251,14 +257,19 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Day's high line edit generated.")
 
     def load_post_trade_analysis_section(self):
+        """load post trade analysis section"""
+
+        # Create section label
         self.post_trade_analysis_section = QLabel('', self, objectName="section-label")
         self.post_trade_analysis_section.setFixedSize(780, 100)
         self.post_trade_analysis_section.move(10, 630)
 
+        # Create input textfield 
         self.post_trade_analysis_textfield = QPlainTextEdit(self, objectName='reason-text')
         self.post_trade_analysis_textfield.setFixedSize(760, 50)
         self.post_trade_analysis_textfield.move(20, 640)
 
+        # Create info label
         self.post_trade_analysis_info = QLabel('Post Trade Analysis', self, objectName="reason-text")
         self.post_trade_analysis_info.move(10, 610)
         self.logger.logger.info("Post Trade Analysis section generated.")
@@ -275,6 +286,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter.set_text(self.post_trade_analysis_info, 'Analiza potransakzyjna')
 
     def load_exit_tactics_cb_items(self):
+        """Load exit tactic combobox items"""
+        
         exit_tactics_list = self.database.select('exit_tactics')
         for exit_tactic in exit_tactics_list:
             self.exit_tactic_cb.addItem(f'{exit_tactic[0]} {exit_tactic[1]}')
