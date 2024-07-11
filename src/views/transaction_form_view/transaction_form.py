@@ -286,6 +286,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter.set_text(self.post_trade_analysis_info, 'Analiza potransakzyjna')
 
     def load_exit_tactics_cb_items(self):
+        """Load exit tactic combobox items"""
+        
         exit_tactics_list = self.database.select('exit_tactics')
         for exit_tactic in exit_tactics_list:
             self.exit_tactic_cb.addItem(f'{exit_tactic[0]} {exit_tactic[1]}')
