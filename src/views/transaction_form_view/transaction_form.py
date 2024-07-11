@@ -248,7 +248,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
 
     def load_transaction_days_high(self):
         """Load transaction days high input section"""
-        
+
         self.transaction_days_high = QLineEdit(self)
         self.transaction_days_high.setValidator(QDoubleValidator(0.001,99999.999,3))
         self.transaction_days_high.setFixedSize(50, 20)
@@ -257,14 +257,19 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Day's high line edit generated.")
 
     def load_post_trade_analysis_section(self):
+        """load post trade analysis section"""
+
+        # Create section label
         self.post_trade_analysis_section = QLabel('', self, objectName="section-label")
         self.post_trade_analysis_section.setFixedSize(780, 100)
         self.post_trade_analysis_section.move(10, 630)
 
+        # Create input textfield 
         self.post_trade_analysis_textfield = QPlainTextEdit(self, objectName='reason-text')
         self.post_trade_analysis_textfield.setFixedSize(760, 50)
         self.post_trade_analysis_textfield.move(20, 640)
 
+        # Create info label
         self.post_trade_analysis_info = QLabel('Post Trade Analysis', self, objectName="reason-text")
         self.post_trade_analysis_info.move(10, 610)
         self.logger.logger.info("Post Trade Analysis section generated.")
