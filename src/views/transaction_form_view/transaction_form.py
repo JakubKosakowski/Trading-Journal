@@ -275,6 +275,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Post Trade Analysis section generated.")
 
     def load_text(self):
+        """Load text in choosed language for all elements in view"""
+        
         text_setter = TextSetter(self.language)
         text_setter.set_title(self.main_window, 'Dodaj transakcję')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
