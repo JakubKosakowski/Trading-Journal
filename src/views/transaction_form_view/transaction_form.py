@@ -313,6 +313,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_exit_tactics_cb_items()
 
     def add_exit_tactic(self):
+        """Show popup window for adding new exit tactic"""
+        
         self.ui = AddExitTacticPopupWindow()
         self.ui.submitted.connect(self.update_exit_tactic)
         self.ui.show()
