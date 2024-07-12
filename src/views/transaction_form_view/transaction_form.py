@@ -135,6 +135,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Exit tactic section generated.")
 
     def load_colors(self):
+        """Load colors for all buttons in view"""
+        
         self.load_menu_button_color()
 
     def load_menu_button_color(self):
@@ -275,6 +277,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Post Trade Analysis section generated.")
 
     def load_text(self):
+        """Load text in choosed language for all elements in view"""
+        
         text_setter = TextSetter(self.language)
         text_setter.set_title(self.main_window, 'Dodaj transakcję')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
@@ -293,12 +297,26 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
             self.exit_tactic_cb.addItem(f'{exit_tactic[0]} {exit_tactic[1]}')
 
     @pyqtSlot(str)
-    def update_exit_tactic(self, exit_tactic):
+    def update_exit_tactic(self, exit_tactic: str):
+        """Add new created exit tactic into database
+
+        Arguments
+        ---------
+            exit_tactic (str): Exit tactic description
+        """
+
+        # Insert exit tactic into database table
         self.database.insert([exit_tactic], "exit_tactics")
+
+        # Clear whole exit tactic combobox
         self.exit_tactic_cb.clear()
+
+        # Load exit tactics again
         self.load_exit_tactics_cb_items()
 
     def add_exit_tactic(self):
+        """Show popup window for adding new exit tactic"""
+
         self.ui = AddExitTacticPopupWindow()
         self.ui.submitted.connect(self.update_exit_tactic)
         self.ui.show()
