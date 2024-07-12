@@ -295,8 +295,13 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
             self.exit_tactic_cb.addItem(f'{exit_tactic[0]} {exit_tactic[1]}')
 
     @pyqtSlot(str)
-    def update_exit_tactic(self, exit_tactic):
-        """Add new created exit tactic into database"""
+    def update_exit_tactic(self, exit_tactic: str):
+        """Add new created exit tactic into database
+
+        Arguments
+        ---------
+            exit_tactic (str): Exit tactic description
+        """
 
         # Insert exit tactic into database table
         self.database.insert([exit_tactic], "exit_tactics")
