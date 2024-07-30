@@ -66,6 +66,8 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter.set_text(self.name_label, 'Imię')
 
     def show_edit_fields(self):
+        """Show input fields"""
+
         self.show_name_field()
         self.show_age_field()
 
