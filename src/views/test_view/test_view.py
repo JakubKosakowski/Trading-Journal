@@ -33,12 +33,20 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_text()
 
     def load_colors(self):
+        """Load color for all buttons in view"""
+
+        # Create and set button_text_color_picker
         button_text_color_picker = ButtonTextColorPicker()
         text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
         button_text_color_picker.check_pick_condiditon(self.main_window.toml_data['settings']['primary_color'])
+
+        # Create button_color_setter
         button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'], text_color_setter)
+
+        # Set buttons color with proper text color
         button_color_setter.set_color(self.menu_btn)
         button_color_setter.set_color(self.add_test_btn)
+
         self.logger.logger.info('Go back to menu button generated.')
 
     def load_text(self):
