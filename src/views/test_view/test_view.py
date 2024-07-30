@@ -33,17 +33,32 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_text()
 
     def load_colors(self):
+        """Load color for all buttons in view"""
+
+        # Create and set button_text_color_picker
         button_text_color_picker = ButtonTextColorPicker()
         text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
         button_text_color_picker.check_pick_condiditon(self.main_window.toml_data['settings']['primary_color'])
+
+        # Create button_color_setter
         button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'], text_color_setter)
+
+        # Set buttons color with proper text color
         button_color_setter.set_color(self.menu_btn)
         button_color_setter.set_color(self.add_test_btn)
+
         self.logger.logger.info('Go back to menu button generated.')
 
     def load_text(self):
+        """Load text in choosed language"""
+
+        # Get language code
         self.language = self.main_window.toml_data['settings']['language']
+
+        # Create text_setter
         text_setter = TextSetter(self.language)
+
+        # Load text for all texts in widget
         text_setter.set_title(self.main_window, 'Test')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.add_test_btn, 'Dodaj')
@@ -51,11 +66,18 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter.set_text(self.name_label, 'Imię')
 
     def show_edit_fields(self):
+        """Show input fields"""
+
         self.show_name_field()
         self.show_age_field()
 
     def show_name_field(self):
+        """Show input field for name"""
+
+        # Load edit field info label
         self.load_name_field_label()
+
+        # Create input field
         self.name = QLineEdit(self)
         self.name.setFixedSize(100, 20)
         self.name.move(100, 60)
