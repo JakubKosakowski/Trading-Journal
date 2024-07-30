@@ -50,8 +50,15 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info('Go back to menu button generated.')
 
     def load_text(self):
+        """Load text in choosed language"""
+
+        # Get language code
         self.language = self.main_window.toml_data['settings']['language']
+
+        # Create text_setter
         text_setter = TextSetter(self.language)
+
+        # Load text for all texts in widget
         text_setter.set_title(self.main_window, 'Test')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.add_test_btn, 'Dodaj')
