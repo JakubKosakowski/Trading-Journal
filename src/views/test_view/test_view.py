@@ -117,8 +117,14 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Name info label generated.")
 
     def add_record(self):
+        """Add record after 'Add' button click"""
+
+        # Show inputed data in log
         self.logger.logger.debug(self.name.text())
         self.logger.logger.debug(self.age.text())
+        # Insert record into database
         self.db.insert([self.name.text(), int(self.age.text()), 35])
         self.logger.logger.info('Record added.')
+
+        # Go back to menu
         self.main_window.start_main_window_UI()
