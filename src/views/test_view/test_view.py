@@ -85,7 +85,12 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Name line edit generated.")
 
     def show_age_field(self):
+        """Show input field for age"""
+
+        # Load edit ffield info label
         self.load_age_field_label()
+
+        # Create input field
         self.age = QLineEdit(self)
         self.age.setFixedSize(100, 20)
         self.age.setValidator(QIntValidator(18,200))
@@ -94,6 +99,8 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Age edit generated.")
 
     def load_age_field_label(self):
+        """Load age field input info"""
+
         self.age_label = QLabel('', self)
         self.age_label.setFixedSize(50, 20)
         self.age_label.move(100, 100)
@@ -101,6 +108,8 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Age info label generated.")
 
     def load_name_field_label(self):
+        """Load name field input info"""
+        
         self.name_label = QLabel('', self)
         self.name_label.setFixedSize(50, 20)
         self.name_label.move(100, 40)
@@ -108,8 +117,14 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Name info label generated.")
 
     def add_record(self):
+        """Add record after 'Add' button click"""
+
+        # Show inputed data in log
         self.logger.logger.debug(self.name.text())
         self.logger.logger.debug(self.age.text())
+        # Insert record into database
         self.db.insert([self.name.text(), int(self.age.text()), 35])
         self.logger.logger.info('Record added.')
+
+        # Go back to menu
         self.main_window.start_main_window_UI()
