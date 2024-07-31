@@ -85,7 +85,12 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Name line edit generated.")
 
     def show_age_field(self):
+        """Show input field for age"""
+
+        # Load edit ffield info label
         self.load_age_field_label()
+
+        # Create input field
         self.age = QLineEdit(self)
         self.age.setFixedSize(100, 20)
         self.age.setValidator(QIntValidator(18,200))
