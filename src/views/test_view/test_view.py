@@ -99,6 +99,8 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Age edit generated.")
 
     def load_age_field_label(self):
+        """Load age field input info"""
+        
         self.age_label = QLabel('', self)
         self.age_label.setFixedSize(50, 20)
         self.age_label.move(100, 100)
