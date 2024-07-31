@@ -100,7 +100,7 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
 
     def load_age_field_label(self):
         """Load age field input info"""
-        
+
         self.age_label = QLabel('', self)
         self.age_label.setFixedSize(50, 20)
         self.age_label.move(100, 100)
@@ -108,6 +108,8 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger.logger.info("Age info label generated.")
 
     def load_name_field_label(self):
+        """Load name field input info"""
+        
         self.name_label = QLabel('', self)
         self.name_label.setFixedSize(50, 20)
         self.name_label.move(100, 40)
