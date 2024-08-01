@@ -13,10 +13,12 @@ class Logger:
 
     def set_file_handler(self):
         """Set file handler for logger"""
-        
+
         self.file_handler = logging.FileHandler(self.filename)
         self.file_handler.setLevel('INFO')
 
     def set_formatter(self):
+        """Set formatter for logger"""
+        
         self.formatter = logging.Formatter("%(asctime)s: %(levelname)s - %(message)s (Line: %(lineno)d [%(filename)s])")
         self.file_handler.setFormatter(self.formatter)
