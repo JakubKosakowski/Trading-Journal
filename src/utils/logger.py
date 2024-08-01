@@ -2,7 +2,14 @@ import logging
 import datetime as dt
 
 class Logger:
-    def __init__(self, logger_name):
+    def __init__(self, logger_name: str):
+        """Initialize Logger class instance base on logger name
+
+        Arguments
+        ---------
+            logger_name (str): logger name
+        """
+        
         logging.basicConfig(level=logging.DEBUG)
         today = dt.datetime.today()
         self.logger = logging.getLogger(logger_name)
@@ -12,9 +19,13 @@ class Logger:
         self.logger.addHandler(self.file_handler)
 
     def set_file_handler(self):
+        """Set file handler for logger"""
+
         self.file_handler = logging.FileHandler(self.filename)
         self.file_handler.setLevel('INFO')
 
     def set_formatter(self):
+        """Set formatter for logger"""
+
         self.formatter = logging.Formatter("%(asctime)s: %(levelname)s - %(message)s (Line: %(lineno)d [%(filename)s])")
         self.file_handler.setFormatter(self.formatter)
