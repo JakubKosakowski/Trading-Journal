@@ -12,6 +12,8 @@ class Logger:
         self.logger.addHandler(self.file_handler)
 
     def set_file_handler(self):
+        """Set file handler for logger"""
+        
         self.file_handler = logging.FileHandler(self.filename)
         self.file_handler.setLevel('INFO')
 
