@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from PyQt5.QtWidgets import *
 from src.utils import Utils
 
 class TextSetter:
@@ -20,7 +20,7 @@ class TextSetter:
         Use Utils class static method to set widnow title as words in lang dictionary for choosen language
     """
 
-    def __init__(self, lang):
+    def __init__(self, lang: str):
         """
         Parameters
         ----------
@@ -46,13 +46,13 @@ class TextSetter:
 
         Utils.set_language_text(obj, text, self.lang)
 
-    def set_title(self, obj, text):
+    def set_title(self, obj: QMainWindow | QWidget, text: str):
         """
         Set text on window in choosen language
 
         Parameters
         ----------
-        obj: Qt Object
+        obj: QMainWindow
             Object, which text we want to set
         text: str
             Text, which we will set in object
