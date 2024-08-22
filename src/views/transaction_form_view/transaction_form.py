@@ -7,14 +7,19 @@ from src.abstract import FormClass
 from src.meta import MetaFormClass
 from src.popup_window import AddExitTacticPopupWindow
 from src.postgres_database import Database
+from src.generators import QLineEditGenerator
 
 
 class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
     def __init__(self, parent=None):
         super(TransactionFormView, self).__init__(parent)
+
+
         self.main_window = parent
         self.language = self.main_window.toml_data['settings']['language']
         self.logger = Logger(__name__)
+        self.q_line_edit_generator = QLineEditGenerator(self, 0.000)
+
         self.menu_btn = QPushButton("Go back to menu", self)
         self.menu_btn.move(100, 750)
         self.menu_btn.setObjectName('menu-btn')
@@ -163,6 +168,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_transaction_filled_shares()
         self.load_transaction_total_cost()
         self.load_transaction_days_high()
+        self.load_transaction_days_low()
 
     def load_transaction_date_picker(self):
         """Load data field in form"""
@@ -197,11 +203,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
     def load_transaction_order_price(self):
         """Load transaction order price input section"""
         
-        self.transaction_order_price = QLineEdit(self)
-        self.transaction_order_price.setValidator(QDoubleValidator(0.001,99999.999,3))
-        self.transaction_order_price.setFixedSize(50, 20)
+        self.transaction_order_price = self.q_line_edit_generator.generate_element()
         self.transaction_order_price.move(122, 330)
-        self.transaction_order_price.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Order price line edit generated.")
 
     def load_transaction_filled_priced(self):
@@ -258,6 +261,16 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.transaction_days_high.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Day's high line edit generated.")
 
+    def load_transaction_days_low(self):
+        """Load transaction days low input section"""
+        
+        self.transaction_days_low = QLineEdit(self)
+        self.transaction_days_low.setValidator(QDoubleValidator(0.001,99999.999,3))
+        self.transaction_days_low.setFixedSize(50, 20)
+        self.transaction_days_low.move(630, 330)
+        self.transaction_days_low.setStyleSheet(f"background-color: #ffffff;")
+        self.logger.logger.info("Day's low line edit generated.")
+
     def load_post_trade_analysis_section(self):
         """load post trade analysis section"""
 
@@ -287,7 +300,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter.set_text(self.company_code_label, "Kod spółki")
         text_setter.set_text(self.reason_for_exit_info, 'Powód wyjścia')
         text_setter.set_text(self.exit_tactic_label, 'Taktyka wyjścia')
-        text_setter.set_text(self.post_trade_analysis_info, 'Analiza potransakzyjna')
+        text_setter.set_text(self.post_trade_analysis_info, 'Analiza potransakcyjna')
 
     def load_exit_tactics_cb_items(self):
         """Load exit tactic combobox items"""
