@@ -19,7 +19,7 @@ LANGUAGES = {
         'Powód wyjścia': 'Reason for Exit',
         'Taktyka wyjścia': 'Exit Tactic',
         'Wejścia i Wyjścia': 'Entries & Exits',
-        'Analiza potransakzyjna': 'Post Trade Analysis',
+        'Analiza potransakcyjna': 'Post Trade Analysis',
         'Test': 'Test',
         'Wiek': 'Age',
         'Imię': 'Name'

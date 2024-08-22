@@ -7,14 +7,19 @@ from src.abstract import FormClass
 from src.meta import MetaFormClass
 from src.popup_window import AddExitTacticPopupWindow
 from src.postgres_database import Database
+from src.generators import QLineEditGenerator
 
 
 class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
     def __init__(self, parent=None):
         super(TransactionFormView, self).__init__(parent)
+
+
         self.main_window = parent
         self.language = self.main_window.toml_data['settings']['language']
         self.logger = Logger(__name__)
+        self.q_line_edit_generator = QLineEditGenerator(self, 0.000)
+
         self.menu_btn = QPushButton("Go back to menu", self)
         self.menu_btn.move(100, 750)
         self.menu_btn.setObjectName('menu-btn')
@@ -198,11 +203,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
     def load_transaction_order_price(self):
         """Load transaction order price input section"""
         
-        self.transaction_order_price = QLineEdit(self)
-        self.transaction_order_price.setValidator(QDoubleValidator(0.001,99999.999,3))
-        self.transaction_order_price.setFixedSize(50, 20)
+        self.transaction_order_price = self.q_line_edit_generator.generate_element()
         self.transaction_order_price.move(122, 330)
-        self.transaction_order_price.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Order price line edit generated.")
 
     def load_transaction_filled_priced(self):
