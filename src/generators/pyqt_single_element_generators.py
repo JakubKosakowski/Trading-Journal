@@ -1,4 +1,4 @@
-from abstract import GenerateSinglePyQtElement
+from src.abstract import GenerateSinglePyQtElement
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 

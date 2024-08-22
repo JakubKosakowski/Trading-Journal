@@ -1,1 +1,1 @@
-from .pyqt_single_element_generators import *
+from .pyqt_single_element_generators import QLineEditGenerator
