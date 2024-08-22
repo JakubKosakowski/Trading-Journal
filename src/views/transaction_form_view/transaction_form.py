@@ -287,7 +287,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter.set_text(self.company_code_label, "Kod spółki")
         text_setter.set_text(self.reason_for_exit_info, 'Powód wyjścia')
         text_setter.set_text(self.exit_tactic_label, 'Taktyka wyjścia')
-        text_setter.set_text(self.post_trade_analysis_info, 'Analiza potransakzyjna')
+        text_setter.set_text(self.post_trade_analysis_info, 'Analiza potransakcyjna')
 
     def load_exit_tactics_cb_items(self):
         """Load exit tactic combobox items"""
