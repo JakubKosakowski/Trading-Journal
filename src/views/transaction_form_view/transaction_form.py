@@ -163,6 +163,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_transaction_filled_shares()
         self.load_transaction_total_cost()
         self.load_transaction_days_high()
+        self.load_transaction_days_low()
 
     def load_transaction_date_picker(self):
         """Load data field in form"""
@@ -257,6 +258,16 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.transaction_days_high.move(545, 330)
         self.transaction_days_high.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Day's high line edit generated.")
+
+    def load_transaction_days_low(self):
+        """Load transaction days low input section"""
+        
+        self.transaction_days_low = QLineEdit(self)
+        self.transaction_days_low.setValidator(QDoubleValidator(0.001,99999.999,3))
+        self.transaction_days_low.setFixedSize(50, 20)
+        self.transaction_days_low.move(630, 330)
+        self.transaction_days_low.setStyleSheet(f"background-color: #ffffff;")
+        self.logger.logger.info("Day's low line edit generated.")
 
     def load_post_trade_analysis_section(self):
         """load post trade analysis section"""
