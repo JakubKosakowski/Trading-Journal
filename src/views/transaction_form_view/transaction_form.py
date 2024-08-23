@@ -186,8 +186,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_company_code_label()
 
         # Create company code edit line
-        self.company_code = self.qline_edit_generator.generate_element()
-        self.company_code.move(100, 100)
+        self.company_code = self.qline_edit_generator.generate_element(100, 100)
+        # self.company_code.move()
         self.logger.logger.info("Company code line edit generated.")
 
     def load_company_code_label(self):
@@ -201,50 +201,43 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
     def load_transaction_order_price(self):
         """Load transaction order price input section"""
         
-        self.transaction_order_price = self.qline_edit_generator.generate_element()
-        self.transaction_order_price.move(122, 330)
+        self.transaction_order_price = self.qline_edit_generator.generate_element(122, 330)
         self.logger.logger.info("Order price line edit generated.")
 
     def load_transaction_filled_priced(self):
         """Load transaction filled price input section"""
         
-        self.transaction_filled_priced = self.qline_edit_generator.generate_element()
-        self.transaction_filled_priced.move(210, 330)
+        self.transaction_filled_priced = self.qline_edit_generator.generate_element(210, 330)
         self.logger.logger.info("Filled priced line edit generated.")
 
     def load_transaction_slippage(self):
         """Load transaction slippage input section"""
         
-        self.transaction_slippage = self.qline_edit_generator.generate_element(readonly=True)
-        self.transaction_slippage.move(290, 330)
+        self.transaction_slippage = self.qline_edit_generator.generate_element(290, 330, readonly=True)
         self.logger.logger.info("Slippage line edit generated.")
 
     def load_transaction_filled_shares(self):
         """Load transaction filled shares input section"""
 
-        self.transaction_filled_shares = self.qline_edit_generator.generate_element()
-        self.transaction_filled_shares.move(370, 330)
+        self.transaction_filled_shares = self.qline_edit_generator.generate_element(370, 330)
         self.logger.logger.info("Filled share line edit generated.")
 
     def load_transaction_total_cost(self):
         """Load transaction total cost input section"""
 
-        self.transaction_total_cost = self.qline_edit_generator.generate_element(readonly=True)
-        self.transaction_total_cost.move(460, 330)
+        self.transaction_total_cost = self.qline_edit_generator.generate_element(460, 330, readonly=True)
         self.logger.logger.info("Total cost line edit generated.")
 
     def load_transaction_days_high(self):
         """Load transaction days high input section"""
 
-        self.transaction_days_high = self.qline_edit_generator.generate_element()
-        self.transaction_days_high.move(545, 330)
+        self.transaction_days_high = self.qline_edit_generator.generate_element(545, 330)
         self.logger.logger.info("Day's high line edit generated.")
 
     def load_transaction_days_low(self):
         """Load transaction days low input section"""
         
-        self.transaction_days_low = self.qline_edit_generator.generate_element()
-        self.transaction_days_low.move(630, 330)
+        self.transaction_days_low = self.qline_edit_generator.generate_element(630, 330)
         self.logger.logger.info("Day's low line edit generated.")
 
     def load_post_trade_analysis_section(self):

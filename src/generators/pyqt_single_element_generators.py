@@ -7,7 +7,7 @@ class QLineEditGenerator(GenerateSinglePyQtElement):
         self.widget = widget
         self.defalt_value = default_value
 
-    def generate_element(self, position_x: int = 200, position_y: int = 200, readonly: bool = False):
+    def generate_element(self, position_x: int, position_y: int, readonly: bool = False):
         """Generate single QLineEdit input
 
         Arguments
