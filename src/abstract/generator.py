@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from types import FunctionType
 
 class GenerateSinglePyQtElement(ABC):
     @abstractmethod
@@ -9,5 +8,5 @@ class GenerateSinglePyQtElement(ABC):
 
 class GenerateButtonElement(ABC):
     @abstractmethod
-    def generate_element(self, name: str, text: str, position_x: int, position_y: int, connect_func: FunctionType):
+    def generate_element(self, name: str, text: str, position_x: int, position_y: int):
         pass
