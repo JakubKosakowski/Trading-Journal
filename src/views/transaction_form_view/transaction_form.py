@@ -18,7 +18,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.main_window = parent
         self.language = self.main_window.toml_data['settings']['language']
         self.logger = Logger(__name__)
-        self.q_line_edit_generator = QLineEditGenerator(self, 0.000)
+        self.qline_edit_generator = QLineEditGenerator(self, 0.000)
 
         self.menu_btn = QPushButton("Go back to menu", self)
         self.menu_btn.move(100, 750)
@@ -186,10 +186,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_company_code_label()
 
         # Create company code edit line
-        self.company_code = QLineEdit(self)
-        self.company_code.setFixedSize(40, 20)
+        self.company_code = self.qline_edit_generator.generate_element()
         self.company_code.move(100, 100)
-        self.company_code.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Company code line edit generated.")
 
     def load_company_code_label(self):
@@ -203,72 +201,50 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
     def load_transaction_order_price(self):
         """Load transaction order price input section"""
         
-        self.transaction_order_price = self.q_line_edit_generator.generate_element()
+        self.transaction_order_price = self.qline_edit_generator.generate_element()
         self.transaction_order_price.move(122, 330)
         self.logger.logger.info("Order price line edit generated.")
 
     def load_transaction_filled_priced(self):
         """Load transaction filled price input section"""
         
-        self.transaction_filled_priced = QLineEdit(self)
-        self.transaction_filled_priced.setValidator(QDoubleValidator(0.001,99999.999,3))
-        self.transaction_filled_priced.setFixedSize(50, 20)
+        self.transaction_filled_priced = self.qline_edit_generator.generate_element()
         self.transaction_filled_priced.move(210, 330)
-        self.transaction_filled_priced.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Filled priced line edit generated.")
 
     def load_transaction_slippage(self):
         """Load transaction slippage input section"""
         
-        self.transaction_slippage = QLineEdit(self)
-        self.transaction_slippage.setReadOnly(True)
-        self.transaction_slippage.setValidator(QDoubleValidator(0.001,99999.999,3))
-        self.transaction_slippage.setText('0.000')
-        self.transaction_slippage.setFixedSize(50, 20)
+        self.transaction_slippage = self.qline_edit_generator.generate_element(readonly=True)
         self.transaction_slippage.move(290, 330)
-        self.transaction_slippage.setStyleSheet(f"background-color: gray;")
         self.logger.logger.info("Slippage line edit generated.")
 
     def load_transaction_filled_shares(self):
         """Load transaction filled shares input section"""
 
-        self.transaction_filled_shares = QLineEdit(self)
-        self.transaction_filled_shares.setValidator(QDoubleValidator(1,99999,0))
-        self.transaction_filled_shares.setFixedSize(50, 20)
+        self.transaction_filled_shares = self.qline_edit_generator.generate_element()
         self.transaction_filled_shares.move(370, 330)
-        self.transaction_filled_shares.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Filled share line edit generated.")
 
     def load_transaction_total_cost(self):
         """Load transaction total cost input section"""
 
-        self.transaction_total_cost = QLineEdit(self)
-        self.transaction_total_cost.setReadOnly(True)
-        self.transaction_total_cost.setValidator(QDoubleValidator(0.001,99999.999,3))
-        self.transaction_total_cost.setText('0.000')
-        self.transaction_total_cost.setFixedSize(50, 20)
+        self.transaction_total_cost = self.qline_edit_generator.generate_element(readonly=True)
         self.transaction_total_cost.move(460, 330)
-        self.transaction_total_cost.setStyleSheet(f"background-color: gray;")
         self.logger.logger.info("Total cost line edit generated.")
 
     def load_transaction_days_high(self):
         """Load transaction days high input section"""
 
-        self.transaction_days_high = QLineEdit(self)
-        self.transaction_days_high.setValidator(QDoubleValidator(0.001,99999.999,3))
-        self.transaction_days_high.setFixedSize(50, 20)
+        self.transaction_days_high = self.qline_edit_generator.generate_element()
         self.transaction_days_high.move(545, 330)
-        self.transaction_days_high.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Day's high line edit generated.")
 
     def load_transaction_days_low(self):
         """Load transaction days low input section"""
         
-        self.transaction_days_low = QLineEdit(self)
-        self.transaction_days_low.setValidator(QDoubleValidator(0.001,99999.999,3))
-        self.transaction_days_low.setFixedSize(50, 20)
+        self.transaction_days_low = self.qline_edit_generator.generate_element()
         self.transaction_days_low.move(630, 330)
-        self.transaction_days_low.setStyleSheet(f"background-color: #ffffff;")
         self.logger.logger.info("Day's low line edit generated.")
 
     def load_post_trade_analysis_section(self):
