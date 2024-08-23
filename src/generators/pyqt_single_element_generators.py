@@ -25,3 +25,7 @@ class QLineEditGenerator(GenerateSinglePyQtElement):
         else:
             element.setStyleSheet(f"background-color: #ffffff;")
         return element
+    
+
+class QPushButtonGenerator(GenerateSinglePyQtElement):
+    pass
