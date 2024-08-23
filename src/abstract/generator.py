@@ -9,5 +9,5 @@ class GenerateSinglePyQtElement(ABC):
 
 class GenerateButtonElement(ABC):
     @abstractmethod
-    def generate_element(self, position_x: int, position_y: int, connect_func: FunctionType):
+    def generate_element(self, name: str, text: str, position_x: int, position_y: int, connect_func: FunctionType):
         pass
