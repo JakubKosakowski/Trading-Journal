@@ -13,7 +13,7 @@ class ViewClass(ABC):
         pass
 
 
-class FormClass(ViewClass):
+class FormClass(ABC):
 
     @abstractmethod
     def add_record(self, values: list) -> None:
