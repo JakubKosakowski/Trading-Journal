@@ -3,15 +3,13 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.views import TransactionFormView, AllTransactionsView, SettingsView, TestView
-from src.utils import Logger, Utils
+from src.utils import Logger
 from config.settings import load_toml_settings
-from src.setters import ButtonColorSetter, TextSetter, ProfitLossColorPicker, TextColorSetter, ButtonTextColorPicker
-from src.abstract import ViewClass
-from src.meta import MetaClass
+from src.setters import TextSetter, ProfitLossColorPicker, TextColorSetter
 from src.generators import QPushButtonGenerator
 
 
-class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
+class MainWindowWidget(QWidget):
     """A class used to build widget for main window
 
     Arguments
@@ -104,6 +102,7 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         self.all_transactions_btn = self.qpush_button_generator.generate_element('all-transactions-btn', 'Wszystkie transakcje', 50, 200)
         self.test_btn = self.qpush_button_generator.generate_element('test-btn', 'Test', 50, 260)
         self.exit_btn = self.qpush_button_generator.generate_element('exit-btn', 'Wyjdź', 50, 320)
+        self.main_window.logger.logger.info('Buttons loaded.')
 
     def load_text(self):
         """Load texts for all elements in main window"""
