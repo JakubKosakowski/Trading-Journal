@@ -3,21 +3,18 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from src.views import TransactionFormView, AllTransactionsView, SettingsView, TestView
-from src.utils import Logger, Utils
+from src.utils import Logger
 from config.settings import load_toml_settings
-from src.setters import ButtonColorSetter, TextSetter, ProfitLossColorPicker, TextColorSetter, ButtonTextColorPicker
-from src.abstract import ViewClass
-from src.meta import MetaClass
+from src.setters import TextSetter, ProfitLossColorPicker, TextColorSetter
+from src.generators import QPushButtonGenerator
 
 
-class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
+class MainWindowWidget(QWidget):
     """A class used to build widget for main window
 
     Arguments
     ---------
     QWidget (class): Class used to create widgets
-    ViewClass (class): Abstract class used to override methods for view type classes
-    metaclass (class, optional): Class used to inherit by two classes. Defaults to MetaClass.
 
     Attributes
     ----------
@@ -71,33 +68,8 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         self.database = Database()
         self.language = self.main_window.toml_data['settings']['language']
         self.currency = self.main_window.toml_data['settings']['user_currency']
-
-        # Create settings button
-        self.settings_btn = QPushButton("", self, objectName='settings-btn')
-        self.settings_btn.move(750, 50)
-        self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
-        self.settings_btn.setCursor(QCursor(Qt.PointingHandCursor))
-        self.main_window.logger.logger.info('Settings button generated.')
-
-        # Create trasnsactions button
-        self.transaction_btn = QPushButton("", self, objectName='transaction-btn')
-        self.transaction_btn.move(50, 140)
-        self.main_window.logger.logger.info("Add transaction button generated")
-
-        # Create all transactions button
-        self.all_transactions_btn = QPushButton("", self, objectName='all-transactions-btn')
-        self.all_transactions_btn.move(50, 200)
-        self.main_window.logger.logger.info("Show all transactions button generated")
-        
-        # Create exit button
-        self.exit_btn = QPushButton("", self, objectName='exit-btn')
-        self.exit_btn.move(50, 320)
-        self.main_window.logger.logger.info("Exit button generated")
-
-        # Create test button
-        self.test_btn = QPushButton("", self, objectName='test-btn')
-        self.test_btn.move(50, 260)
-        self.main_window.logger.logger.info("Test view button generated")
+        self.text_setter = TextSetter(self.language)
+        self.qpush_button_generator = QPushButtonGenerator(self, self.main_window.toml_data['settings']['primary_color'], self.text_setter)
 
         # Create version label
         self.version_label = QLabel(self, objectName='version-label')
@@ -115,43 +87,25 @@ class MainWindowWidget(QWidget, ViewClass, metaclass=MetaClass):
         else:
             self.main_window.setGeometry(550, 200, 800, 800)
 
-        # Load colors and texts
-        self.load_colors()
+        # Load buttons
+        self.load_buttons()
         self.load_text()
 
-    def load_colors(self):
-        """Load colors for all elements in main window"""
+    def load_buttons(self):
+        self.settings_btn = self.qpush_button_generator.generate_element('settings-btn', '', 750, 50)
+        self.settings_btn.setIcon(QIcon('static/images/settings_icon.png'))
+        self.settings_btn.setCursor(QCursor(Qt.PointingHandCursor))
 
-        # Initiate ButtonTextColorPicker and TextColorSetter
-        button_text_color_picker = ButtonTextColorPicker()
-        text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
-
-        # Check if primary color is not enough bright for white text color
-        button_text_color_picker.check_pick_condiditon(self.main_window.toml_data['settings']['primary_color'])
-
-        # Initiate ButtonColorSetter 
-        button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'], text_color_setter)
-
-        # Set colors for all buttons in main window
-        button_color_setter.set_color(self.transaction_btn)
-        button_color_setter.set_color(self.all_transactions_btn)
-        button_color_setter.set_color(self.exit_btn)
-        button_color_setter.set_color(self.test_btn)
-        self.main_window.logger.logger.info("All window styles set.")
+        self.transaction_btn = self.qpush_button_generator.generate_element('transaction-btn', 'Dodaj transakcję', 50, 140)
+        self.all_transactions_btn = self.qpush_button_generator.generate_element('all-transactions-btn', 'Wszystkie transakcje', 50, 200)
+        self.test_btn = self.qpush_button_generator.generate_element('test-btn', 'Test', 50, 260)
+        self.exit_btn = self.qpush_button_generator.generate_element('exit-btn', 'Wyjdź', 50, 320)
+        self.main_window.logger.logger.info('Buttons loaded.')
 
     def load_text(self):
         """Load texts for all elements in main window"""
 
-        # Initiate TextSetter
-        text_setter = TextSetter(self.language)
-
-        # Set text for window title and all buttons in main window 
-        text_setter.set_title(self.main_window, 'Dziennik transakcji')
-        text_setter.set_text(self.transaction_btn, "Dodaj transakcję")
-        text_setter.set_text(self.exit_btn, "Wyjdź")
-        text_setter.set_text(self.all_transactions_btn, "Wszystkie transakcje")
-        text_setter.set_text(self.test_btn, "Test")
-        text_setter.set_text(self.profit_loss_label, 'Z/S: ')
+        self.text_setter.set_text(self.profit_loss_label, 'Z/S: ')
         self.main_window.logger.logger.info('View text set.')
 
     def show_profit_loss_info(self):

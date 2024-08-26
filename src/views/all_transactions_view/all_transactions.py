@@ -5,6 +5,7 @@ from src.utils import Logger, Utils
 from src.postgres_database import Database
 from src.setters import ButtonColorSetter, TextSetter, BackgroundColorSetter, TextColorSetter, ButtonTextColorPicker
 from src.abstract import ViewClass
+from src.generators import QPushButtonGenerator
 from src.meta import MetaClass
 
 
@@ -70,11 +71,10 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
         self.database = Database()
         self.logger.logger.info("Database loaded.")
 
-        # Create 'Go back to menu' button
-        self.menu_btn = QPushButton("", self)
-        self.menu_btn.move(100, 350)
-        self.menu_btn.setObjectName('menu-btn')
-        self.logger.logger.info('Go back to menu button generated.')
+        self.text_setter = TextSetter(self.language)
+        self.qpush_button_generator = QPushButtonGenerator(self, self.main_window.toml_data['settings']['primary_color'], self.text_setter)
+
+        self.load_buttons()
 
         # Create table widget
         self.create_table()
@@ -106,6 +106,7 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
         self.layout.addWidget(self.menu_btn)
         self.setLayout(self.layout)
         self.logger.logger.info("Table layout set up.")
+
 
         # Load colors
         self.load_colors()
@@ -141,19 +142,9 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
     def load_colors(self):
         """Method used to load all colors for widget"""
         
-        self.load_menu_button_color()
         self.load_background_color()
         self.logger.logger.info("All view colors loaded.")
 
-    def load_menu_button_color(self):
-        """Method used to load menu button background and text color"""
-
-        button_text_color_picker = ButtonTextColorPicker()
-        text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
-        button_text_color_picker.check_pick_condiditon(self.main_window.toml_data['settings']['primary_color'])
-        button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'], text_color_setter)
-        button_color_setter.set_color(self.menu_btn)
-        self.logger.logger.info('Menu button color set.')
         
     def load_background_color(self):
         """Method used to load table background color"""
@@ -169,3 +160,7 @@ class AllTransactionsView(QWidget, ViewClass, metaclass=MetaClass):
         text_setter.set_title(self.main_window, 'Wszystkie transakcje')
         text_setter.set_text(self.menu_btn, "Wróć do menu")
         self.logger.logger.info('View text set.')
+
+    def load_buttons(self):
+        self.menu_btn = self.qpush_button_generator.generate_element('menu-btn', 'Wróć do menu', 100, 350)
+        self.logger.logger.info('Button loaded.')

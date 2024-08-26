@@ -7,7 +7,7 @@ from src.abstract import FormClass
 from src.meta import MetaFormClass
 from src.popup_window import AddExitTacticPopupWindow
 from src.postgres_database import Database
-from src.generators import QLineEditGenerator
+from src.generators import QLineEditGenerator, QPushButtonGenerator
 
 
 class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
@@ -20,18 +20,12 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.logger = Logger(__name__)
         self.qline_edit_generator = QLineEditGenerator(self, 0.000)
 
-        self.menu_btn = QPushButton("Go back to menu", self)
-        self.menu_btn.move(100, 750)
-        self.menu_btn.setObjectName('menu-btn')
-        self.logger.logger.info('Go back to menu button generated.')
-
-        self.add_transaction_btn = QPushButton("Add", self)
-        self.add_transaction_btn.move(250, 750)
-        self.add_transaction_btn.setObjectName('add-transaction-btn')
-        self.add_transaction_btn.clicked.connect(self.add_record)
+        self.text_setter = TextSetter(self.language)
+        self.qpush_button_generator = QPushButtonGenerator(self, self.main_window.toml_data['settings']['primary_color'], self.text_setter)
 
         self.database = Database()
 
+        self.load_buttons()
         self.load_reason_to_entry()
         self.load_reason_to_entry_edit_lines()
         self.load_enter_and_exits_section()
@@ -39,9 +33,14 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_exit_tactic_section()
         self.load_fields_labels()
         self.load_post_trade_analysis_section()
-        self.load_colors()
 
         self.load_text()
+
+    def load_buttons(self):
+        self.menu_btn = self.qpush_button_generator.generate_element('menu-btn', 'Wróć do menu', 100, 750)
+        self.add_transaction_btn = self.qpush_button_generator.generate_element('add-btn', 'Dodaj transakcję', 250, 750)
+        self.add_transaction_btn.clicked.connect(self.add_record)
+        self.main_window.logger.logger.info('Buttons loaded.')
 
     def load_reason_to_entry(self):
         """Load reason for entry section"""
@@ -138,24 +137,6 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.add_exit_tactic_btn.setCursor(QCursor(Qt.PointingHandCursor))
         self.add_exit_tactic_btn.clicked.connect(self.add_exit_tactic)
         self.logger.logger.info("Exit tactic section generated.")
-
-    def load_colors(self):
-        """Load colors for all buttons in view"""
-        
-        self.load_menu_button_color()
-
-    def load_menu_button_color(self):
-        """Load colors for all buttons"""
-
-        # Config button_text_color_picker
-        button_text_color_picker = ButtonTextColorPicker()
-        text_color_setter = TextColorSetter(['white', 'black'], button_text_color_picker)
-        button_text_color_picker.check_pick_condiditon(self.main_window.toml_data['settings']['primary_color'])
-
-        # Create button_color_setter and set colors for all buttons
-        button_color_setter = ButtonColorSetter(self.main_window.toml_data['settings']['primary_color'], text_color_setter)
-        button_color_setter.set_color(self.menu_btn)
-        button_color_setter.set_color(self.add_transaction_btn)
         
     def load_input_lines(self):
         """Load all input lines in transaction form view"""
@@ -263,7 +244,6 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         
         text_setter = TextSetter(self.language)
         text_setter.set_title(self.main_window, 'Dodaj transakcję')
-        text_setter.set_text(self.menu_btn, "Wróć do menu")
         text_setter.set_text(self.entry_reason_info, 'Powód wejścia')
         text_setter.set_text(self.enter_exit_info, 'Wejścia i Wyjścia')
         text_setter.set_text(self.company_code_label, "Kod spółki")
