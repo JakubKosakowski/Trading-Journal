@@ -15,8 +15,6 @@ class MainWindowWidget(QWidget):
     Arguments
     ---------
     QWidget (class): Class used to create widgets
-    ViewClass (class): Abstract class used to override methods for view type classes
-    metaclass (class, optional): Class used to inherit by two classes. Defaults to MetaClass.
 
     Attributes
     ----------
