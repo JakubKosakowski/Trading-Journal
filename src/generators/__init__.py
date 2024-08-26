@@ -1,1 +1,1 @@
-from .pyqt_single_element_generators import QLineEditGenerator
+from .pyqt_single_element_generators import QLineEditGenerator, QPushButtonGenerator

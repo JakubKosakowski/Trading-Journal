@@ -45,7 +45,8 @@ class QPushButtonGenerator(GenerateButtonElement):
         element = QPushButton('', self.widget, objectName=name)
         element.move(position_x, position_y)
 
-        self.button_color_setter.set_color(element)
+        if name != 'settings-btn':
+            self.button_color_setter.set_color(element)
         self.text_setter.set_text(element, text)
         
         return element
