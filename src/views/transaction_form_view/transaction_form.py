@@ -34,6 +34,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_fields_labels()
         self.load_post_trade_analysis_section()
 
+        self.load_type_of_transaction_combobox()
+
         self.load_text()
 
     def load_buttons(self):
@@ -171,6 +173,17 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         # self.company_code.move()
         self.logger.logger.info("Company code line edit generated.")
 
+    def load_type_of_transaction_combobox(self):
+
+        self.load_type_of_transaction_label()
+
+        self.transaction_type_cb = QComboBox(self)
+        self.transaction_type_cb.setFixedSize(100, 20)
+        self.transaction_type_cb.move(300, 100)
+        types = ['Pozycja długa', 'Pozycja krótka']
+        self.transaction_type_cb.addItems(types)
+        self.transaction_type_cb.setCurrentIndex(0)
+
     def load_company_code_label(self):
         """Load company code info label"""
         self.company_code_label = QLabel('', self)
@@ -178,6 +191,15 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.company_code_label.move(20, 100)
         self.company_code_label.setStyleSheet(f"border-style: none;")
         self.logger.logger.info("Company code info label generated.")
+
+    def load_type_of_transaction_label(self):
+        """Load type of transaction info label"""
+        
+        self.transaction_type_label = QLabel('', self)
+        self.transaction_type_label.setFixedSize(100, 20)
+        self.transaction_type_label.move(200, 100)
+        self.transaction_type_label.setStyleSheet(f"border-style: none;")
+        self.logger.logger.info("Type of Transaction info label generated.")
 
     def load_transaction_order_price(self):
         """Load transaction order price input section"""
@@ -247,6 +269,7 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter.set_text(self.entry_reason_info, 'Powód wejścia')
         text_setter.set_text(self.enter_exit_info, 'Wejścia i Wyjścia')
         text_setter.set_text(self.company_code_label, "Kod spółki")
+        text_setter.set_text(self.transaction_type_label, "Rodzaj transakcji")
         text_setter.set_text(self.reason_for_exit_info, 'Powód wyjścia')
         text_setter.set_text(self.exit_tactic_label, 'Taktyka wyjścia')
         text_setter.set_text(self.post_trade_analysis_info, 'Analiza potransakcyjna')
