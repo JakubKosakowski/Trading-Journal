@@ -34,6 +34,8 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.load_fields_labels()
         self.load_post_trade_analysis_section()
 
+        self.load_type_of_transaction_combobox()
+
         self.load_text()
 
     def load_buttons(self):
@@ -170,6 +172,14 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.company_code = self.qline_edit_generator.generate_element(100, 100)
         # self.company_code.move()
         self.logger.logger.info("Company code line edit generated.")
+
+    def load_type_of_transaction_combobox(self):
+
+        # self.load_type_of_transaction_label()
+
+        self.transaction_type_cb = QComboBox(self)
+        self.transaction_type_cb.setFixedSize(100, 20)
+        self.transaction_type_cb.move(300, 100)
 
     def load_company_code_label(self):
         """Load company code info label"""
