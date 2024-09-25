@@ -180,6 +180,9 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
         self.transaction_type_cb = QComboBox(self)
         self.transaction_type_cb.setFixedSize(100, 20)
         self.transaction_type_cb.move(300, 100)
+        types = ['Pozycja długa', 'Pozycja krótka']
+        self.transaction_type_cb.addItems(types)
+        self.transaction_type_cb.setCurrentIndex(0)
 
     def load_company_code_label(self):
         """Load company code info label"""
