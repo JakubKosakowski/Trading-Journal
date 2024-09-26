@@ -29,6 +29,8 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
 
         self.show_edit_fields()
 
+        self.show_test_widget()
+
         self.load_colors()
         self.load_text()
 
@@ -64,6 +66,12 @@ class TestView(QWidget, FormClass, metaclass=MetaFormClass):
         text_setter.set_text(self.add_test_btn, 'Dodaj')
         text_setter.set_text(self.age_label, 'Wiek')
         text_setter.set_text(self.name_label, 'Imię')
+
+    def show_test_widget(self):
+        self.test_widget = QWidget(objectName="test-widget")
+        self.test_widget.setFixedSize(100, 100)
+        self.test_widget.move(100, 100)
+        self.logger.logger.info('Test widget generated.')
 
     def show_edit_fields(self):
         """Show input fields"""

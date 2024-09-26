@@ -50,3 +50,16 @@ class QPushButtonGenerator(GenerateButtonElement):
         self.text_setter.set_text(element, text)
         
         return element
+    
+
+# class QLabelAndQLineEditGenerator(GenerateSinglePyQtElement):
+#     def __init__(self, widget: QWidget, default_value: (int | float)):
+#         self.widget = widget
+#         self.defalt_value = default_value
+
+#     def generate_element(self, position_x: int, position_y: int, readonly: bool = False):
+#         self.label = QLabel('Test text', self.widget, objectName="text-label")
+#         self.label.move(position_x, position_y - 25)
+
+#         self.q_line_edit_generator = QLineEditGenerator(self.widget, 0.000)
+#         self.q_line_edit = self.q_line_edit_generator.generate_element(100, 100)

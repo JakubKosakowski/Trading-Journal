@@ -27,6 +27,10 @@ QWidget {
     color: #393E46;
 }
 
+QWidget#test-widget {
+    border: 1px solid #222831;
+}
+
 /* All transaction table styles */
 
 QTableWidget {
