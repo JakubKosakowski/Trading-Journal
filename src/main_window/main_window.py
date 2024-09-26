@@ -81,15 +81,15 @@ class MainWindowWidget(QWidget):
         # Show profile/loss information
         self.show_profit_loss_info()
 
+        # Load buttons
+        self.load_buttons()
+        self.load_text()
+
         # Check if show window in full screen
         if self.main_window.toml_data['settings']['fullscreen']:
             self.main_window.showFullScreen()
         else:
             self.main_window.setGeometry(550, 200, 800, 800)
-
-        # Load buttons
-        self.load_buttons()
-        self.load_text()
 
     def load_buttons(self):
         self.settings_btn = self.qpush_button_generator.generate_element('settings-btn', '', 750, 50)
