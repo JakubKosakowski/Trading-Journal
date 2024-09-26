@@ -83,12 +83,12 @@ class TransactionFormView(QWidget, FormClass, metaclass=MetaFormClass):
     def load_fields_labels(self):
         """Load section with input field info's"""
 
-        self.fields_labels = QLabel("        Date\t\tOrder Price           Filled Priced           Slippage           Filled Shares           Total Cost           Day's High           Day's Low           Grade        ",
-                                    self, objectName="section-label")
-        self.fields_labels.setObjectName('transaction-data-info')
-        self.fields_labels.setFixedSize(760, 30)
-        self.fields_labels.move(20, 300)
-        self.logger.logger.info("Fields labels section generated.")
+        # self.fields_labels = QLabel("        Date\t\tOrder Price           Filled Priced           Slippage           Filled Shares           Total Cost           Day's High           Day's Low           Grade        ",
+        #                             self, objectName="section-label")
+        # self.fields_labels.setObjectName('transaction-data-info')
+        # self.fields_labels.setFixedSize(760, 30)
+        # self.fields_labels.move(20, 300)
+        # self.logger.logger.info("Fields labels section generated.")
 
         # Generate input fields
         self.load_input_lines()
